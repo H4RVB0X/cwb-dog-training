@@ -115,6 +115,7 @@ content:
       - { name: hours, label: Opening hours, type: string }
       - { name: facebook, label: Facebook URL, type: string }
       - { name: instagram, label: Instagram URL, type: string }
+      - { name: tiktok, label: TikTok URL, type: string }
       - { name: googleReviewsUrl, label: Google reviews URL, type: string }
       - { name: rating, label: Google rating (e.g. 5.0), type: string }
       - { name: reviewCount, label: Number of Google reviews, type: number }

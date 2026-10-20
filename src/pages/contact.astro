@@ -52,6 +52,7 @@ const tel = settings.phone.replace(/\s/g, '');
 				<div class="social-row">
 					<a href={settings.facebook} target="_blank" rel="noopener"><Icon name="facebook" /> Facebook</a>
 					<a href={settings.instagram} target="_blank" rel="noopener"><Icon name="instagram" /> Instagram</a>
+					<a href={settings.tiktok} target="_blank" rel="noopener"><Icon name="tiktok" /> TikTok</a>
 				</div>
 			</aside>
 
@@ -243,7 +244,8 @@ const tel = settings.phone.replace(/\s/g, '');
 	}
 	.social-row {
 		display: flex;
-		gap: 1.2rem;
+		flex-wrap: wrap;
+		gap: 0.6rem 1.2rem;
 		margin-top: 0.6rem;
 	}
 	.social-row a {
