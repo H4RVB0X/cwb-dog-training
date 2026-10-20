@@ -1,0 +1,85 @@
+---
+import Icon from './Icon.astro';
+import settings from '../data/settings.json';
+
+interface Props {
+	title?: string;
+	text?: string;
+}
+const {
+	title = 'Ready to start where you are?',
+	text = 'Book an initial assessment and we’ll build a plan around your dog, your goals and your schedule.',
+} = Astro.props;
+const tel = settings.phone.replace(/\s/g, '');
+---
+
+<section class="cta section--tight">
+	<div class="container">
+		<div class="cta__box topo reveal">
+			<img class="cta__dog" src="/images/logos/cwb-dog.png" alt="" loading="lazy" />
+			<div class="cta__text">
+				<h2>{title}</h2>
+				<p>{text}</p>
+			</div>
+			<div class="btn-row">
+				<a class="btn btn--light" href="/contact/">Send an enquiry <Icon name="arrow" /></a>
+				<a class="btn btn--ghost" href={`tel:${tel}`}><Icon name="phone" /> {settings.phone}</a>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.cta__box {
+		position: relative;
+		background: var(--signal);
+		color: #fff;
+		border-radius: var(--radius-lg);
+		padding: clamp(28px, 5vw, 56px);
+		display: grid;
+		gap: 1.5rem;
+		align-items: center;
+		overflow: hidden;
+	}
+	@media (min-width: 900px) {
+		.cta__box {
+			grid-template-columns: 1fr auto;
+			gap: 3rem;
+		}
+	}
+	.cta__box::before {
+		opacity: 0.12;
+	}
+	.cta h2 {
+		font-size: clamp(2rem, 4vw, 3rem);
+		margin-bottom: 0.3em;
+	}
+	.cta p {
+		margin: 0;
+		max-width: 52ch;
+		color: rgba(255, 255, 255, 0.9);
+	}
+	.cta .btn--ghost {
+		color: #fff;
+	}
+	.cta .btn--ghost:hover {
+		color: var(--navy);
+		background: #fff;
+		border-color: #fff;
+	}
+	.cta__dog {
+		position: absolute;
+		right: -20px;
+		bottom: -24px;
+		width: 220px;
+		opacity: 0.22;
+		mix-blend-mode: multiply;
+		pointer-events: none;
+	}
+	@media (min-width: 900px) {
+		.cta__dog {
+			right: auto;
+			left: 46%;
+		}
+	}
+</style>

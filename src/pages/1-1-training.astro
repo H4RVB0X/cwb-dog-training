@@ -1,0 +1,205 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import CtaBand from '../components/CtaBand.astro';
+import packages from '../data/packages.json';
+---
+
+<Layout
+	title="1-1 Dog Training"
+	description="Private 1-1 dog training in Wall Heath, Kingswinford. Initial assessment, a tailored training plan and 1-hour sessions from £210, with phone support between sessions."
+>
+	<PageHero
+		eyebrow="CWB 1-1 Training"
+		title="Your dog. Your goals. <em>Your pace.</em>"
+		intro="Transform your dog into an owner-focused companion in just weeks with personalised 1-1 training, built around your dog’s needs and your schedule."
+		image="/images/german-shepherd-park.jpg"
+		imageAlt="German Shepherd in a harness sitting on grass in a park"
+	>
+		<div class="btn-row">
+			<a class="btn" href="/contact/?course=1-1-training">Book an assessment <Icon name="arrow" /></a>
+			<a class="btn btn--ghost" href="#packages">See packages</a>
+		</div>
+	</PageHero>
+
+	<section class="section">
+		<div class="container split">
+			<div class="reveal">
+				<span class="eyebrow">What you get</span>
+				<h2>Everything you need <br />to succeed</h2>
+				<ul class="ticks">
+					<li>An initial assessment to fully understand your training requirements</li>
+					<li>Private 1-hour 1-1 sessions tailored to your dog’s needs</li>
+					<li>Demonstrations of exercises and personalised tuition</li>
+					<li>A customised training plan, including options for puppy training</li>
+					<li>Ongoing phone support if you need advice between sessions</li>
+					<li>You control the pace of training to fit around your schedule</li>
+				</ul>
+			</div>
+			<div class="reveal">
+				<span class="eyebrow">How it works</span>
+				<h2>Four simple steps</h2>
+				<ol class="steps">
+					<li><div><strong>Book your assessment</strong>Choose the package option that suits you.</div></li>
+					<li><div><strong>Pick a time</strong>We agree on a time that works for your schedule.</div></li>
+					<li><div><strong>Equipment check</strong>Is the lead, harness or collar right for your dog?</div></li>
+					<li><div><strong>Welcome pack</strong>A welcome email with helpful guides for your dog’s breed and age.</div></li>
+				</ol>
+			</div>
+		</div>
+	</section>
+
+	<section class="section section--bone topo" id="packages">
+		<div class="container">
+			<div class="section-head">
+				<span class="eyebrow">Packages &amp; prices</span>
+				<h2>Choose your package</h2>
+				<p class="lede">Every package starts with an initial assessment and a personalised training plan.</p>
+			</div>
+			<div class="grid grid--3 packages">
+				{
+					packages.packages.map((p, i) => (
+						<article class="package reveal" class:list={{ 'is-mid': i === 1 }}>
+							<span class="package__hours">{p.hours}</span>
+							<h3>{p.name}</h3>
+							<p class="package__price">{p.price}</p>
+							<p class="package__sum">{p.summary}</p>
+							<ul class="ticks">
+								<li>Initial assessment</li>
+								<li>Personalised training plan</li>
+								<li>Phone support between sessions</li>
+							</ul>
+							<a class="btn" class:list={{ 'btn--ghost': i !== 1 }} href={`/contact/?course=1-1-training&package=${encodeURIComponent(p.name)}`}>
+								Choose {p.name}
+							</a>
+						</article>
+					))
+				}
+			</div>
+		</div>
+	</section>
+
+	<section class="section" id="puppies">
+		<div class="container split split--img">
+			<div class="frame puppy-img reveal">
+				<img src="/images/weimaraner-puppy.jpg" alt="Weimaraner puppy sitting by a sofa with its head tilted" loading="lazy" />
+			</div>
+			<div class="reveal">
+				<span class="eyebrow">Puppies · Rescue · Rehome</span>
+				<h2>Bringing a new dog home?</h2>
+				<p class="lede">
+					Consider a pre-puppy home visit. We’ll talk through puppy-proofing your home and what to expect in those first
+					weeks.
+				</p>
+				<ul class="ticks">
+					<li>Essential equipment, toys and puppy enrichment</li>
+					<li>Ways to help your new family member settle in</li>
+					<li>Support with toilet training, socialisation and more</li>
+				</ul>
+				<div class="btn-row" style="margin-top:2rem">
+					<a class="btn" href="/contact/?course=home-visit">Request a visit <Icon name="arrow" /></a>
+					<a class="btn btn--ghost" href="/courses/">Puppy courses</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<CtaBand />
+</Layout>
+
+<style>
+	.split {
+		display: grid;
+		gap: 3.5rem;
+	}
+	@media (min-width: 940px) {
+		.split {
+			grid-template-columns: 1fr 1fr;
+			gap: 5rem;
+		}
+		.split--img {
+			align-items: center;
+		}
+	}
+	.split h2 {
+		font-size: clamp(2rem, 3.6vw, 2.8rem);
+	}
+
+	.packages {
+		align-items: stretch;
+	}
+	.package {
+		background: #fff;
+		border: 1px solid var(--line);
+		border-radius: var(--radius-lg);
+		padding: 2rem 1.6rem 1.6rem;
+		display: flex;
+		flex-direction: column;
+		position: relative;
+		box-shadow: var(--shadow);
+	}
+	.package.is-mid {
+		background: var(--navy);
+		color: var(--bone);
+		border-color: var(--navy);
+	}
+	@media (min-width: 1000px) {
+		.package.is-mid {
+			transform: translateY(-14px);
+		}
+	}
+	.package h3 {
+		font-size: 1.6rem;
+		margin-bottom: 0.2rem;
+	}
+	.package__hours {
+		align-self: flex-start;
+		font-family: var(--font-mono);
+		font-size: 0.72rem;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: var(--signal);
+		margin-bottom: 1rem;
+	}
+	.is-mid .package__hours {
+		color: var(--tan);
+	}
+	.package__price {
+		font-family: var(--font-display);
+		font-weight: 800;
+		font-size: 4rem;
+		line-height: 1;
+		margin: 0.3rem 0 0.6rem;
+	}
+	.package__sum {
+		color: var(--muted);
+		min-height: 3.2em;
+	}
+	.is-mid .package__sum {
+		color: rgba(239, 234, 223, 0.78);
+	}
+	.package .ticks {
+		margin: 0.6rem 0 1.8rem;
+		font-size: 0.98rem;
+	}
+	.package .btn {
+		margin-top: auto;
+	}
+	.package .btn--ghost {
+		color: var(--navy);
+	}
+	.package .btn--ghost:hover {
+		color: var(--signal);
+		border-color: var(--signal);
+	}
+	.is-mid .ticks li::before {
+		background-color: var(--tan);
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23141d24' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E");
+	}
+
+	.puppy-img {
+		aspect-ratio: 4 / 5;
+		max-height: 560px;
+	}
+</style>

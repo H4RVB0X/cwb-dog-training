@@ -1,0 +1,14 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+---
+
+<Layout title="Page not found" description="This page could not be found.">
+	<PageHero eyebrow="404 · Lost the scent" title="This trail’s gone <em>cold.</em>" intro="The page you’re looking for has moved or doesn’t exist.">
+		<div class="btn-row">
+			<a class="btn" href="/">Back to home <Icon name="arrow" /></a>
+			<a class="btn btn--ghost" href="/courses/">Courses</a>
+		</div>
+	</PageHero>
+</Layout>

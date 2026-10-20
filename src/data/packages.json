@@ -1,0 +1,22 @@
+{
+  "packages": [
+    {
+      "name": "Foundation",
+      "price": "£210",
+      "summary": "Initial assessment, training plan and 2 × 1hr follow-up sessions",
+      "hours": "2 hrs training"
+    },
+    {
+      "name": "Progress",
+      "price": "£270",
+      "summary": "Initial assessment, training plan and 3 hours of 1-1 training",
+      "hours": "3 hrs training"
+    },
+    {
+      "name": "Complete",
+      "price": "£340",
+      "summary": "Initial assessment, training plan and 4 hours of 1-1 training",
+      "hours": "4 hrs training"
+    }
+  ]
+}

@@ -1,0 +1,209 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import Credentials from '../components/Credentials.astro';
+import CtaBand from '../components/CtaBand.astro';
+
+const timeline = [
+	{
+		when: '1980s',
+		title: 'Panda',
+		text: 'A small black Labrador ball of fluff, found in a cardboard box in winter by police officers in Brierley Hill and taken to the station, where my mother worked for the CPS at the time. A few days later Panda came home with us, and my journey with dogs began. Her love of water, and tales of her sitting on our laps on long road trips to Scotland, are still told with much affection. (It was the 1980s, so don’t be too alarmed by the lack of safety standards that are now commonplace!)',
+		img: '/images/black-lab-looking-up.jpg',
+		alt: 'Black Labrador looking up at the camera',
+	},
+	{
+		when: 'My first dog',
+		title: 'Harvey',
+		text: 'Another black Labrador rehome (can you see a theme developing yet?). A brilliant dog who, probably more by luck than knowledge, I trained to do a multitude of skills at my local park. He also became a Pets As Therapy dog for a time, and I was hooked on the emotional connection and joy that dogs bring.',
+		img: '/images/labrador-upside-down.jpg',
+		alt: 'Black Labrador lying upside down, smiling',
+	},
+	{
+		when: 'Fostering',
+		title: 'Police dog puppies',
+		text: 'After Harvey came a long period of fostering police dog puppies, both German Shepherds and Springer Spaniels. I had no plans to start a training business back then. It was simply the right thing for me to do at that moment.',
+		img: '/images/shepherd-resting.jpg',
+		alt: 'German Shepherd resting its head on a garden table',
+	},
+	{
+		when: 'Recent years',
+		title: 'Service dogs & Pinto',
+		text: 'Three more dogs have graced our home in recent years, all belonging to service dog charities I also volunteer for. In a total change from Labs and Shepherds, a tiny male cavapoo arrived who loved nothing more than playing with Pinto (my most recent rescued black Labrador) and jumping on your lap for a snooze.',
+		img: '/images/cavapoo-puppy.jpg',
+		alt: 'Apricot cavapoo puppy lying with a rope toy',
+	},
+	{
+		when: '2023 →',
+		title: 'CWB Dog Training',
+		text: 'With retirement looming at the end of 2023 and wanting to do something for myself, I buried my head in books, webinars and courses, and it immediately ignited a passion for helping dogs and their owners. Relating all that knowledge back to the dogs I’d known, it all made sense. This is what I should do.',
+		img: '/images/chris.jpg',
+		alt: 'Chris, founder of CWB Dog Training',
+	},
+];
+---
+
+<Layout
+	title="About Chris"
+	description="Meet Chris, the trainer behind CWB Dog Training in Wall Heath, Kingswinford. A lifetime with Labradors, police dog puppy fostering and service dog charity work."
+>
+	<PageHero
+		eyebrow="About CWB"
+		title="Every dog <em>teaches</em> you something."
+		intro="If I could go back years and tell myself one thing when I started, it would be that every dog that comes into your life will teach you something."
+		image="/images/chris.jpg"
+		imageAlt="Chris, founder of CWB Dog Training, smiling in a navy CWB hoodie"
+	/>
+
+	<section class="section">
+		<div class="container">
+			<div class="section-head">
+				<span class="eyebrow">The story so far</span>
+				<h2>From Panda to <span class="accent">CWB.</span></h2>
+			</div>
+
+			<ol class="timeline">
+				{
+					timeline.map((t, i) => (
+						<li class="timeline__item reveal" class:list={{ 'is-flip': i % 2 === 1 }}>
+							<div class="timeline__img frame">
+								<img src={t.img} alt={t.alt} loading="lazy" />
+							</div>
+							<div class="timeline__dot" aria-hidden="true" />
+							<div class="timeline__text">
+								<span class="tag tag--olive">{t.when}</span>
+								<h3>{t.title}</h3>
+								<p>{t.text}</p>
+							</div>
+						</li>
+					))
+				}
+			</ol>
+		</div>
+	</section>
+
+	<section class="section section--olive topo">
+		<div class="container still-learning reveal">
+			<span class="eyebrow">Still learning</span>
+			<p class="still-learning__q">
+				“The more I work with dogs, the more I see the individuals: their personalities, and how they make me think and
+				adjust what I do to get my message across.”
+			</p>
+			<p class="still-learning__a">
+				Hearing from clients that they enjoy their time with their dog, or that they’ve passed my details on to a friend or
+				relative, tells me I’m headed in the right direction.
+			</p>
+		</div>
+	</section>
+
+	<Credentials />
+	<CtaBand title="Let’s meet your dog" />
+</Layout>
+
+<style>
+	.timeline {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		position: relative;
+		display: grid;
+		gap: clamp(40px, 6vw, 80px);
+	}
+	.timeline::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 50%;
+		width: 2px;
+		background: repeating-linear-gradient(to bottom, var(--khaki) 0 8px, transparent 8px 16px);
+	}
+	.timeline__item {
+		display: grid;
+		grid-template-columns: 1fr 60px 1fr;
+		align-items: center;
+	}
+	.timeline__img {
+		aspect-ratio: 4 / 3;
+		max-height: 340px;
+	}
+	.timeline__dot {
+		justify-self: center;
+		width: 22px;
+		height: 22px;
+		border-radius: 50%;
+		background: var(--signal);
+		border: 5px solid var(--paper);
+		box-shadow: 0 0 0 2px var(--signal);
+		position: relative;
+		z-index: 1;
+	}
+	.timeline__text h3 {
+		font-size: clamp(1.8rem, 3vw, 2.4rem);
+		margin: 0.6rem 0 0.4rem;
+	}
+	.timeline__text p {
+		color: var(--muted);
+		margin: 0;
+	}
+	.is-flip .timeline__img {
+		order: 3;
+	}
+	.is-flip .timeline__text {
+		order: 1;
+		text-align: right;
+	}
+	.is-flip .timeline__dot {
+		order: 2;
+	}
+
+	@media (max-width: 820px) {
+		.timeline::before {
+			left: 11px;
+		}
+		.timeline__item,
+		.is-flip.timeline__item {
+			grid-template-columns: 24px 1fr;
+			column-gap: 1.2rem;
+			row-gap: 1rem;
+		}
+		.timeline__dot,
+		.is-flip .timeline__dot {
+			order: 0;
+			grid-row: 1;
+			grid-column: 1;
+			align-self: start;
+			margin-top: 6px;
+		}
+		.timeline__img,
+		.is-flip .timeline__img {
+			order: 0;
+			grid-column: 2;
+			grid-row: 2;
+			max-height: 260px;
+		}
+		.timeline__text,
+		.is-flip .timeline__text {
+			order: 0;
+			grid-column: 2;
+			grid-row: 1;
+			text-align: left;
+		}
+	}
+
+	.still-learning {
+		max-width: 900px;
+	}
+	.still-learning__q {
+		font-family: var(--font-display);
+		font-weight: 700;
+		text-transform: uppercase;
+		font-size: clamp(1.8rem, 3.8vw, 3rem);
+		line-height: 1.05;
+	}
+	.still-learning__a {
+		font-size: 1.15rem;
+		color: rgba(239, 234, 223, 0.85);
+		max-width: 60ch;
+	}
+</style>

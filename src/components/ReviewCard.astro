@@ -1,0 +1,99 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import settings from '../data/settings.json';
+
+interface Props {
+	review: CollectionEntry<'reviews'>;
+}
+const { review } = Astro.props;
+const d = review.data;
+const date = d.date.toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });
+---
+
+<figure class="review reveal">
+	<div class="review__top">
+		<span class="stars" aria-label={`${d.rating} out of 5 stars`}>{'★'.repeat(d.rating)}</span>
+		{d.topic && <span class="tag">{d.topic}</span>}
+	</div>
+	<blockquote>{review.body?.trim()}</blockquote>
+	<figcaption>
+		<span class="avatar" aria-hidden="true">{d.name.replace(/[^A-Za-z ]/g, '').split(' ').filter(Boolean).map((p) => p[0]).slice(0, 2).join('')}</span>
+		<span>
+			<strong>{d.name}</strong>
+			<small>Google review · {date}</small>
+		</span>
+	</figcaption>
+	{
+		d.excerpt && (
+			<a class="review__more" href={settings.googleReviewsUrl} target="_blank" rel="noopener">
+				Read the full review on Google
+			</a>
+		)
+	}
+</figure>
+
+<style>
+	.review {
+		margin: 0;
+		background: #fff;
+		border: 1px solid var(--line);
+		border-radius: var(--radius-lg);
+		padding: 1.5rem;
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		position: relative;
+		box-shadow: var(--shadow);
+	}
+	.review__top {
+		display: flex;
+		align-items: center;
+		gap: 0.8rem;
+		position: relative;
+	}
+	.review .stars {
+		font-size: 1.1rem;
+	}
+	blockquote {
+		margin: 0;
+		font-size: 1.15rem;
+		line-height: 1.5;
+		font-weight: 500;
+		position: relative;
+	}
+	blockquote :global(p) {
+		margin: 0;
+	}
+	figcaption {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		margin-top: auto;
+	}
+	figcaption strong {
+		display: block;
+		line-height: 1.2;
+	}
+	figcaption small {
+		color: var(--muted);
+		font-size: 0.85rem;
+	}
+	.avatar {
+		width: 42px;
+		height: 42px;
+		border-radius: 50%;
+		background: var(--olive);
+		color: var(--bone);
+		display: grid;
+		place-items: center;
+		font-family: var(--font-display);
+		font-weight: 700;
+		font-size: 1.1rem;
+		flex: none;
+	}
+	.review__more {
+		font-size: 0.88rem;
+		color: var(--signal);
+		text-underline-offset: 3px;
+	}
+</style>

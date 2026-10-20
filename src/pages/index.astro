@@ -1,0 +1,626 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import Icon from '../components/Icon.astro';
+import Credentials from '../components/Credentials.astro';
+import CourseCard from '../components/CourseCard.astro';
+import ReviewCard from '../components/ReviewCard.astro';
+import CtaBand from '../components/CtaBand.astro';
+import settings from '../data/settings.json';
+import packages from '../data/packages.json';
+
+const featured = (await getCollection('courses', (c) => c.data.featured && !c.data.hidden)).sort((a, b) => a.data.order - b.data.order);
+const reviews = (await getCollection('reviews')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime()).slice(0, 3);
+const allCourses = await getCollection('courses', (c) => !c.data.hidden);
+const lowest = (cat: string) =>
+	Math.min(...allCourses.filter((c) => c.data.category === cat).map((c) => Number(c.data.price.replace(/[^\d.]/g, ''))).filter((n) => n > 0));
+
+const services = [
+	{
+		href: '/1-1-training/',
+		img: '/images/german-shepherd-park.jpg',
+		alt: 'German Shepherd in a harness sitting on grass',
+		kicker: '01',
+		title: '1-1 Training',
+		text: 'Private sessions built around your dog’s needs, at your pace, with phone support between sessions.',
+		from: packages.packages[0].price,
+	},
+	{
+		href: '/courses/',
+		img: '/images/gsd-puppy-frost.jpg',
+		alt: 'German Shepherd puppy on frosty grass',
+		kicker: '02',
+		title: 'Puppy & Skills Courses',
+		text: 'Give puppies a confident start and teach adult dogs the everyday skills that make life easier.',
+		from: `£${lowest('training')}`,
+	},
+	{
+		href: '/scentwork/',
+		img: '/images/dog-in-woodland.jpg',
+		alt: 'Dark Labrador sitting in autumn woodland',
+		kicker: '03',
+		title: 'Scent Detection',
+		text: 'UK Sniffer Dogs Bronze, Silver and Gold courses. Brilliant enrichment for any dog, at any age.',
+		from: `£${lowest('scent')}`,
+	},
+];
+---
+
+<Layout
+	title="Dog Training in Wall Heath & Kingswinford"
+	description="Fun, effective dog training in Wall Heath, Kingswinford. 1-1 training, puppy courses and UK Sniffer Dogs scent detection with an ABTC Registered Animal Training Instructor. Rated 5.0 on Google."
+>
+	<!-- HERO -->
+	<section class="hero section--dark topo">
+		<div class="container hero__inner">
+			<div class="hero__text">
+				<span class="eyebrow">{settings.location} · {settings.region}</span>
+				<h1>Fun, effective dog training <span class="accent">for all.</span></h1>
+				<p class="lede">
+					Turn a distracted dog into an owner-focused companion. 1-1 training, puppy foundations and UK Sniffer Dogs scent
+					detection, with an ABTC Registered Animal Training Instructor.
+				</p>
+				<div class="btn-row">
+					<a class="btn" href="/contact/">Book an assessment <Icon name="arrow" /></a>
+					<a class="btn btn--ghost" href="/courses/">Courses &amp; prices</a>
+				</div>
+				<a class="rating" href={settings.googleReviewsUrl} target="_blank" rel="noopener">
+					<span class="rating__score">{settings.rating}</span>
+					<span>
+						<span class="stars">★★★★★</span>
+						<small>{settings.reviewCount} Google reviews</small>
+					</span>
+				</a>
+			</div>
+
+			<div class="hero__visual">
+				<div class="hero__photo hero__photo--main">
+					<img src="/images/dog-in-woodland.jpg" alt="Happy dark Labrador sitting among autumn leaves in woodland" fetchpriority="high" />
+				</div>
+				<div class="hero__photo hero__photo--chris">
+					<img src="/images/chris.jpg" alt="Chris, founder of CWB Dog Training" />
+				</div>
+				<div class="hero__patch">
+					<img src="/images/logos/uksd-bronze.jpg" alt="" />
+				</div>
+				<div class="hero__note">
+					<strong>Hi, I’m {settings.trainerName}.</strong>
+					<span>Let’s start where you are and build from there.</span>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<Credentials />
+
+	<!-- SERVICES -->
+	<section class="section">
+		<div class="container">
+			<div class="section-head section-head--split">
+				<div>
+					<span class="eyebrow">How I can help</span>
+					<h2>Training that fits <br />your dog. And your life.</h2>
+				</div>
+				<p class="lede">
+					Whether it’s a brand-new puppy, a rescue finding their feet or a dog who needs a job, there’s a path for you.
+				</p>
+			</div>
+			<div class="grid grid--3">
+				{
+					services.map((s) => (
+						<a class="service reveal" href={s.href}>
+							<div class="service__img">
+								<img src={s.img} alt={s.alt} loading="lazy" />
+								<span class="service__num">{s.kicker}</span>
+							</div>
+							<div class="service__body">
+								<h3>{s.title}</h3>
+								<p>{s.text}</p>
+								<div class="service__foot">
+									<span>
+										<small>from</small> {s.from}
+									</span>
+									<span class="service__go" aria-hidden="true">
+										<Icon name="arrow" />
+									</span>
+								</div>
+							</div>
+						</a>
+					))
+				}
+			</div>
+		</div>
+	</section>
+
+	<!-- NO JUDGEMENT -->
+	<section class="section section--olive topo quote-band">
+		<div class="container quote-band__inner reveal">
+			<p class="quote-band__q">“…I’m not sure my dog is even <em>trainable!</em>”</p>
+			<div>
+				<p class="quote-band__a">
+					No judgement on your dog’s ability. Every dog is an individual. We start where you are today and build from
+					there, at a pace that suits you both.
+				</p>
+				<a class="text-link" href="/1-1-training/">How 1-1 training works <Icon name="arrow" /></a>
+			</div>
+		</div>
+	</section>
+
+	<!-- ABOUT TEASER -->
+	<section class="section">
+		<div class="container about-teaser">
+			<div class="about-teaser__imgs reveal">
+				<div class="frame about-teaser__a"><img src="/images/shepherd-by-water.jpg" alt="German Shepherd looking out over water" loading="lazy" /></div>
+				<div class="frame about-teaser__b"><img src="/images/black-lab-looking-up.jpg" alt="Black Labrador looking up" loading="lazy" /></div>
+				<span class="about-teaser__stamp">Living with dogs since the 1980s</span>
+			</div>
+			<div class="reveal">
+				<span class="eyebrow">Meet your trainer</span>
+				<h2>“Every dog that comes into your life will teach you something.”</h2>
+				<p class="lede">
+					From a black Labrador puppy found in a cardboard box, to Pets As Therapy work and years fostering police dog
+					puppies, dogs have shaped Chris’s whole life. CWB is what happened when that passion met serious study.
+				</p>
+				<ul class="ticks about-teaser__list">
+					<li>Former foster carer for police dog puppies: German Shepherds &amp; Springer Spaniels</li>
+					<li>Volunteer with service dog charities</li>
+					<li>ABTC Registered Animal Training Instructor &amp; UK Sniffer Dogs Instructor</li>
+				</ul>
+				<a class="text-link" href="/about/">Read Chris’s story <Icon name="arrow" /></a>
+			</div>
+		</div>
+	</section>
+
+	<!-- SCENT COURSES -->
+	<section class="section section--bone topo">
+		<div class="container">
+			<div class="section-head section-head--split">
+				<div>
+					<span class="eyebrow">Scent detection courses</span>
+					<h2>Bronze. Silver. <span class="accent">Gold.</span></h2>
+				</div>
+				<p class="lede">
+					Six-week UK Sniffer Dogs courses that tap into your dog’s natural superpower. No experience needed, and
+					suitable for all dogs regardless of age.
+				</p>
+			</div>
+			<div class="grid grid--3">
+				{featured.map((c) => <CourseCard course={c} />)}
+			</div>
+			<p class="more-link"><a class="text-link" href="/courses/">See all courses &amp; prices <Icon name="arrow" /></a></p>
+		</div>
+	</section>
+
+	<!-- REVIEWS -->
+	<section class="section">
+		<div class="container">
+			<div class="section-head section-head--split">
+				<div>
+					<span class="eyebrow">What clients say</span>
+					<h2>{settings.rating} stars from {settings.reviewCount} Google reviews</h2>
+				</div>
+				<div>
+					<a class="text-link" href={settings.googleReviewsUrl} target="_blank" rel="noopener">Read them all on Google <Icon name="arrow" /></a>
+				</div>
+			</div>
+			<div class="grid grid--3">
+				{reviews.map((r) => <ReviewCard review={r} />)}
+			</div>
+		</div>
+	</section>
+
+	<!-- PARTNERS -->
+	<section class="section section--dark topo partners">
+		<div class="container">
+			<div class="section-head">
+				<span class="eyebrow">Exclusive client offers</span>
+				<h2>Kit I trust, <span class="accent">for less.</span></h2>
+				<p class="lede">CWB is an official partner of two brilliant UK brands. Clients get access to exclusive discount codes, so just ask.</p>
+			</div>
+			<div class="grid grid--2">
+				<article class="partner reveal">
+					<div class="partner__logo partner__logo--pf"><img src="/images/logos/perfect-fit.jpg" alt="Perfect Fit dog harnesses logo" loading="lazy" /></div>
+					<div>
+						<h3>Perfect Fit Harnesses</h3>
+						<p>
+							Premium modular harnesses with a unique three-piece design for a snug, custom fit on dogs of every shape and
+							size. Fleece-lined to prevent chafing, so your dog stays comfortable and secure on every walk.
+						</p>
+					</div>
+				</article>
+				<article class="partner reveal">
+					<div class="partner__logo"><img src="/images/logos/tug-e-nuff.png" alt="Tug-E-Nuff partner logo" loading="lazy" /></div>
+					<div>
+						<h3>Tug-E-Nuff Dog Toys</h3>
+						<p>
+							Expert-approved, durable tug toys with bungee handles and irresistible textures like real sheepskin. A
+							game-changer for motivation, recall and building a rock-solid bond.
+						</p>
+					</div>
+				</article>
+			</div>
+		</div>
+	</section>
+
+	<CtaBand />
+</Layout>
+
+<style>
+	/* HERO */
+	.hero {
+		padding-block: clamp(48px, 7vw, 96px) clamp(64px, 8vw, 110px);
+		overflow: hidden;
+	}
+	.hero__inner {
+		display: grid;
+		gap: 3rem;
+		align-items: center;
+	}
+	@media (min-width: 980px) {
+		.hero__inner {
+			grid-template-columns: 1.1fr 1fr;
+			gap: 4rem;
+		}
+	}
+	.hero h1 {
+		margin-bottom: 0.3em;
+	}
+	.hero .lede {
+		margin-bottom: 2rem;
+	}
+	.rating {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.9rem;
+		margin-top: 2rem;
+		padding: 0.65rem 1.1rem 0.65rem 0.7rem;
+		border: 1px solid rgba(239, 234, 223, 0.2);
+		border-radius: 999px;
+		text-decoration: none;
+		background: rgba(239, 234, 223, 0.05);
+		transition: border-color 0.2s ease;
+	}
+	.rating:hover {
+		border-color: var(--tan);
+	}
+	.rating__score {
+		width: 48px;
+		height: 48px;
+		border-radius: 50%;
+		background: var(--tan);
+		color: var(--ink);
+		display: grid;
+		place-items: center;
+		font-family: var(--font-display);
+		font-weight: 800;
+		font-size: 1.35rem;
+	}
+	.rating small {
+		display: block;
+		font-size: 0.85rem;
+		opacity: 0.8;
+	}
+
+	.hero__visual {
+		position: relative;
+		min-height: 420px;
+		max-width: 560px;
+		margin-inline: auto;
+		width: 100%;
+	}
+	.hero__photo {
+		position: absolute;
+		border-radius: var(--radius-lg);
+		overflow: hidden;
+		box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.6);
+		border: 6px solid var(--bone);
+	}
+	.hero__photo img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+	.hero__photo--main {
+		inset: 0 18% 8% 0;
+		transform: rotate(-2deg);
+	}
+	.hero__photo--chris {
+		width: 42%;
+		aspect-ratio: 3 / 4;
+		right: 0;
+		bottom: 0;
+		transform: rotate(3deg);
+	}
+	.hero__photo--chris img {
+		object-position: 50% 20%;
+	}
+	.hero__patch {
+		position: absolute;
+		top: -14px;
+		right: 8%;
+		width: 104px;
+		height: 104px;
+		border-radius: 50%;
+		overflow: hidden;
+		border: 4px solid var(--bone);
+		box-shadow: 0 14px 30px -10px rgba(0, 0, 0, 0.6);
+		transform: rotate(10deg);
+	}
+	.hero__note {
+		position: absolute;
+		left: -6px;
+		bottom: -18px;
+		background: var(--signal);
+		color: #fff;
+		padding: 0.8rem 1.1rem;
+		border-radius: var(--radius);
+		max-width: 250px;
+		box-shadow: 0 14px 30px -10px rgba(0, 0, 0, 0.5);
+		transform: rotate(-2deg);
+		line-height: 1.3;
+	}
+	.hero__note strong {
+		display: block;
+		font-family: var(--font-display);
+		font-size: 1.35rem;
+		text-transform: uppercase;
+		letter-spacing: 0.03em;
+	}
+	.hero__note span {
+		font-size: 0.95rem;
+	}
+	@media (min-width: 980px) {
+		.hero__visual {
+			min-height: 540px;
+		}
+	}
+	@media (max-width: 520px) {
+		.hero__visual {
+			min-height: 360px;
+		}
+		.hero__patch {
+			width: 78px;
+			height: 78px;
+		}
+		.hero__note {
+			max-width: 200px;
+		}
+	}
+	@media (prefers-reduced-motion: no-preference) {
+		.hero__photo--main {
+			animation: drop 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+		}
+		.hero__photo--chris {
+			animation: drop 0.9s 0.15s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+		}
+		.hero__patch {
+			animation: stamp 0.6s 0.55s cubic-bezier(0.3, 1.6, 0.5, 1) both;
+		}
+		.hero__note {
+			animation: drop 0.8s 0.35s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+		}
+	}
+	@keyframes drop {
+		from {
+			opacity: 0;
+			translate: 0 30px;
+		}
+	}
+	@keyframes stamp {
+		from {
+			opacity: 0;
+			scale: 1.8;
+		}
+	}
+
+	/* SERVICES */
+	.service {
+		display: flex;
+		flex-direction: column;
+		text-decoration: none;
+		background: #fff;
+		border: 1px solid var(--line);
+		border-radius: var(--radius-lg);
+		overflow: hidden;
+		box-shadow: var(--shadow);
+		transition:
+			transform 0.25s ease,
+			box-shadow 0.25s ease;
+	}
+	.service:hover {
+		transform: translateY(-6px);
+		box-shadow: 0 1px 0 rgba(20, 29, 36, 0.05), 0 26px 44px -20px rgba(20, 29, 36, 0.45);
+	}
+	.service__img {
+		position: relative;
+		aspect-ratio: 4 / 3;
+		overflow: hidden;
+	}
+	.service__img img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transition: transform 0.6s ease;
+	}
+	.service:hover .service__img img {
+		transform: scale(1.06);
+	}
+	.service__num {
+		position: absolute;
+		left: 14px;
+		top: 10px;
+		font-family: var(--font-display);
+		font-weight: 800;
+		font-size: 3rem;
+		line-height: 1;
+		color: #fff;
+		text-shadow: 0 2px 16px rgba(0, 0, 0, 0.4);
+	}
+	.service__body {
+		padding: 1.4rem;
+		display: flex;
+		flex-direction: column;
+		flex: 1;
+	}
+	.service__body p {
+		color: var(--muted);
+	}
+	.service__foot {
+		margin-top: auto;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		font-family: var(--font-display);
+		font-weight: 800;
+		font-size: 1.8rem;
+		color: var(--navy);
+	}
+	.service__foot small {
+		font-family: var(--font-mono);
+		font-weight: 500;
+		font-size: 0.7rem;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: var(--muted);
+	}
+	.service__go {
+		width: 46px;
+		height: 46px;
+		border-radius: 50%;
+		background: var(--navy);
+		color: var(--bone);
+		display: grid;
+		place-items: center;
+		transition:
+			background 0.2s ease,
+			transform 0.2s ease;
+	}
+	.service__go :global(svg) {
+		width: 20px;
+		height: 20px;
+	}
+	.service:hover .service__go {
+		background: var(--signal);
+		transform: rotate(-45deg);
+	}
+
+	/* QUOTE BAND */
+	.quote-band__inner {
+		display: grid;
+		gap: 2rem;
+		align-items: center;
+	}
+	@media (min-width: 900px) {
+		.quote-band__inner {
+			grid-template-columns: 1.3fr 1fr;
+			gap: 4rem;
+		}
+	}
+	.quote-band__q {
+		font-family: var(--font-display);
+		font-weight: 800;
+		text-transform: uppercase;
+		font-size: clamp(2.4rem, 5.4vw, 4.4rem);
+		line-height: 0.95;
+		margin: 0;
+	}
+	.quote-band__q em {
+		font-style: normal;
+		color: var(--tan);
+	}
+	.quote-band__a {
+		font-size: 1.2rem;
+		color: rgba(239, 234, 223, 0.9);
+	}
+
+	/* ABOUT TEASER */
+	.about-teaser {
+		display: grid;
+		gap: 3rem;
+		align-items: center;
+	}
+	@media (min-width: 940px) {
+		.about-teaser {
+			grid-template-columns: 1fr 1.1fr;
+			gap: 5rem;
+		}
+	}
+	.about-teaser h2 {
+		font-size: clamp(1.9rem, 3.6vw, 2.9rem);
+	}
+	.about-teaser__imgs {
+		position: relative;
+		min-height: 440px;
+	}
+	.about-teaser__a {
+		position: absolute;
+		inset: 0 22% 18% 0;
+	}
+	.about-teaser__b {
+		position: absolute;
+		width: 48%;
+		aspect-ratio: 3 / 4;
+		right: 0;
+		bottom: 0;
+		border: 6px solid var(--paper);
+	}
+	.about-teaser__stamp {
+		position: absolute;
+		left: 18px;
+		bottom: 30px;
+		background: var(--navy);
+		color: var(--bone);
+		font-family: var(--font-mono);
+		font-size: 0.72rem;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		padding: 0.5rem 0.8rem;
+		border-radius: 3px;
+	}
+	.about-teaser__list {
+		margin: 1.5rem 0 2rem;
+	}
+
+	.more-link {
+		margin: 2.5rem 0 0;
+		text-align: center;
+	}
+
+	/* PARTNERS */
+	.partner {
+		display: grid;
+		grid-template-columns: 110px 1fr;
+		gap: 1.4rem;
+		align-items: start;
+		padding: 1.6rem;
+		border: 1px solid rgba(239, 234, 223, 0.15);
+		border-radius: var(--radius-lg);
+		background: rgba(239, 234, 223, 0.04);
+	}
+	.partner h3 {
+		color: var(--bone);
+	}
+	.partner p {
+		margin: 0;
+		color: rgba(239, 234, 223, 0.78);
+	}
+	.partner__logo {
+		width: 110px;
+		aspect-ratio: 1;
+		border-radius: var(--radius);
+		background: #fff;
+		display: grid;
+		place-items: center;
+		padding: 8px;
+		overflow: hidden;
+	}
+	.partner__logo img {
+		max-height: 100%;
+		object-fit: contain;
+	}
+	@media (max-width: 480px) {
+		.partner {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

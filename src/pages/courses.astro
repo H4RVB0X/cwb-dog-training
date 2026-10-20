@@ -1,0 +1,183 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import CourseCard from '../components/CourseCard.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Icon from '../components/Icon.astro';
+import packages from '../data/packages.json';
+
+const courses = (await getCollection('courses', (c) => !c.data.hidden)).sort((a, b) => a.data.order - b.data.order);
+const filters = [
+	{ key: 'all', label: 'All courses' },
+	{ key: 'scent', label: 'Scent detection' },
+	{ key: 'training', label: 'Training' },
+	{ key: 'workshop', label: 'Workshops' },
+];
+---
+
+<Layout
+	title="Courses & Prices"
+	description="Dog training courses and prices at CWB Dog Training: UK Sniffer Dogs Bronze, Silver and Gold scent detection, puppy courses, retrieval and tracking workshops, plus 1-1 packages."
+>
+	<PageHero
+		eyebrow="Courses & prices"
+		title="Find the right <em>course</em>"
+		intro="Group courses, workshops and 1-1 options for every stage of your dog’s journey. Tap any course to book a place or register your interest."
+	/>
+
+	<section class="section courses">
+		<div class="container">
+			<div class="filters" role="toolbar" aria-label="Filter courses">
+				{
+					filters.map((f, i) => (
+						<button type="button" class="filter" data-filter={f.key} aria-pressed={i === 0 ? 'true' : 'false'}>
+							{f.label}
+						</button>
+					))
+				}
+			</div>
+
+			<div class="grid grid--3" data-course-grid>
+				{courses.map((c) => <CourseCard course={c} />)}
+			</div>
+		</div>
+	</section>
+
+	<section class="section section--dark topo">
+		<div class="container one-to-one">
+			<div>
+				<span class="eyebrow">Prefer 1-1?</span>
+				<h2>Private training packages</h2>
+				<p class="lede">An initial assessment, a personalised plan and 1-hour sessions that fit around your schedule.</p>
+				<a class="text-link" href="/1-1-training/">More about 1-1 training <Icon name="arrow" /></a>
+			</div>
+			<ul class="price-list">
+				{
+					packages.packages.map((p) => (
+						<li>
+							<span>
+								<strong>Assessment + {p.hours}</strong>
+								<small>{p.summary}</small>
+							</span>
+							<span class="price-list__dots" aria-hidden="true" />
+							<span class="price-list__price">{p.price}</span>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</section>
+
+	<CtaBand title="Not sure which course?" text="Drop me a line and tell me about your dog. I’ll point you in the right direction." />
+</Layout>
+
+<script>
+	const buttons = document.querySelectorAll<HTMLButtonElement>('[data-filter]');
+	const cards = document.querySelectorAll<HTMLElement>('[data-course-grid] [data-category]');
+	buttons.forEach((btn) =>
+		btn.addEventListener('click', () => {
+			const f = btn.dataset.filter;
+			buttons.forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+			cards.forEach((c) => {
+				c.hidden = f !== 'all' && c.dataset.category !== f;
+			});
+		}),
+	);
+</script>
+
+<style>
+	.filters {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		margin-bottom: 2.5rem;
+	}
+	.filter {
+		font-family: var(--font-display);
+		font-weight: 700;
+		font-size: 1.05rem;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		padding: 0.55rem 1.1rem;
+		min-height: 44px;
+		border-radius: 999px;
+		border: 2px solid var(--navy);
+		background: transparent;
+		color: var(--navy);
+		cursor: pointer;
+		transition:
+			background 0.15s ease,
+			color 0.15s ease;
+	}
+	.filter:hover {
+		background: var(--bone);
+	}
+	.filter[aria-pressed='true'] {
+		background: var(--navy);
+		color: var(--bone);
+	}
+	[data-course-grid] :global([hidden]) {
+		display: none;
+	}
+
+	.one-to-one {
+		display: grid;
+		gap: 3rem;
+		align-items: center;
+	}
+	@media (min-width: 940px) {
+		.one-to-one {
+			grid-template-columns: 1fr 1.2fr;
+			gap: 5rem;
+		}
+	}
+	.price-list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: grid;
+		gap: 0.4rem;
+	}
+	.price-list li {
+		display: grid;
+		grid-template-columns: auto 1fr auto;
+		gap: 1rem;
+		align-items: end;
+		padding: 1.1rem 0;
+		border-bottom: 1px solid rgba(239, 234, 223, 0.14);
+	}
+	.price-list strong {
+		display: block;
+		font-family: var(--font-display);
+		font-size: 1.5rem;
+		text-transform: uppercase;
+		letter-spacing: 0.02em;
+		line-height: 1.1;
+	}
+	.price-list small {
+		display: block;
+		color: rgba(239, 234, 223, 0.65);
+		font-size: 0.92rem;
+		max-width: 36ch;
+	}
+	.price-list__dots {
+		border-bottom: 2px dotted rgba(239, 234, 223, 0.3);
+		margin-bottom: 0.6rem;
+	}
+	.price-list__price {
+		font-family: var(--font-display);
+		font-weight: 800;
+		font-size: 2.4rem;
+		line-height: 1;
+		color: var(--tan);
+	}
+	@media (max-width: 520px) {
+		.price-list li {
+			grid-template-columns: 1fr auto;
+		}
+		.price-list__dots {
+			display: none;
+		}
+	}
+</style>

@@ -1,0 +1,32 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import settings from '../data/settings.json';
+---
+
+<Layout title="Privacy" description={`Privacy information for ${settings.businessName}.`}>
+	<PageHero eyebrow="Privacy" title="Privacy policy" />
+	<section class="section">
+		<div class="container privacy">
+			<p>
+				This website does not use tracking or advertising cookies. When you send an enquiry, the details you provide
+				(name, email, phone number and anything you tell me about your dog) are emailed to {settings.businessName} so I
+				can reply. They are never sold or shared for marketing.
+			</p>
+			<p>
+				To request a copy of the full privacy policy, or to ask for your details to be updated or deleted, please email
+				<a href={`mailto:${settings.email}`}>{settings.email}</a>.
+			</p>
+		</div>
+	</section>
+</Layout>
+
+<style>
+	.privacy {
+		max-width: 760px;
+		font-size: 1.1rem;
+	}
+	.privacy a {
+		color: var(--signal);
+	}
+</style>

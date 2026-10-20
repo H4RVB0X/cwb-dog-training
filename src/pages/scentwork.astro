@@ -1,0 +1,228 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Icon from '../components/Icon.astro';
+
+const scent = (await getCollection('courses', (c) => c.data.category === 'scent' && !c.data.hidden)).sort(
+	(a, b) => a.data.order - b.data.order,
+);
+
+const benefits = [
+	{ title: 'Mental stimulation', text: 'A mentally stimulated dog is usually a happier dog.' },
+	{ title: 'Enhanced bonding', text: 'Working together on a fun, rewarding task strengthens your relationship.' },
+	{ title: 'Focus & obedience', text: 'Dogs learn patience and problem-solving, which carries over into everyday obedience.' },
+	{ title: 'Natural instincts', text: 'A constructive outlet for the things your dog was born to do.' },
+	{ title: 'Builds confidence', text: 'Every successful find gives your dog a real confidence boost.' },
+	{ title: 'Stress relief', text: 'Sniffing is calming and gives dogs a sense of purpose.' },
+	{ title: 'Fun & engaging', text: 'Hidden treats or a specific target scent: endless variety and excitement.' },
+	{ title: 'Better at home', text: 'A great outlet for energy that helps prevent unwanted behaviours.' },
+];
+---
+
+<Layout
+	title="Scent Detection for Pet Dogs"
+	description="UK Sniffer Dogs scent detection courses in Wall Heath, Kingswinford. Bronze, Silver and Gold 6-week courses for pet dogs of any age. No experience necessary."
+>
+	<PageHero
+		eyebrow="UK Sniffer Dogs instructor"
+		title="Any dog can <em>do it.</em>"
+		intro="Scent training taps into your dog’s natural abilities, providing mental, physical and emotional enrichment. Suitable for all dogs regardless of age, and no experience is necessary."
+		image="/images/shepherd-by-water.jpg"
+		imageAlt="German Shepherd looking out across water"
+	>
+		<div class="btn-row">
+			<a class="btn" href="#levels">View courses <Icon name="arrow" /></a>
+		</div>
+	</PageHero>
+
+	<section class="section">
+		<div class="container">
+			<div class="section-head section-head--split">
+				<div>
+					<span class="eyebrow">Why scentwork?</span>
+					<h2>Eight reasons dogs love it</h2>
+				</div>
+				<p class="lede">Scent training offers a well-rounded form of enrichment for your dog’s mind and overall wellbeing.</p>
+			</div>
+			<ol class="benefits">
+				{
+					benefits.map((b, i) => (
+						<li class="reveal">
+							<span class="benefits__n">{String(i + 1).padStart(2, '0')}</span>
+							<h3>{b.title}</h3>
+							<p>{b.text}</p>
+						</li>
+					))
+				}
+			</ol>
+		</div>
+	</section>
+
+	<section class="section section--dark topo" id="levels">
+		<div class="container">
+			<div class="section-head">
+				<span class="eyebrow">The pathway</span>
+				<h2>Bronze → Silver → <span class="accent">Gold</span></h2>
+				<p class="lede">Each level is a 6-week UK Sniffer Dogs course. Start at Bronze and work your way up to the ultimate challenge.</p>
+			</div>
+			<ol class="levels">
+				{
+					scent.map((c, i) => (
+						<li class="level reveal" style={`--d:${i * 0.1}s`}>
+							<img src={c.data.image} alt={c.data.imageAlt} loading="lazy" />
+							<div class="level__body">
+								<span class="level__step">Level {i + 1}</span>
+								<h3>{c.data.title}</h3>
+								<p>{c.body?.trim()}</p>
+								<dl>
+									{c.data.dates && (
+										<div>
+											<dt>When</dt>
+											<dd>{c.data.dates}</dd>
+										</div>
+									)}
+									{c.data.level && (
+										<div>
+											<dt>Who</dt>
+											<dd>{c.data.level}</dd>
+										</div>
+									)}
+								</dl>
+								<div class="level__foot">
+									<span class="level__price">{c.data.price}</span>
+									<a class="btn btn--light" href={`/contact/?course=${c.id}`}>Book</a>
+								</div>
+							</div>
+						</li>
+					))
+				}
+			</ol>
+		</div>
+	</section>
+
+	<CtaBand title="Ready to start sniffing?" text="Spaces on group courses are limited. Get in touch to book your place or ask about 1-1 scentwork." />
+</Layout>
+
+<style>
+	.benefits {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+		border-top: 1px solid var(--line);
+		border-left: 1px solid var(--line);
+	}
+	.benefits li {
+		padding: 1.6rem;
+		border-right: 1px solid var(--line);
+		border-bottom: 1px solid var(--line);
+		background: #fff;
+		transition: background 0.2s ease;
+	}
+	.benefits li:hover {
+		background: var(--bone);
+	}
+	.benefits__n {
+		font-family: var(--font-mono);
+		font-size: 0.8rem;
+		color: var(--signal);
+	}
+	.benefits h3 {
+		margin: 0.6rem 0 0.4rem;
+		font-size: 1.45rem;
+	}
+	.benefits p {
+		margin: 0;
+		color: var(--muted);
+		font-size: 1rem;
+	}
+
+	.levels {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: grid;
+		gap: 1.5rem;
+	}
+	@media (min-width: 980px) {
+		.levels {
+			grid-template-columns: repeat(3, 1fr);
+		}
+	}
+	.level {
+		background: rgba(239, 234, 223, 0.05);
+		border: 1px solid rgba(239, 234, 223, 0.16);
+		border-radius: var(--radius-lg);
+		padding: 1.6rem;
+		display: flex;
+		flex-direction: column;
+		transition-delay: var(--d);
+	}
+	.level img {
+		width: 140px;
+		height: 140px;
+		border-radius: 50%;
+		object-fit: cover;
+		margin-bottom: 1.2rem;
+		box-shadow: 0 14px 30px -10px rgba(0, 0, 0, 0.6);
+	}
+	.level__body {
+		display: flex;
+		flex-direction: column;
+		flex: 1;
+	}
+	.level__step {
+		font-family: var(--font-mono);
+		font-size: 0.75rem;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--tan);
+	}
+	.level h3 {
+		font-size: 2rem;
+		margin: 0.4rem 0 0.6rem;
+	}
+	.level p {
+		color: rgba(239, 234, 223, 0.78);
+	}
+	.level dl {
+		margin: 0 0 1.5rem;
+		display: grid;
+		gap: 0.4rem;
+	}
+	.level dl div {
+		display: grid;
+		grid-template-columns: 56px 1fr;
+		gap: 0.6rem;
+	}
+	.level dt {
+		font-family: var(--font-mono);
+		font-size: 0.7rem;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: rgba(239, 234, 223, 0.55);
+		padding-top: 0.2rem;
+	}
+	.level dd {
+		margin: 0;
+		font-weight: 500;
+	}
+	.level__foot {
+		margin-top: auto;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding-top: 1.2rem;
+		border-top: 1px dashed rgba(239, 234, 223, 0.2);
+	}
+	.level__price {
+		font-family: var(--font-display);
+		font-weight: 800;
+		font-size: 2.6rem;
+		line-height: 1;
+		color: var(--tan);
+	}
+</style>

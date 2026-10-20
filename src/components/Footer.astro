@@ -1,0 +1,191 @@
+---
+import Icon from './Icon.astro';
+import settings from '../data/settings.json';
+
+const tel = settings.phone.replace(/\s/g, '');
+const year = new Date().getFullYear();
+---
+
+<footer class="footer section--dark topo">
+	<div class="container footer__grid">
+		<div class="footer__brand">
+			<a href="/" class="footer__logo">
+				<span class="mark"><img src="/images/logos/cwb-dog.png" alt="" width="145" height="130" loading="lazy" /></span>
+				<span>
+					<strong>CWB</strong>
+					<em>Dog Training</em>
+				</span>
+			</a>
+			<p>{settings.tagline}. 1-1 training, puppy foundations and UK Sniffer Dogs scent detection courses, based in {settings.location}.</p>
+			<div class="social">
+				<a href={settings.facebook} aria-label="Facebook" rel="noopener" target="_blank"><Icon name="facebook" /></a>
+				<a href={settings.instagram} aria-label="Instagram" rel="noopener" target="_blank"><Icon name="instagram" /></a>
+				<a href={settings.googleReviewsUrl} aria-label="Google reviews" rel="noopener" target="_blank"><Icon name="google" /></a>
+			</div>
+		</div>
+
+		<div>
+			<h3>Training</h3>
+			<ul>
+				<li><a href="/1-1-training/">1-1 Training</a></li>
+				<li><a href="/courses/">Courses &amp; prices</a></li>
+				<li><a href="/scentwork/">Scent detection</a></li>
+				<li><a href="/1-1-training/#puppies">Puppies &amp; rescues</a></li>
+			</ul>
+		</div>
+
+		<div>
+			<h3>CWB</h3>
+			<ul>
+				<li><a href="/about/">About Chris</a></li>
+				<li><a href="/reviews/">Reviews &amp; gallery</a></li>
+				<li><a href="/contact/">Contact</a></li>
+				<li><a href="/privacy/">Privacy</a></li>
+			</ul>
+		</div>
+
+		<div>
+			<h3>Get in touch</h3>
+			<ul class="contact-list">
+				<li><Icon name="phone" /><a href={`tel:${tel}`}>{settings.phone}</a></li>
+				<li><Icon name="mail" /><a href={`mailto:${settings.email}`}>{settings.email}</a></li>
+				<li><Icon name="pin" /><span>{settings.location}, {settings.region}</span></li>
+				<li><Icon name="clock" /><span>{settings.hours}</span></li>
+			</ul>
+		</div>
+	</div>
+	<div class="container footer__base">
+		<span>© {year} {settings.businessName}. All rights reserved.</span>
+		<span>ABTC Registered Animal Training Instructor · UK Sniffer Dogs Instructor</span>
+	</div>
+</footer>
+
+<style>
+	.footer {
+		background: var(--ink);
+		color: var(--bone);
+		padding-top: clamp(56px, 8vw, 96px);
+	}
+	.footer__grid {
+		display: grid;
+		gap: 2.5rem;
+		grid-template-columns: 1fr;
+	}
+	@media (min-width: 640px) {
+		.footer__grid {
+			grid-template-columns: 1fr 1fr;
+		}
+	}
+	@media (min-width: 980px) {
+		.footer__grid {
+			grid-template-columns: 1.5fr 0.8fr 0.8fr 1.3fr;
+		}
+	}
+	.footer__logo {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.8rem;
+		text-decoration: none;
+		font-family: var(--font-display);
+		text-transform: uppercase;
+		line-height: 0.9;
+		margin-bottom: 1rem;
+	}
+	.footer__logo .mark {
+		width: 58px;
+		height: 58px;
+		border-radius: 50%;
+		background: var(--bone);
+		display: grid;
+		place-items: center;
+	}
+	.footer__logo img {
+		width: 42px;
+	}
+	.footer__logo strong {
+		display: block;
+		font-size: 2rem;
+		letter-spacing: 0.06em;
+	}
+	.footer__logo em {
+		font-style: normal;
+		font-size: 0.95rem;
+		letter-spacing: 0.22em;
+		color: var(--tan);
+	}
+	.footer__brand p {
+		color: rgba(239, 234, 223, 0.7);
+		max-width: 40ch;
+	}
+	.footer h3 {
+		font-size: 1.15rem;
+		letter-spacing: 0.12em;
+		color: var(--tan);
+		margin-bottom: 1rem;
+	}
+	.footer ul {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: grid;
+		gap: 0.6rem;
+	}
+	.footer a {
+		text-decoration: none;
+		color: rgba(239, 234, 223, 0.85);
+	}
+	.footer a:hover {
+		color: var(--tan);
+	}
+	.contact-list li {
+		display: grid;
+		grid-template-columns: 20px 1fr;
+		gap: 0.6rem;
+		align-items: start;
+		color: rgba(239, 234, 223, 0.85);
+		overflow-wrap: anywhere;
+	}
+	.contact-list :global(svg) {
+		width: 18px;
+		height: 18px;
+		margin-top: 4px;
+		color: var(--tan);
+	}
+	.social {
+		display: flex;
+		gap: 0.6rem;
+	}
+	.social a {
+		width: 44px;
+		height: 44px;
+		border: 1px solid rgba(239, 234, 223, 0.25);
+		border-radius: 50%;
+		display: grid;
+		place-items: center;
+		transition:
+			background 0.15s ease,
+			border-color 0.15s ease;
+	}
+	.social a:hover {
+		background: var(--signal);
+		border-color: var(--signal);
+		color: #fff;
+	}
+	.social :global(svg) {
+		width: 20px;
+		height: 20px;
+	}
+	.footer__base {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		gap: 0.8rem;
+		margin-top: 3.5rem;
+		padding-block: 1.5rem;
+		border-top: 1px solid rgba(239, 234, 223, 0.12);
+		font-family: var(--font-mono);
+		font-size: 0.74rem;
+		letter-spacing: 0.04em;
+		color: rgba(239, 234, 223, 0.55);
+	}
+</style>

@@ -1,0 +1,167 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Icon from './Icon.astro';
+
+interface Props {
+	course: CollectionEntry<'courses'>;
+}
+
+const { course } = Astro.props;
+const d = course.data;
+
+const statusLabel = {
+	open: 'Booking now',
+	'coming-soon': 'Dates coming soon',
+	enquire: 'Enquire',
+	'one-to-one': '1-1 option',
+}[d.status];
+
+const categoryLabel = { training: 'Training course', scent: 'Scent detection', workshop: 'Workshop' }[d.category];
+const cta = d.status === 'open' ? 'Book a place' : d.status === 'coming-soon' ? 'Register interest' : 'Enquire';
+---
+
+<article class="course card reveal" data-category={d.category}>
+	<div class="course__media" class:list={{ 'is-badge': d.badge }}>
+		<img src={d.image} alt={d.imageAlt} loading="lazy" />
+		<span class:list={['tag', d.status === 'open' ? 'tag--signal' : 'tag--tan', 'course__status']}>{statusLabel}</span>
+	</div>
+	<div class="course__body">
+		<span class="course__cat">{categoryLabel}{d.duration && ` · ${d.duration}`}</span>
+		<h3>{d.title}</h3>
+		<p class="course__desc">{course.body?.trim()}</p>
+		<dl class="course__meta">
+			{
+				d.dates && (
+					<div>
+						<dt>When</dt>
+						<dd>{d.dates}</dd>
+					</div>
+				)
+			}
+			{
+				d.level && (
+					<div>
+						<dt>Who</dt>
+						<dd>{d.level}</dd>
+					</div>
+				)
+			}
+		</dl>
+		<div class="course__foot">
+			<span class="course__price">{d.price}</span>
+			<a class="text-link" href={`/contact/?course=${course.id}`}>{cta} <Icon name="arrow" /></a>
+		</div>
+	</div>
+</article>
+
+<style>
+	.course {
+		display: flex;
+		flex-direction: column;
+		transition:
+			transform 0.2s ease,
+			box-shadow 0.2s ease;
+	}
+	.course:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 1px 0 rgba(20, 29, 36, 0.05), 0 22px 40px -18px rgba(20, 29, 36, 0.4);
+	}
+	.course__media {
+		position: relative;
+		aspect-ratio: 16 / 10;
+		background: var(--bone);
+		overflow: hidden;
+	}
+	.course__media img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transition: transform 0.5s ease;
+	}
+	.course:hover .course__media img {
+		transform: scale(1.04);
+	}
+	.course__media.is-badge {
+		background: var(--navy);
+		background-image: radial-gradient(circle at 50% 55%, var(--navy-2), var(--navy) 70%);
+		display: grid;
+		place-items: center;
+	}
+	.course__media.is-badge img {
+		width: auto;
+		height: 78%;
+		border-radius: 50%;
+		object-fit: contain;
+		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+	}
+	.course__status {
+		position: absolute;
+		top: 12px;
+		left: 12px;
+	}
+	.course__body {
+		padding: 1.4rem 1.4rem 1.3rem;
+		display: flex;
+		flex-direction: column;
+		flex: 1;
+	}
+	.course__cat {
+		font-family: var(--font-mono);
+		font-size: 0.72rem;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: var(--olive-2);
+		margin-bottom: 0.5rem;
+	}
+	.course h3 {
+		margin-bottom: 0.5rem;
+	}
+	.course__desc {
+		color: var(--muted);
+		font-size: 1rem;
+		margin-bottom: 1rem;
+	}
+	.course__meta {
+		margin: 0 0 1.2rem;
+		display: grid;
+		gap: 0.45rem;
+		font-size: 0.95rem;
+	}
+	.course__meta div {
+		display: grid;
+		grid-template-columns: 56px 1fr;
+		gap: 0.6rem;
+	}
+	.course__meta dt {
+		font-family: var(--font-mono);
+		font-size: 0.7rem;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: var(--muted);
+		padding-top: 0.2rem;
+	}
+	.course__meta dd {
+		margin: 0;
+		font-weight: 500;
+	}
+	.course__foot {
+		margin-top: auto;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		padding-top: 1rem;
+		border-top: 1px dashed var(--line);
+	}
+	.course__price {
+		font-family: var(--font-display);
+		font-weight: 800;
+		font-size: 2rem;
+		line-height: 1;
+		color: var(--navy);
+	}
+	.course__foot :global(svg) {
+		width: 18px;
+		height: 18px;
+	}
+</style>

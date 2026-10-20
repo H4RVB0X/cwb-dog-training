@@ -1,0 +1,362 @@
+---
+import Icon from './Icon.astro';
+import settings from '../data/settings.json';
+
+const nav = [
+	{ href: '/', label: 'Home' },
+	{ href: '/about/', label: 'About' },
+	{ href: '/1-1-training/', label: '1-1 Training' },
+	{ href: '/courses/', label: 'Courses' },
+	{ href: '/scentwork/', label: 'Scentwork' },
+	{ href: '/reviews/', label: 'Reviews & Gallery' },
+];
+
+const path = Astro.url.pathname.replace(/\/?$/, '/');
+const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
+const tel = settings.phone.replace(/\s/g, '');
+---
+
+<header class="site-header" data-header>
+	<div class="topbar">
+		<div class="container topbar__inner">
+			<span><Icon name="pin" /> {settings.location}</span>
+			<span class="topbar__hours"><Icon name="clock" /> {settings.hours}</span>
+			<a href={`mailto:${settings.email}`} class="topbar__email"><Icon name="mail" /> {settings.email}</a>
+		</div>
+	</div>
+	<div class="container bar">
+		<a href="/" class="brand" aria-label={`${settings.businessName}, home`}>
+			<span class="brand__mark"><img src="/images/logos/cwb-dog.png" alt="" width="145" height="130" /></span>
+			<span class="brand__text">
+				<strong>CWB</strong>
+				<span>Dog Training</span>
+			</span>
+		</a>
+
+		<nav class="nav" aria-label="Main">
+			<ul id="nav-list">
+				{
+					nav.map((item) => (
+						<li>
+							<a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
+								{item.label}
+							</a>
+						</li>
+					))
+				}
+				<li class="nav__mobile-cta">
+					<a class="btn" href="/contact/">Send an enquiry <Icon name="arrow" /></a>
+					<a class="btn btn--ghost" href={`tel:${tel}`}><Icon name="phone" /> {settings.phone}</a>
+				</li>
+			</ul>
+		</nav>
+
+		<div class="bar__actions">
+			<a class="call" href={`tel:${tel}`} aria-label={`Call ${settings.phone}`}>
+				<Icon name="phone" />
+				<span>{settings.phone}</span>
+			</a>
+			<a class="btn bar__cta" href="/contact/">Get in touch</a>
+			<button class="menu-btn" aria-expanded="false" aria-controls="nav-list" data-menu-btn>
+				<Icon name="menu" class="i-open" />
+				<Icon name="close" class="i-close" />
+				<span class="sr-only">Menu</span>
+			</button>
+		</div>
+	</div>
+</header>
+
+<script>
+	const header = document.querySelector<HTMLElement>('[data-header]')!;
+	const btn = document.querySelector<HTMLButtonElement>('[data-menu-btn]')!;
+	btn.addEventListener('click', () => {
+		const open = header.classList.toggle('is-open');
+		btn.setAttribute('aria-expanded', String(open));
+		document.body.style.overflow = open ? 'hidden' : '';
+	});
+	const onScroll = () => header.classList.toggle('is-scrolled', window.scrollY > 40);
+	onScroll();
+	window.addEventListener('scroll', onScroll, { passive: true });
+</script>
+
+<style>
+	.site-header {
+		position: sticky;
+		top: 0;
+		z-index: 50;
+		background: rgba(248, 245, 238, 0.92);
+		backdrop-filter: saturate(1.4) blur(10px);
+		-webkit-backdrop-filter: saturate(1.4) blur(10px);
+		border-bottom: 1px solid transparent;
+		transition:
+			border-color 0.2s ease,
+			box-shadow 0.2s ease;
+	}
+	.site-header:global(.is-scrolled) {
+		border-color: var(--line);
+		box-shadow: 0 8px 24px -16px rgba(20, 29, 36, 0.35);
+	}
+
+	.topbar {
+		background: var(--navy);
+		color: var(--bone);
+		font-family: var(--font-mono);
+		font-size: 0.74rem;
+		letter-spacing: 0.04em;
+	}
+	.topbar__inner {
+		display: flex;
+		gap: 1.6rem;
+		justify-content: flex-end;
+		padding-block: 0.45rem;
+	}
+	.topbar span,
+	.topbar a {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		text-decoration: none;
+		opacity: 0.88;
+	}
+	.topbar a:hover {
+		opacity: 1;
+		color: var(--tan);
+	}
+	.topbar :global(svg) {
+		width: 14px;
+		height: 14px;
+		color: var(--tan);
+	}
+	@media (max-width: 760px) {
+		.topbar {
+			display: none;
+		}
+	}
+
+	.bar {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		min-height: 76px;
+	}
+
+	.brand {
+		display: flex;
+		align-items: center;
+		gap: 0.7rem;
+		text-decoration: none;
+		flex: none;
+	}
+	.brand__mark {
+		width: 54px;
+		height: 54px;
+		border-radius: 50%;
+		background: #fff;
+		border: 2px solid var(--navy);
+		display: grid;
+		place-items: center;
+		overflow: hidden;
+	}
+	.brand__mark img {
+		width: 40px;
+		height: auto;
+		margin-left: 2px;
+	}
+	.brand__text {
+		display: grid;
+		line-height: 0.9;
+		font-family: var(--font-display);
+		text-transform: uppercase;
+	}
+	.brand__text strong {
+		font-size: 1.9rem;
+		font-weight: 800;
+		letter-spacing: 0.06em;
+		color: var(--navy);
+	}
+	.brand__text span {
+		font-size: 0.9rem;
+		font-weight: 600;
+		letter-spacing: 0.22em;
+		color: var(--signal);
+	}
+
+	.nav ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		gap: 0.2rem;
+	}
+	.nav a {
+		display: block;
+		padding: 0.5rem 0.7rem;
+		font-family: var(--font-display);
+		font-weight: 600;
+		font-size: 1.08rem;
+		letter-spacing: 0.05em;
+		text-transform: uppercase;
+		text-decoration: none;
+		color: var(--navy);
+		border-radius: var(--radius);
+		position: relative;
+	}
+	.nav a::after {
+		content: '';
+		position: absolute;
+		left: 0.7rem;
+		right: 0.7rem;
+		bottom: 0.25rem;
+		height: 2px;
+		background: var(--signal);
+		transform: scaleX(0);
+		transform-origin: left;
+		transition: transform 0.2s ease;
+	}
+	.nav a:hover::after,
+	.nav a[aria-current='page']::after {
+		transform: scaleX(1);
+	}
+	.nav__mobile-cta {
+		display: none;
+	}
+
+	.bar__actions {
+		display: flex;
+		align-items: center;
+		gap: 0.8rem;
+	}
+	.call {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.45rem;
+		font-family: var(--font-display);
+		font-weight: 700;
+		font-size: 1.15rem;
+		letter-spacing: 0.04em;
+		text-decoration: none;
+		color: var(--navy);
+	}
+	.call :global(svg) {
+		width: 20px;
+		height: 20px;
+		color: var(--signal);
+	}
+	.bar__cta {
+		min-height: 44px;
+		padding-inline: 1.1rem;
+		font-size: 1.05rem;
+	}
+	.menu-btn {
+		display: none;
+		width: 46px;
+		height: 46px;
+		border: 2px solid var(--navy);
+		border-radius: var(--radius);
+		background: transparent;
+		color: var(--navy);
+		place-items: center;
+		cursor: pointer;
+	}
+	.menu-btn :global(svg) {
+		width: 24px;
+		height: 24px;
+	}
+	.menu-btn :global(.i-close) {
+		display: none;
+	}
+
+	@media (max-width: 1180px) {
+		.call span {
+			display: none;
+		}
+	}
+
+	@media (max-width: 1020px) {
+		.menu-btn {
+			display: grid;
+		}
+		.bar__cta {
+			display: none;
+		}
+		.nav {
+			position: fixed;
+			inset: 76px 0 0 0;
+			background: var(--navy);
+			color: var(--bone);
+			padding: 1.5rem var(--gutter) 2rem;
+			display: none;
+			overflow-y: auto;
+		}
+		.site-header:global(.is-open) {
+			/* backdrop-filter would make the header the containing block for the fixed menu */
+			backdrop-filter: none;
+			-webkit-backdrop-filter: none;
+			background: var(--paper);
+		}
+		.site-header:global(.is-open) .nav {
+			display: block;
+			animation: nav-in 0.28s ease both;
+		}
+		.site-header:global(.is-open) .menu-btn :global(.i-open) {
+			display: none;
+		}
+		.site-header:global(.is-open) .menu-btn :global(.i-close) {
+			display: block;
+		}
+		.nav ul {
+			flex-direction: column;
+			gap: 0;
+		}
+		.nav li {
+			border-bottom: 1px solid rgba(239, 234, 223, 0.12);
+		}
+		.nav a {
+			color: var(--bone);
+			font-size: 2rem;
+			padding: 0.75rem 0;
+		}
+		.nav a::after {
+			left: 0;
+			right: auto;
+			width: 40px;
+			bottom: 0.6rem;
+		}
+		.nav__mobile-cta {
+			display: block;
+			border: 0 !important;
+			margin-top: 1.5rem;
+		}
+		.nav__mobile-cta .btn::after {
+			display: none;
+		}
+		.nav__mobile-cta .btn {
+			margin-bottom: 0.7rem;
+			color: #fff;
+			width: 100%;
+			font-size: 1.3rem;
+			padding-block: 1rem;
+		}
+	}
+	@media (max-width: 1020px) and (min-width: 761px) {
+		.nav {
+			inset: calc(76px + 30px) 0 0 0;
+		}
+	}
+	@keyframes nav-in {
+		from {
+			opacity: 0;
+			transform: translateX(40px);
+		}
+	}
+	@media (max-width: 380px) {
+		.brand__text strong {
+			font-size: 1.6rem;
+		}
+		.brand__mark {
+			width: 46px;
+			height: 46px;
+		}
+	}
+</style>
