@@ -1,0 +1,161 @@
+---
+import faq from '../data/faq.json';
+
+interface Props {
+	eyebrow?: string;
+}
+const { eyebrow = 'Questions' } = Astro.props;
+
+const items = faq.questions.filter((q) => q.question?.trim() && q.answer?.trim());
+const paragraphs = (text: string) => text.split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean);
+
+const jsonLd = {
+	'@context': 'https://schema.org',
+	'@type': 'FAQPage',
+	mainEntity: items.map((q) => ({
+		'@type': 'Question',
+		name: q.question,
+		acceptedAnswer: { '@type': 'Answer', text: q.answer },
+	})),
+};
+---
+
+{
+	items.length > 0 && (
+		<section class="section section--bone topo faq" id="faq">
+			<div class="container faq__inner">
+				<div class="faq__head">
+					<span class="eyebrow">{eyebrow}</span>
+					<h2>{faq.title}</h2>
+					<p class="lede">
+						Can’t see your question? <a href="/contact/#enquiry">Send me a message</a> and I’ll be happy to help.
+					</p>
+				</div>
+				<div class="faq__list">
+					{items.map((q, i) => (
+						<details class="faq__item" open={i === 0}>
+							<summary>
+								<span>{q.question}</span>
+								<span class="faq__icon" aria-hidden="true" />
+							</summary>
+							<div class="faq__answer">
+								{paragraphs(q.answer).map((p) => (
+									<p>{p}</p>
+								))}
+							</div>
+						</details>
+					))}
+				</div>
+			</div>
+			<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+		</section>
+	)
+}
+
+<style>
+	.faq__inner {
+		display: grid;
+		gap: 2.5rem;
+		align-items: start;
+	}
+	@media (min-width: 940px) {
+		.faq__inner {
+			grid-template-columns: 0.8fr 1.4fr;
+			gap: 4rem;
+		}
+		.faq__head {
+			position: sticky;
+			top: 140px;
+		}
+	}
+	.faq__head h2 {
+		margin-bottom: 0.4em;
+	}
+	.faq__head a {
+		color: var(--signal);
+		font-weight: 600;
+		text-underline-offset: 3px;
+	}
+	.faq__list {
+		display: grid;
+		gap: 0.75rem;
+	}
+	.faq__item {
+		background: #fff;
+		border: 1px solid var(--line);
+		border-radius: var(--radius-lg);
+		box-shadow: var(--shadow);
+		overflow: hidden;
+	}
+	.faq__item[open] {
+		border-color: rgba(194, 59, 41, 0.35);
+	}
+	summary {
+		list-style: none;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		padding: 1.15rem 1.3rem;
+		font-family: var(--font-display);
+		font-weight: 700;
+		font-size: 1.3rem;
+		line-height: 1.2;
+		letter-spacing: 0.01em;
+		text-transform: uppercase;
+		color: var(--navy);
+	}
+	summary::-webkit-details-marker {
+		display: none;
+	}
+	summary:hover {
+		color: var(--signal);
+	}
+	.faq__icon {
+		flex: none;
+		width: 32px;
+		height: 32px;
+		border-radius: 50%;
+		background: var(--bone);
+		position: relative;
+		transition:
+			background 0.2s ease,
+			transform 0.25s ease;
+	}
+	.faq__icon::before,
+	.faq__icon::after {
+		content: '';
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		width: 12px;
+		height: 2px;
+		background: var(--navy);
+		translate: -50% -50%;
+	}
+	.faq__icon::after {
+		rotate: 90deg;
+		transition: rotate 0.25s ease;
+	}
+	.faq__item[open] .faq__icon {
+		background: var(--signal);
+	}
+	.faq__item[open] .faq__icon::before,
+	.faq__item[open] .faq__icon::after {
+		background: #fff;
+	}
+	.faq__item[open] .faq__icon::after {
+		rotate: 0deg;
+	}
+	.faq__answer {
+		padding: 0 1.3rem 1.2rem;
+		color: var(--muted);
+	}
+	.faq__answer p {
+		margin: 0 0 0.8em;
+	}
+	.faq__answer p:last-child {
+		margin-bottom: 0;
+	}
+</style>

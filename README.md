@@ -24,6 +24,7 @@ A fast static site built with [Astro](https://astro.build). Course dates, prices
 | Phone, email, hours, socials, rating, form key | `src/data/settings.json` |
 | 1-1 packages | `src/data/packages.json` |
 | Gallery photos | `src/data/gallery.json` |
+| FAQs (shown on Contact page) | `src/data/faq.json` |
 | Images | `public/images/` |
 
 Course `status` controls the badge and button text:

@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/PageHero.astro';
 import Icon from '../components/Icon.astro';
+import Faq from '../components/Faq.astro';
 import settings from '../data/settings.json';
 
 const courses = (await getCollection('courses', (c) => !c.data.hidden)).sort((a, b) => a.data.order - b.data.order);
@@ -60,7 +61,7 @@ const tel = settings.phone.replace(/\s/g, '');
 				</div>
 			</aside>
 
-			<form class="form card" data-form data-key={settings.web3formsKey} data-email={settings.email} action="https://api.web3forms.com/submit" method="POST" novalidate>
+			<form id="enquiry" class="form card" data-form data-key={settings.web3formsKey} data-email={settings.email} action="https://api.web3forms.com/submit" method="POST" novalidate>
 				<input type="hidden" name="access_key" value={settings.web3formsKey} />
 				<input type="hidden" name="subject" value="New enquiry from cwbdogtraining.co.uk" />
 				<input type="hidden" name="from_name" value="CWB Dog Training website" />
@@ -110,6 +111,8 @@ const tel = settings.phone.replace(/\s/g, '');
 			</form>
 		</div>
 	</section>
+
+	<Faq />
 </Layout>
 
 <script>
