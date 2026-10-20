@@ -18,6 +18,8 @@ const statusLabel = {
 
 const categoryLabel = { training: 'Training course', scent: 'Scent detection', workshop: 'Workshop' }[d.category];
 const cta = d.status === 'open' ? 'Book a place' : d.status === 'coming-soon' ? 'Register interest' : 'Enquire';
+const href = d.bookingUrl || `/contact/?course=${course.id}`;
+const external = !!d.bookingUrl;
 ---
 
 <article class="course card reveal" data-category={d.category}>
@@ -39,6 +41,14 @@ const cta = d.status === 'open' ? 'Book a place' : d.status === 'coming-soon' ? 
 				)
 			}
 			{
+				d.venue && (
+					<div>
+						<dt>Where</dt>
+						<dd>{d.venue}</dd>
+					</div>
+				)
+			}
+			{
 				d.level && (
 					<div>
 						<dt>Who</dt>
@@ -49,7 +59,7 @@ const cta = d.status === 'open' ? 'Book a place' : d.status === 'coming-soon' ? 
 		</dl>
 		<div class="course__foot">
 			<span class="course__price">{d.price}</span>
-			<a class="text-link" href={`/contact/?course=${course.id}`}>{cta} <Icon name="arrow" /></a>
+			<a class="text-link" href={href} target={external ? '_blank' : undefined} rel={external ? 'noopener' : undefined}>{cta} <Icon name="arrow" /></a>
 		</div>
 	</div>
 </article>

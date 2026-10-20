@@ -13,6 +13,8 @@ const courses = defineCollection({
 		dates: z.string().optional(),
 		status: z.enum(['open', 'coming-soon', 'enquire', 'one-to-one']).default('enquire'),
 		level: z.string().optional(),
+		venue: z.string().optional(),
+		bookingUrl: z.union([z.string().url(), z.literal('')]).optional(), // empty = use the enquiry form
 		image: z.string(),
 		imageAlt: z.string().default(''),
 		badge: z.boolean().default(false),

@@ -32,6 +32,10 @@ const tel = settings.phone.replace(/\s/g, '');
 					<span class="info-card__icon"><Icon name="phone" /></span>
 					<span><small>Call or text</small><strong>{settings.phone}</strong></span>
 				</a>
+				<a class="info-card" href={`https://wa.me/${settings.whatsapp}`} target="_blank" rel="noopener">
+					<span class="info-card__icon"><Icon name="whatsapp" /></span>
+					<span><small>WhatsApp</small><strong>Send a message</strong></span>
+				</a>
 				<a class="info-card" href={`mailto:${settings.email}`}>
 					<span class="info-card__icon"><Icon name="mail" /></span>
 					<span><small>Email</small><strong class="email">{settings.email}</strong></span>

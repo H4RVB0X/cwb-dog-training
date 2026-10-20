@@ -46,6 +46,12 @@ content:
       - name: level
         label: Who it's for
         type: string
+      - name: venue
+        label: Where (e.g. Wednesbury, outdoors)
+        type: string
+      - name: bookingUrl
+        label: Booking link (e.g. your Bookwhen page). Leave empty to use the website enquiry form
+        type: string
       - name: image
         label: Image
         type: image
@@ -109,6 +115,7 @@ content:
       - { name: tagline, label: Tagline, type: string }
       - { name: trainerName, label: Trainer first name, type: string }
       - { name: phone, label: Phone number, type: string }
+      - { name: whatsapp, label: WhatsApp number (international format, no + or spaces e.g. 447804251993), type: string }
       - { name: email, label: Email, type: string }
       - { name: location, label: Location, type: string }
       - { name: region, label: Region, type: string }
@@ -116,6 +123,7 @@ content:
       - { name: facebook, label: Facebook URL, type: string }
       - { name: instagram, label: Instagram URL, type: string }
       - { name: tiktok, label: TikTok URL, type: string }
+      - { name: bookwhenUrl, label: Bookwhen booking page URL, type: string }
       - { name: googleReviewsUrl, label: Google reviews URL, type: string }
       - { name: rating, label: Google rating (e.g. 5.0), type: string }
       - { name: reviewCount, label: Number of Google reviews, type: number }

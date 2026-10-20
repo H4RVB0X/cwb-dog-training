@@ -4,12 +4,14 @@ category: scent
 order: 2
 price: "£140"
 duration: 6 weeks
-dates: "Starts Sun 18 Oct, 10am"
+dates: "Sundays 18 Oct – 22 Nov, 10–11am"
 status: open
-level: Next step on from Bronze
+level: Completed Bronze, or some scentwork experience (have a chat with Chris first)
 image: /images/logos/uksd-silver.jpg
 imageAlt: UK Sniffer Dogs Silver instructor badge
 badge: true
 featured: true
+venue: Wednesbury (outdoors)
+bookingUrl: https://bookwhen.com/cwbdogtraining
 ---
-Progress your sniffing journey onto new, exciting scents and environments.
+Progress your sniffing journey onto new, exciting scents and environments, building on scent identification, searching and indication.

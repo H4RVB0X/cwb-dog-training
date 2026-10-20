@@ -83,6 +83,12 @@ const benefits = [
 											<dd>{c.data.dates}</dd>
 										</div>
 									)}
+									{c.data.venue && (
+										<div>
+											<dt>Where</dt>
+											<dd>{c.data.venue}</dd>
+										</div>
+									)}
 									{c.data.level && (
 										<div>
 											<dt>Who</dt>
@@ -92,7 +98,11 @@ const benefits = [
 								</dl>
 								<div class="level__foot">
 									<span class="level__price">{c.data.price}</span>
-									<a class="btn btn--light" href={`/contact/?course=${c.id}`}>Book</a>
+									{c.data.bookingUrl ? (
+										<a class="btn btn--light" href={c.data.bookingUrl} target="_blank" rel="noopener">Book</a>
+									) : (
+										<a class="btn btn--light" href={`/contact/?course=${c.id}`}>Book</a>
+									)}
 								</div>
 							</div>
 						</li>

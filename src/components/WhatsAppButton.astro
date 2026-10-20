@@ -1,0 +1,62 @@
+---
+import Icon from './Icon.astro';
+import settings from '../data/settings.json';
+
+const text = encodeURIComponent(`Hi ${settings.trainerName}, I found you on your website and I'd like to ask about training.`);
+---
+
+{
+	settings.whatsapp && (
+		<a class="wa" href={`https://wa.me/${settings.whatsapp}?text=${text}`} target="_blank" rel="noopener" aria-label="Message on WhatsApp">
+			<Icon name="whatsapp" />
+			<span>WhatsApp</span>
+		</a>
+	)
+}
+
+<style>
+	.wa {
+		position: fixed;
+		right: 18px;
+		bottom: 18px;
+		z-index: 40;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		height: 56px;
+		padding: 0 1.2rem 0 1rem;
+		border-radius: 999px;
+		background: #25d366;
+		color: #fff;
+		text-decoration: none;
+		font-family: var(--font-display);
+		font-weight: 700;
+		font-size: 1.1rem;
+		letter-spacing: 0.05em;
+		text-transform: uppercase;
+		box-shadow: 0 12px 28px -10px rgba(20, 29, 36, 0.55);
+		transition: transform 0.2s ease;
+	}
+	.wa:hover {
+		transform: translateY(-3px);
+	}
+	.wa :global(svg) {
+		width: 26px;
+		height: 26px;
+	}
+	@media (max-width: 600px) {
+		.wa {
+			width: 56px;
+			padding: 0;
+			justify-content: center;
+		}
+		.wa span {
+			display: none;
+		}
+	}
+	@media print {
+		.wa {
+			display: none;
+		}
+	}
+</style>
