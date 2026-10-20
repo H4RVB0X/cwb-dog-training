@@ -55,6 +55,7 @@ const jsonLd = {
 		<link rel="canonical" href={canonical} />
 		<link rel="icon" type="image/png" href="/images/logos/cwb-dog.png" />
 		<meta name="theme-color" content="#1c2b36" />
+		{process.env.NOINDEX === 'true' && <meta name="robots" content="noindex, nofollow" />}
 
 		<meta property="og:type" content="website" />
 		<meta property="og:site_name" content={settings.businessName} />

@@ -34,6 +34,13 @@ Course `status` controls the badge and button text:
 
 Set `hidden: true` to take a course off the site without deleting it, and `featured: true` to show it on the home page.
 
+## Preview on GitHub Pages
+
+Every push to `main` deploys a preview to GitHub Pages via `.github/workflows/deploy.yml`.
+The preview is served from a subfolder (`/<repo-name>/`), so the build runs `scripts/rebase.mjs`
+to prefix links with `BASE_PATH`, and `NOINDEX=true` keeps it out of Google.
+When moving to the real domain, delete those two `env` lines from the workflow.
+
 ## Going live (one-time setup)
 
 1. **GitHub**: push this folder to a new GitHub repository.
