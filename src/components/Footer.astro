@@ -9,12 +9,8 @@ const year = new Date().getFullYear();
 <footer class="footer section--dark topo">
 	<div class="container footer__grid">
 		<div class="footer__brand">
-			<a href="/" class="footer__logo">
-				<span class="mark"><img src="/images/logos/cwb-dog.png" alt="" width="145" height="130" loading="lazy" /></span>
-				<span>
-					<strong>CWB</strong>
-					<em>Dog Training</em>
-				</span>
+			<a href="/" class="footer__logo" aria-label={`${settings.businessName}, home`}>
+				<img src="/images/logos/cwb-logo-full.png" alt={settings.businessName} width="534" height="348" loading="lazy" />
 			</a>
 			<p>{settings.tagline}. 1-1 training, puppy foundations and UK Sniffer Dogs scent detection courses, based in {settings.location}.</p>
 			<div class="social">
@@ -83,36 +79,19 @@ const year = new Date().getFullYear();
 		}
 	}
 	.footer__logo {
-		display: inline-flex;
-		align-items: center;
-		gap: 0.8rem;
-		text-decoration: none;
-		font-family: var(--font-display);
-		text-transform: uppercase;
-		line-height: 0.9;
-		margin-bottom: 1rem;
+		display: inline-block;
+		background: #fff;
+		border-radius: var(--radius-lg);
+		padding: 14px 18px;
+		margin-bottom: 1.2rem;
+		transition: transform 0.2s ease;
 	}
-	.footer__logo .mark {
-		width: 58px;
-		height: 58px;
-		border-radius: 50%;
-		background: var(--bone);
-		display: grid;
-		place-items: center;
+	.footer__logo:hover {
+		transform: rotate(-1.5deg);
 	}
 	.footer__logo img {
-		width: 42px;
-	}
-	.footer__logo strong {
-		display: block;
-		font-size: 2rem;
-		letter-spacing: 0.06em;
-	}
-	.footer__logo em {
-		font-style: normal;
-		font-size: 0.95rem;
-		letter-spacing: 0.22em;
-		color: var(--tan);
+		width: 190px;
+		height: auto;
 	}
 	.footer__brand p {
 		color: rgba(239, 234, 223, 0.7);
