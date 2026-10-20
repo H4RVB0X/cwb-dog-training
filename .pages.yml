@@ -50,7 +50,7 @@ content:
         label: Where (e.g. Wednesbury, outdoors)
         type: string
       - name: bookingUrl
-        label: Booking link (e.g. your Bookwhen page). Leave empty to use the website enquiry form
+        label: Booking link (open the course on Bookwhen and copy the address from the top of the page). Leave empty to use the website enquiry form
         type: string
       - name: image
         label: Image

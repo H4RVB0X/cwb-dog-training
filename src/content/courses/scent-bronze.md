@@ -12,6 +12,6 @@ imageAlt: UK Sniffer Dogs Bronze instructor badge
 badge: true
 featured: true
 venue: Wednesbury (outdoors)
-bookingUrl: https://bookwhen.com/cwbdogtraining
+bookingUrl: https://bookwhen.com/cwbdogtraining/e/ev-s8ge1-20261018090000
 ---
 Use your dog's superpower! Over 6 weeks we cover scent identification, searching skills and scent indication in a fun, relaxed setting. Dogs from 7 months to 13 years have taken part so far.

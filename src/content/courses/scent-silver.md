@@ -12,6 +12,6 @@ imageAlt: UK Sniffer Dogs Silver instructor badge
 badge: true
 featured: true
 venue: Wednesbury (outdoors)
-bookingUrl: https://bookwhen.com/cwbdogtraining
+bookingUrl: https://bookwhen.com/cwbdogtraining/e/ev-sp2bb-20261018100000
 ---
 Progress your sniffing journey onto new, exciting scents and environments, building on scent identification, searching and indication.

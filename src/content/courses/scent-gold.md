@@ -12,6 +12,6 @@ imageAlt: UK Sniffer Dogs Gold instructor badge
 badge: true
 featured: true
 venue: Wednesbury (outdoors)
-bookingUrl: https://bookwhen.com/cwbdogtraining
+bookingUrl: https://bookwhen.com/cwbdogtraining/e/ev-sxm5y-20261018110000
 ---
 The final chapter! Inaccessible hides, underwater indications, person searches, new scents and a tougher retrieve search. There's a Gold certificate with your name on it.
