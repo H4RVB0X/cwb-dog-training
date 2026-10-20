@@ -98,11 +98,19 @@ const external = !!d.bookingUrl;
 		place-items: center;
 	}
 	.course__media.is-badge img {
+		/* absolute so the % height resolves against the fixed-ratio box, keeping the whole badge in view */
+		position: absolute;
+		inset: 0;
+		margin: auto;
 		width: auto;
-		height: 78%;
+		height: 76%;
+		aspect-ratio: 1;
 		border-radius: 50%;
 		object-fit: contain;
 		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+	}
+	.course:hover .course__media.is-badge img {
+		transform: scale(1.06);
 	}
 	.course__status {
 		position: absolute;
