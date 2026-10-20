@@ -219,23 +219,29 @@ const services = [
 			</div>
 			<div class="grid grid--2">
 				<article class="partner reveal">
-					<div class="partner__logo partner__logo--pf"><img src="/images/logos/perfect-fit.jpg" alt="Perfect Fit dog harnesses logo" loading="lazy" /></div>
-					<div>
+					<div class="partner__logo">
+						<img src="/images/logos/perfect-fit.jpg" alt="Perfect Fit: the ultimate walking harness" width="600" height="321" loading="lazy" />
+					</div>
+					<div class="partner__body">
 						<h3>Perfect Fit Harnesses</h3>
 						<p>
 							Premium modular harnesses with a unique three-piece design for a snug, custom fit on dogs of every shape and
 							size. Fleece-lined to prevent chafing, so your dog stays comfortable and secure on every walk.
 						</p>
+						<span class="tag tag--tan partner__perk">Client discount code available</span>
 					</div>
 				</article>
 				<article class="partner reveal">
-					<div class="partner__logo"><img src="/images/logos/tug-e-nuff.png" alt="Tug-E-Nuff partner logo" loading="lazy" /></div>
-					<div>
+					<div class="partner__logo">
+						<img src="/images/logos/tug-e-nuff.png" alt="Tug-E-Nuff partner logo" width="593" height="816" loading="lazy" />
+					</div>
+					<div class="partner__body">
 						<h3>Tug-E-Nuff Dog Toys</h3>
 						<p>
 							Expert-approved, durable tug toys with bungee handles and irresistible textures like real sheepskin. A
 							game-changer for motivation, recall and building a rock-solid bond.
 						</p>
+						<span class="tag tag--tan partner__perk">Client discount code available</span>
 					</div>
 				</article>
 			</div>
@@ -588,39 +594,55 @@ const services = [
 
 	/* PARTNERS */
 	.partner {
-		display: grid;
-		grid-template-columns: 110px 1fr;
-		gap: 1.4rem;
-		align-items: start;
-		padding: 1.6rem;
+		display: flex;
+		flex-direction: column;
 		border: 1px solid rgba(239, 234, 223, 0.15);
 		border-radius: var(--radius-lg);
 		background: rgba(239, 234, 223, 0.04);
+		overflow: hidden;
+		transition:
+			transform 0.25s ease,
+			border-color 0.25s ease;
+	}
+	.partner:hover {
+		transform: translateY(-4px);
+		border-color: rgba(201, 164, 103, 0.5);
+	}
+	.partner__logo {
+		height: 190px;
+		background: #fff;
+		display: grid;
+		place-items: center;
+		padding: 24px;
+	}
+	.partner__logo img {
+		width: auto;
+		height: auto;
+		max-width: 100%;
+		max-height: 142px;
+	}
+	.partner__body {
+		padding: 1.6rem;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		flex: 1;
 	}
 	.partner h3 {
 		color: var(--bone);
 	}
 	.partner p {
-		margin: 0;
 		color: rgba(239, 234, 223, 0.78);
 	}
-	.partner__logo {
-		width: 110px;
-		aspect-ratio: 1;
-		border-radius: var(--radius);
-		background: #fff;
-		display: grid;
-		place-items: center;
-		padding: 8px;
-		overflow: hidden;
-	}
-	.partner__logo img {
-		max-height: 100%;
-		object-fit: contain;
+	.partner__perk {
+		margin-top: auto;
 	}
 	@media (max-width: 480px) {
-		.partner {
-			grid-template-columns: 1fr;
+		.partner__logo {
+			height: 160px;
+		}
+		.partner__logo img {
+			max-height: 116px;
 		}
 	}
 </style>
