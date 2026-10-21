@@ -29,9 +29,11 @@ jobs:
       - run: npm ci
       - run: npm run build
         env:
-          # Served from https://<user>.github.io/<repo>/ - remove both once on the custom domain
-          BASE_PATH: /${{ github.event.repository.name }}
-          NOINDEX: 'true'
+          # Preview mode (no CUSTOM_DOMAIN variable): served from https://<owner>.github.io/<repo>/
+          # and hidden from Google. Once the repo variable CUSTOM_DOMAIN is set
+          # (Settings > Secrets and variables > Actions > Variables), the site builds for the real domain.
+          BASE_PATH: ${{ !vars.CUSTOM_DOMAIN && format('/{0}', github.event.repository.name) || '' }}
+          NOINDEX: ${{ !vars.CUSTOM_DOMAIN && 'true' || 'false' }}
           # Optional: Google Places API key for the live rating (Settings > Secrets > Actions)
           GOOGLE_PLACES_API_KEY: ${{ secrets.GOOGLE_PLACES_API_KEY }}
       - uses: actions/upload-pages-artifact@v3
