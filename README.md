@@ -40,27 +40,16 @@ The Blog menu link and the home page "From the blog" section only appear once at
 
 Set `hidden: true` to take a course off the site without deleting it, and `featured: true` to show it on the home page.
 
-## Preview on GitHub Pages
+## Preview vs live
 
-Every push to `main` deploys a preview to GitHub Pages via `.github/workflows/deploy.yml`.
-The preview is served from a subfolder (`/<repo-name>/`), so the build runs `scripts/rebase.mjs`
-to prefix links with `BASE_PATH`, and `NOINDEX=true` keeps it out of Google.
-When moving to the real domain, delete those two `env` lines from the workflow.
+Every push to `main` (and a daily scheduled run) builds and deploys to GitHub Pages via `.github/workflows/deploy.yml`.
 
-## Going live (one-time setup)
+- **Preview mode** (default): served from `https://<owner>.github.io/<repo>/`. `scripts/rebase.mjs` prefixes links with `BASE_PATH`, and `NOINDEX` keeps it out of Google.
+- **Live mode**: set the Actions **variable** `CUSTOM_DOMAIN` to `cwbdogtraining.co.uk` and the build targets the real domain. No code change is needed.
 
-1. **GitHub**: push this folder to a new GitHub repository.
-2. **Hosting**: connect the repo to Netlify or Cloudflare Pages (both free).
-   - Build command: `npm run build`
-   - Output folder: `dist`
-3. **Domain**: in GoDaddy DNS, point `cwbdogtraining.co.uk` at the new host by following the host's "add custom domain" steps. Cancel the GoDaddy Website Builder plan only once the new site is live.
-4. **Google rating (optional)**: the overall star rating and review count can update automatically every day.
-   1. In [Google Cloud Console](https://console.cloud.google.com/), create a project, enable **Places API (New)** and create an API key. Restrict the key to *Places API (New)* only, and set a low budget alert.
-   2. In this GitHub repo: *Settings → Secrets and variables → Actions → New repository secret*, name `GOOGLE_PLACES_API_KEY`, paste the key.
-   3. Run the *Deploy* workflow (or push any change). The build log shows `[rating] Google: …` when it works, and prints the Place ID; paste that into *Google Place ID* in the site settings.
-   Without the key, the site uses the rating and review count typed into the settings. Individual reviews are still added by hand in Pages CMS.
-5. **Contact form**: go to [web3forms.com](https://web3forms.com), enter `info.cwbdogtraining@gmail.com` to get a free access key, and paste it into `web3formsKey` in `src/data/settings.json` (or in Pages CMS under *Contact details & settings*). Until a key is set, the form opens the visitor's email app instead.
-5. **Editing**: Chris signs in at [app.pagescms.org](https://app.pagescms.org) with a GitHub account and opens the repo. Every save rebuilds the site automatically in about a minute.
+## Going live
+
+Follow **[LAUNCH-CHECKLIST.md](LAUNCH-CHECKLIST.md)**. It covers moving the repo into a GitHub organisation Chris owns, the contact form, the Google rating key, the GoDaddy DNS records, and Pages CMS.
 
 ## Local development
 
