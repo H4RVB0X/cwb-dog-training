@@ -8,7 +8,7 @@ status: enquire
 level: Puppies
 image: /images/gsd-puppy-frost.jpg
 imageAlt: Black and tan German Shepherd puppy standing on frost-covered grass
-logo: ""
+logo: /images/logos/betterdog-approved-trainer.png
 logoAlt: BetterDog approved trainer
 ---
 A stand-alone puppy course built around the BetterDog Puppy Development System, with hands-on support from Chris as an approved BetterDog trainer.

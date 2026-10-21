@@ -7,6 +7,15 @@ interface Props {
 const { eyebrow = 'Questions' } = Astro.props;
 
 const items = faq.questions.filter((q) => q.question?.trim() && q.answer?.trim());
+// Group questions under their section heading, in the order sections first appear
+const sections: { name: string; items: typeof items }[] = [];
+for (const q of items) {
+	const name = (q as { section?: string }).section?.trim() || '';
+	let group = sections.find((g) => g.name === name);
+	if (!group) sections.push((group = { name, items: [] }));
+	group.items.push(q);
+}
+
 const paragraphs = (text: string) => text.split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean);
 
 const jsonLd = {
@@ -32,18 +41,23 @@ const jsonLd = {
 					</p>
 				</div>
 				<div class="faq__list">
-					{items.map((q, i) => (
-						<details class="faq__item" open={i === 0}>
-							<summary>
-								<span>{q.question}</span>
-								<span class="faq__icon" aria-hidden="true" />
-							</summary>
-							<div class="faq__answer">
-								{paragraphs(q.answer).map((p) => (
-									<p>{p}</p>
-								))}
-							</div>
-						</details>
+					{sections.map((g, gi) => (
+						<div class="faq__group">
+							{g.name && <h3 class="faq__section">{g.name}</h3>}
+							{g.items.map((q, i) => (
+								<details class="faq__item" open={gi === 0 && i === 0}>
+									<summary>
+										<span>{q.question}</span>
+										<span class="faq__icon" aria-hidden="true" />
+									</summary>
+									<div class="faq__answer">
+										{paragraphs(q.answer).map((p) => (
+											<p>{p}</p>
+										))}
+									</div>
+								</details>
+							))}
+						</div>
 					))}
 				</div>
 			</div>
@@ -78,7 +92,19 @@ const jsonLd = {
 	}
 	.faq__list {
 		display: grid;
+		gap: 2rem;
+	}
+	.faq__group {
+		display: grid;
 		gap: 0.75rem;
+	}
+	.faq__section {
+		font-size: 1.1rem;
+		font-family: var(--font-mono);
+		font-weight: 500;
+		letter-spacing: 0.12em;
+		color: var(--signal);
+		margin: 0;
 	}
 	.faq__item {
 		background: #fff;

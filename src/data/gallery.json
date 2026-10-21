@@ -1,16 +1,84 @@
 {
   "photos": [
-    { "image": "/images/dog-in-woodland.jpg", "alt": "Dark Labrador sitting happily among autumn leaves in woodland" },
-    { "image": "/images/german-shepherd-park.jpg", "alt": "German Shepherd in a harness sitting on grass in a park" },
-    { "image": "/images/weimaraner-puppy.jpg", "alt": "Weimaraner puppy sitting by a sofa, head tilted" },
-    { "image": "/images/chocolate-labrador.jpg", "alt": "Chocolate Labrador sitting and looking up" },
-    { "image": "/images/cavapoo-puppy.jpg", "alt": "Apricot cavapoo puppy lying with a rope toy" },
-    { "image": "/images/doodle-bandana.jpg", "alt": "Chocolate doodle wearing a red bandana" },
-    { "image": "/images/brindle-dog.jpg", "alt": "Brindle dog lying on a patio" },
-    { "image": "/images/black-lab-looking-up.jpg", "alt": "Black Labrador with a grey muzzle looking up at the camera" },
-    { "image": "/images/shepherd-by-water.jpg", "alt": "German Shepherd looking out over water" },
-    { "image": "/images/shepherd-resting.jpg", "alt": "German Shepherd resting its head on a garden table" },
-    { "image": "/images/gsd-puppy-frost.jpg", "alt": "German Shepherd puppy on frosty grass" },
-    { "image": "/images/labrador-upside-down.jpg", "alt": "Black Labrador lying upside down, smiling" }
+    {
+      "image": "/images/gallery-border-collie.jpg",
+      "alt": "Border Collie sitting inside a big tractor tyre in a field"
+    },
+    {
+      "image": "/images/gallery-labradors.jpg",
+      "alt": "Black Labrador and fox red Labrador sitting side by side on a patio"
+    },
+    {
+      "image": "/images/gallery-golden-retriever.jpg",
+      "alt": "Golden Retriever sitting on a woodland path"
+    },
+    {
+      "image": "/images/gallery-springer-spaniel.jpg",
+      "alt": "Springer Spaniel lying in the grass with a green ball"
+    },
+    {
+      "image": "/images/gallery-german-shepherd.jpg",
+      "alt": "Close-up of a German Shepherd at home"
+    },
+    {
+      "image": "/images/gallery-cocker-spaniel.jpg",
+      "alt": "Golden Cocker Spaniel sitting on a path"
+    },
+    {
+      "image": "/images/gallery-hound.jpg",
+      "alt": "Tricolour hound sitting on a lawn"
+    },
+    {
+      "image": "/images/gallery-small-dog.jpg",
+      "alt": "Small fluffy dog sitting on the grass"
+    },
+    {
+      "image": "/images/dog-in-woodland.jpg",
+      "alt": "Dark Labrador sitting happily among autumn leaves in woodland"
+    },
+    {
+      "image": "/images/german-shepherd-park.jpg",
+      "alt": "German Shepherd in a harness sitting on grass in a park"
+    },
+    {
+      "image": "/images/weimaraner-puppy.jpg",
+      "alt": "Weimaraner puppy sitting by a sofa, head tilted"
+    },
+    {
+      "image": "/images/chocolate-labrador.jpg",
+      "alt": "Chocolate Labrador sitting and looking up"
+    },
+    {
+      "image": "/images/cavapoo-puppy.jpg",
+      "alt": "Apricot cavapoo puppy lying with a rope toy"
+    },
+    {
+      "image": "/images/doodle-bandana.jpg",
+      "alt": "Chocolate doodle wearing a red bandana"
+    },
+    {
+      "image": "/images/brindle-dog.jpg",
+      "alt": "Brindle dog lying on a patio"
+    },
+    {
+      "image": "/images/black-lab-looking-up.jpg",
+      "alt": "Black Labrador with a grey muzzle looking up at the camera"
+    },
+    {
+      "image": "/images/shepherd-by-water.jpg",
+      "alt": "German Shepherd looking out over water"
+    },
+    {
+      "image": "/images/shepherd-resting.jpg",
+      "alt": "German Shepherd resting its head on a garden table"
+    },
+    {
+      "image": "/images/gsd-puppy-frost.jpg",
+      "alt": "German Shepherd puppy on frosty grass"
+    },
+    {
+      "image": "/images/labrador-upside-down.jpg",
+      "alt": "Black Labrador lying upside down, smiling"
+    }
   ]
 }

@@ -1,9 +1,9 @@
 ---
 title: Why scentwork is brilliant for pet dogs
-date: 2026-10-21
+date: 2026-10-20
 summary: Your dog's nose is their superpower. Here's why giving it a job is one of the best things you can do for a happier, calmer, more confident dog.
-image: /images/dog-in-woodland.jpg
-imageAlt: Happy dark Labrador sitting among autumn leaves in woodland
+image: /images/blog-scentwork.jpg
+imageAlt: Dog searching a row of blue stadium seats during a scentwork session
 draft: false
 ---
 Every dog has a superpower: their nose. Scentwork gives that superpower a job, and the results go far beyond a few fun sessions on a Sunday morning.

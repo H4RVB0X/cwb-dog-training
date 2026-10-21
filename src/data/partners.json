@@ -13,6 +13,13 @@
       "description": "Expert-approved, durable tug toys with bungee handles and irresistible textures like real sheepskin. A game-changer for motivation, recall and building a rock-solid bond.",
       "perk": "Client discount code available",
       "link": ""
+    },
+    {
+      "name": "BetterDog",
+      "logo": "/images/logos/betterdog.png",
+      "description": "BetterDog is the dog-owner education arm of the Institute of Applied Canine Science, with expert-led online courses such as the Puppy Development System. As an approved BetterDog trainer, I offer hands-on support alongside them.",
+      "perk": "Approved BetterDog trainer",
+      "link": "/betterdog/"
     }
   ]
 }

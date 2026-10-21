@@ -2,32 +2,99 @@
   "title": "Frequently asked questions",
   "questions": [
     {
-      "question": "I’m not sure my dog is even trainable. Can you help?",
-      "answer": "Yes. There’s no judgement on your dog’s ability. Every dog is an individual, so we start where you are today and build from there, at a pace that suits you both."
+      "section": "Training",
+      "question": "Are you qualified?",
+      "answer": "Yes. I’m an accredited member of the ABTC (Animal Training Instructor) and TCBTS, as well as a UK Sniffer Dogs Instructor."
     },
     {
-      "question": "How does 1-1 training work?",
-      "answer": "It starts with an initial assessment to understand what you and your dog need, followed by a personalised training plan and private 1-hour sessions. You control the pace to fit around your schedule, and you can get phone support between sessions if you need advice."
+      "section": "Training",
+      "question": "What methods do you use?",
+      "answer": "I’m a reward-based trainer."
     },
     {
-      "question": "I’m getting a new puppy or rescue dog. When should I get in touch?",
-      "answer": "Before they arrive, if you can. A pre-puppy home visit covers puppy-proofing your home, the equipment and toys you’ll need, enrichment, and how to help your new dog settle in. After that I can help with toilet training, socialisation and more."
+      "section": "Training",
+      "question": "At what age can I start training my puppy?",
+      "answer": "Your puppy’s learning has already begun before you bring them home. If you have an older dog or other pets, that’s something to consider, along with house rules and introductions to young children. Likewise, if you’re a first-time puppy owner you’ll need to put things in place before they arrive home.\n\nFeel free to call or message to start that conversation early and set yourself up for success."
     },
     {
-      "question": "Does my dog need any experience to start scentwork?",
-      "answer": "No experience is needed for the Bronze course, and it’s suitable for dogs of any age. Dogs from 7 months to 13 years old have taken part so far."
+      "section": "Training",
+      "question": "Where do the assessments for 1-1 training take place?",
+      "answer": "Assessments take place at your home and the surrounding area, so I can fully understand your dog in their home environment."
     },
     {
-      "question": "Can we join Silver without doing Bronze?",
-      "answer": "Silver is for dogs who have completed a Bronze course, or have already done some scentwork training and feel ready to progress. Please have a chat with me before booking. Gold is open to Silver-level dogs only."
+      "section": "Training",
+      "question": "Where do the follow-up sessions take place?",
+      "answer": "The best location is decided once we’ve identified the skills your dog needs. Most of the time I come to you, but we can also meet at other convenient places."
     },
     {
-      "question": "Where are the scent detection courses held?",
-      "answer": "Outdoors at C & W Commercials, Western Way, Wednesbury, WS10 7BW. The extra space makes it ideal for dogs who need a little more room."
+      "section": "Training",
+      "question": "How long are the follow-up sessions?",
+      "answer": "Usually around 60 to 90 minutes."
     },
     {
-      "question": "What should I bring to a scent course?",
-      "answer": "Your dog, a bowl, treats or a toy, a lead, harness or collar, and a sense of fun!\n\nFor Gold, also bring your scent tins from the Bronze course, plus an old pair of boots and an old jacket or jumper to use in the search areas."
+      "section": "Training",
+      "question": "What happens when I’ve finished my sessions?",
+      "answer": "You can book another set, one-off sessions, or look at the other skills courses on offer, such as scentwork and tracking."
+    },
+    {
+      "section": "Training",
+      "question": "What happens if I get stuck between training sessions?",
+      "answer": "Each package includes ongoing phone support for those little hiccups."
+    },
+    {
+      "section": "Training",
+      "question": "Will I get a training plan?",
+      "answer": "Absolutely. Everything is emailed across, with easy-to-follow exercises, general advice and other useful tips."
+    },
+    {
+      "section": "Training",
+      "question": "Is there an age limit for 1-1 training?",
+      "answer": "No. Feel free to call to discuss any concerns, with no obligation."
+    },
+    {
+      "section": "Training",
+      "question": "Are you insured?",
+      "answer": "Yes, I’m fully insured with a reputable pet business insurer."
+    },
+    {
+      "section": "Training",
+      "question": "Do you work with XL Bullies?",
+      "answer": "Please call me directly to discuss, as insurance requirements and UK legislation are constantly changing."
+    },
+    {
+      "section": "Scentwork",
+      "question": "Do I need a Labrador or Spaniel to be successful at scentwork?",
+      "answer": "No. The UK Sniffer Dogs courses are designed for any dog, regardless of breed, age and ability."
+    },
+    {
+      "section": "Scentwork",
+      "question": "How long are the courses?",
+      "answer": "Each course states on its booking page whether it’s a 6-week course or 3 × 2-hour workshops. Feel free to contact me directly if you’re unsure."
+    },
+    {
+      "section": "Scentwork",
+      "question": "I can’t attend a course. Can I still complete UK Sniffer Dogs?",
+      "answer": "Absolutely. 1-1 scentwork training options are available."
+    },
+    {
+      "section": "Scentwork",
+      "question": "Do I need any specialist equipment?",
+      "answer": "No. For Bronze level you’ll only need to buy a red Kong. Everything else is provided for all courses at Bronze, Silver and Gold levels."
+    },
+    {
+      "section": "Scentwork",
+      "question": "Are courses always run at the same location?",
+      "answer": "No. The location of each course is clearly advertised on its booking page, and you’ll receive a confirmation email after payment."
+    },
+    {
+      "section": "Other courses",
+      "question": "When are your Essential Skills, Retrieve and Tracking courses?",
+      "answer": "These run throughout the year at various locations and are advertised well in advance. Full details are shown on the booking page."
+    },
+    {
+      "section": "Other courses",
+      "question": "I’m still not sure if this is right for me and my dog. What do I do?",
+      "answer": "I completely understand that booking a dog trainer is a big commitment of trust and shouldn’t be taken lightly. If you still have questions, get in touch by email, WhatsApp or phone, so we can work out exactly what you need and point you in the right direction."
     }
   ]
 }

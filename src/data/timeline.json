@@ -5,35 +5,45 @@
       "title": "Panda",
       "text": "A small black Labrador ball of fluff, found in a cardboard box in winter by police officers in Brierley Hill and taken to the station, where my mother worked for the CPS at the time. A few days later Panda came home with us, and my journey with dogs began. Her love of water, and tales of her sitting on our laps on long road trips to Scotland, are still told with much affection. (It was the 1980s, so don’t be too alarmed by the lack of safety standards that are now commonplace!)",
       "image": "",
-      "imageAlt": ""
+      "imageAlt": "",
+      "image2": "",
+      "image2Alt": ""
     },
     {
       "when": "My first dog",
       "title": "Harvey",
       "text": "Another black Labrador rehome (can you see a theme developing yet?). A brilliant dog who, probably more by luck than knowledge, I trained to do a multitude of skills at my local park. He also became a Pets As Therapy dog for a time, and I was hooked on the emotional connection and joy that dogs bring.",
       "image": "",
-      "imageAlt": ""
+      "imageAlt": "",
+      "image2": "",
+      "image2Alt": ""
     },
     {
       "when": "Fostering",
       "title": "Police dog puppies",
       "text": "After Harvey came a long period of fostering police dog puppies, both German Shepherds and Springer Spaniels. I had no plans to start a training business back then. It was simply the right thing for me to do at that moment.",
-      "image": "",
-      "imageAlt": ""
+      "image": "/images/timeline-police-puppy.jpg",
+      "imageAlt": "German Shepherd running across a field",
+      "image2": "",
+      "image2Alt": ""
     },
     {
       "when": "Recent years",
       "title": "Service dogs & Pinto",
       "text": "Three more dogs have graced our home in recent years, all belonging to service dog charities I also volunteer for. In a total change from Labs and Shepherds, a tiny male cavapoo arrived who loved nothing more than playing with Pinto (my most recent rescued black Labrador) and jumping on your lap for a snooze.",
-      "image": "/images/labrador-upside-down.jpg",
-      "imageAlt": "Pinto, Chris’s rescued black Labrador, lying upside down and smiling"
+      "image": "/images/timeline-pinto-service-dogs.jpg",
+      "imageAlt": "Pinto and a service dog sitting together on a bandstand step",
+      "image2": "/images/labrador-upside-down.jpg",
+      "image2Alt": "Pinto lying upside down and smiling"
     },
     {
       "when": "2023 →",
       "title": "CWB Dog Training",
       "text": "With retirement looming at the end of 2023 and wanting to do something for myself, I buried my head in books, webinars and courses, and it immediately ignited a passion for helping dogs and their owners. Relating all that knowledge back to the dogs I’d known, it all made sense. This is what I should do.",
       "image": "/images/chris.jpg",
-      "imageAlt": "Chris, founder of CWB Dog Training"
+      "imageAlt": "Chris, founder of CWB Dog Training",
+      "image2": "",
+      "image2Alt": ""
     }
   ]
 }
