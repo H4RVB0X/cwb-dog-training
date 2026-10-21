@@ -34,4 +34,16 @@ const reviews = defineCollection({
 	}),
 });
 
-export const collections = { courses, reviews };
+const blog = defineCollection({
+	loader: glob({ pattern: '**/*.md', base: './src/content/blog' }),
+	schema: z.object({
+		title: z.string(),
+		date: z.coerce.date(),
+		summary: z.string().optional(),
+		image: z.string().optional(),
+		imageAlt: z.string().default(''),
+		draft: z.boolean().default(false),
+	}),
+});
+
+export const collections = { courses, reviews, blog };

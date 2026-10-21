@@ -6,10 +6,15 @@ import Credentials from '../components/Credentials.astro';
 import CourseCard from '../components/CourseCard.astro';
 import ReviewCard from '../components/ReviewCard.astro';
 import CtaBand from '../components/CtaBand.astro';
+import PostCard from '../components/PostCard.astro';
+import { getPosts } from '../lib/blog';
 import settings from '../data/settings.json';
 import packages from '../data/packages.json';
+import partnerData from '../data/partners.json';
 
 const featured = (await getCollection('courses', (c) => c.data.featured && !c.data.hidden)).sort((a, b) => a.data.order - b.data.order);
+const [latestPost] = await getPosts();
+const partners = partnerData.partners.filter((p) => p.name?.trim());
 const reviews = (await getCollection('reviews')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime()).slice(0, 3);
 const allCourses = await getCollection('courses', (c) => !c.data.hidden);
 const lowest = (cat: string) =>
@@ -209,41 +214,56 @@ const services = [
 		</div>
 	</section>
 
+	<!-- LATEST BLOG POST (hidden when there are no posts) -->
+	{
+		latestPost && (
+			<section class="section section--bone topo">
+				<div class="container">
+					<div class="section-head section-head--split">
+						<div>
+							<span class="eyebrow">From the blog</span>
+							<h2>Latest news &amp; tips</h2>
+						</div>
+						<div>
+							<a class="text-link" href="/blog/">All posts <Icon name="arrow" /></a>
+						</div>
+					</div>
+					<PostCard post={latestPost} featured />
+				</div>
+			</section>
+		)
+	}
+
 	<!-- PARTNERS -->
 	<section class="section section--dark topo partners">
 		<div class="container">
 			<div class="section-head">
 				<span class="eyebrow">Exclusive client offers</span>
 				<h2>Kit I trust, <span class="accent">for less.</span></h2>
-				<p class="lede">CWB is an official partner of two brilliant UK brands. Clients get access to exclusive discount codes, so just ask.</p>
+				<p class="lede">CWB is an official partner of brilliant UK brands. Clients get access to exclusive discount codes, so just ask.</p>
 			</div>
 			<div class="grid grid--2">
-				<article class="partner reveal">
-					<div class="partner__logo">
-						<img src="/images/logos/perfect-fit.jpg" alt="Perfect Fit: the ultimate walking harness" width="600" height="321" loading="lazy" />
-					</div>
-					<div class="partner__body">
-						<h3>Perfect Fit Harnesses</h3>
-						<p>
-							Premium modular harnesses with a unique three-piece design for a snug, custom fit on dogs of every shape and
-							size. Fleece-lined to prevent chafing, so your dog stays comfortable and secure on every walk.
-						</p>
-						<span class="tag tag--tan partner__perk">Client discount code available</span>
-					</div>
-				</article>
-				<article class="partner reveal">
-					<div class="partner__logo">
-						<img src="/images/logos/tug-e-nuff.png" alt="Tug-E-Nuff partner logo" width="593" height="816" loading="lazy" />
-					</div>
-					<div class="partner__body">
-						<h3>Tug-E-Nuff Dog Toys</h3>
-						<p>
-							Expert-approved, durable tug toys with bungee handles and irresistible textures like real sheepskin. A
-							game-changer for motivation, recall and building a rock-solid bond.
-						</p>
-						<span class="tag tag--tan partner__perk">Client discount code available</span>
-					</div>
-				</article>
+				{
+					partners.map((p) => (
+						<article class="partner reveal">
+							<div class="partner__logo">
+								<img src={p.logo} alt={`${p.name} logo`} loading="lazy" />
+							</div>
+							<div class="partner__body">
+								<h3>{p.name}</h3>
+								<p>{p.description}</p>
+								<div class="partner__foot">
+									{p.perk && <span class="tag tag--tan">{p.perk}</span>}
+									{p.link && (
+										<a class="text-link" href={p.link} target="_blank" rel="noopener">
+											Visit site <Icon name="arrow" />
+										</a>
+									)}
+								</div>
+							</div>
+						</article>
+					))
+				}
 			</div>
 		</div>
 	</section>
@@ -634,8 +654,14 @@ const services = [
 	.partner p {
 		color: rgba(239, 234, 223, 0.78);
 	}
-	.partner__perk {
+	.partner__foot {
 		margin-top: auto;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: 0.8rem 1.2rem;
+		width: 100%;
 	}
 	@media (max-width: 480px) {
 		.partner__logo {

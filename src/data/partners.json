@@ -1,0 +1,18 @@
+{
+  "partners": [
+    {
+      "name": "Perfect Fit Harnesses",
+      "logo": "/images/logos/perfect-fit.jpg",
+      "description": "Premium modular harnesses with a unique three-piece design for a snug, custom fit on dogs of every shape and size. Fleece-lined to prevent chafing, so your dog stays comfortable and secure on every walk.",
+      "perk": "Client discount code available",
+      "link": ""
+    },
+    {
+      "name": "Tug-E-Nuff Dog Toys",
+      "logo": "/images/logos/tug-e-nuff.png",
+      "description": "Expert-approved, durable tug toys with bungee handles and irresistible textures like real sheepskin. A game-changer for motivation, recall and building a rock-solid bond.",
+      "perk": "Client discount code available",
+      "link": ""
+    }
+  ]
+}

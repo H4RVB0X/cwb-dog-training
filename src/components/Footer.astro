@@ -1,6 +1,9 @@
 ---
 import Icon from './Icon.astro';
 import settings from '../data/settings.json';
+import { getPosts } from '../lib/blog';
+
+const hasPosts = (await getPosts()).length > 0;
 
 const tel = settings.phone.replace(/\s/g, '');
 const year = new Date().getFullYear();
@@ -36,6 +39,7 @@ const year = new Date().getFullYear();
 			<ul>
 				<li><a href="/about/">About Chris</a></li>
 				<li><a href="/reviews/">Reviews &amp; gallery</a></li>
+				{hasPosts && <li><a href="/blog/">Blog</a></li>}
 				<li><a href="/contact/">Contact</a></li>
 				<li><a href="/contact/#faq">FAQs</a></li>
 				<li><a href="/privacy/">Privacy</a></li>

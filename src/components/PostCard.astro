@@ -1,0 +1,111 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Icon from './Icon.astro';
+import { formatDate } from '../lib/blog';
+
+interface Props {
+	post: CollectionEntry<'blog'>;
+	featured?: boolean;
+}
+const { post, featured = false } = Astro.props;
+const d = post.data;
+---
+
+<a class="post reveal" class:list={{ 'post--featured': featured, 'post--noimg': !d.image }} href={`/blog/${post.id}/`}>
+	{
+		d.image && (
+			<div class="post__img">
+				<img src={d.image} alt={d.imageAlt} loading="lazy" />
+			</div>
+		)
+	}
+	<div class="post__body">
+		<time datetime={d.date.toISOString()}>{formatDate(d.date)}</time>
+		<h3>{d.title}</h3>
+		{d.summary && <p>{d.summary}</p>}
+		<span class="text-link">Read more <Icon name="arrow" /></span>
+	</div>
+</a>
+
+<style>
+	.post {
+		display: flex;
+		flex-direction: column;
+		background: #fff;
+		border: 1px solid var(--line);
+		border-radius: var(--radius-lg);
+		overflow: hidden;
+		text-decoration: none;
+		box-shadow: var(--shadow);
+		transition:
+			transform 0.25s ease,
+			box-shadow 0.25s ease;
+	}
+	.post:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 1px 0 rgba(20, 29, 36, 0.05), 0 22px 40px -18px rgba(20, 29, 36, 0.4);
+	}
+	.post__img {
+		aspect-ratio: 16 / 10;
+		overflow: hidden;
+		background: var(--khaki);
+	}
+	.post__img img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transition: transform 0.5s ease;
+	}
+	.post:hover .post__img img {
+		transform: scale(1.04);
+	}
+	.post__body {
+		padding: 1.4rem;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		flex: 1;
+	}
+	time {
+		font-family: var(--font-mono);
+		font-size: 0.72rem;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: var(--olive-2);
+		margin-bottom: 0.6rem;
+	}
+	h3 {
+		margin-bottom: 0.5rem;
+	}
+	p {
+		color: var(--muted);
+	}
+	.text-link {
+		margin-top: auto;
+	}
+
+	@media (min-width: 860px) {
+		.post--featured {
+			flex-direction: row;
+		}
+		.post--featured .post__img {
+			flex: 1.15;
+			aspect-ratio: auto;
+			min-height: 360px;
+		}
+		.post--featured .post__body {
+			flex: 1;
+			padding: 2.4rem;
+			justify-content: center;
+		}
+		.post--featured h3 {
+			font-size: clamp(1.9rem, 3vw, 2.6rem);
+		}
+		.post--featured p {
+			font-size: 1.1rem;
+		}
+		.post--featured .text-link {
+			margin-top: 0.5rem;
+		}
+	}
+</style>

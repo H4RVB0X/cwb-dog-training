@@ -25,6 +25,9 @@ A fast static site built with [Astro](https://astro.build). Course dates, prices
 | 1-1 packages | `src/data/packages.json` |
 | Gallery photos | `src/data/gallery.json` |
 | FAQs (shown on Contact page) | `src/data/faq.json` |
+| About page timeline | `src/data/timeline.json` |
+| Partners (home page) | `src/data/partners.json` |
+| Blog posts | `src/content/blog/*.md` |
 | Images | `public/images/` |
 
 Course `status` controls the badge and button text:
@@ -32,6 +35,8 @@ Course `status` controls the badge and button text:
 - `coming-soon`: "Register interest"
 - `enquire`: "Enquire"
 - `one-to-one`: "1-1 option"
+
+The Blog menu link and the home page "From the blog" section only appear once at least one post is published (`draft: false`).
 
 Set `hidden: true` to take a course off the site without deleting it, and `featured: true` to show it on the home page.
 

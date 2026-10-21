@@ -3,44 +3,11 @@ import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/PageHero.astro';
 import Credentials from '../components/Credentials.astro';
 import CtaBand from '../components/CtaBand.astro';
+import Icon from '../components/Icon.astro';
 
-const timeline = [
-	{
-		when: '1980s',
-		title: 'Panda',
-		text: 'A small black Labrador ball of fluff, found in a cardboard box in winter by police officers in Brierley Hill and taken to the station, where my mother worked for the CPS at the time. A few days later Panda came home with us, and my journey with dogs began. Her love of water, and tales of her sitting on our laps on long road trips to Scotland, are still told with much affection. (It was the 1980s, so don’t be too alarmed by the lack of safety standards that are now commonplace!)',
-		img: '/images/black-lab-looking-up.jpg',
-		alt: 'Black Labrador looking up at the camera',
-	},
-	{
-		when: 'My first dog',
-		title: 'Harvey',
-		text: 'Another black Labrador rehome (can you see a theme developing yet?). A brilliant dog who, probably more by luck than knowledge, I trained to do a multitude of skills at my local park. He also became a Pets As Therapy dog for a time, and I was hooked on the emotional connection and joy that dogs bring.',
-		img: '/images/labrador-upside-down.jpg',
-		alt: 'Black Labrador lying upside down, smiling',
-	},
-	{
-		when: 'Fostering',
-		title: 'Police dog puppies',
-		text: 'After Harvey came a long period of fostering police dog puppies, both German Shepherds and Springer Spaniels. I had no plans to start a training business back then. It was simply the right thing for me to do at that moment.',
-		img: '/images/shepherd-resting.jpg',
-		alt: 'German Shepherd resting its head on a garden table',
-	},
-	{
-		when: 'Recent years',
-		title: 'Service dogs & Pinto',
-		text: 'Three more dogs have graced our home in recent years, all belonging to service dog charities I also volunteer for. In a total change from Labs and Shepherds, a tiny male cavapoo arrived who loved nothing more than playing with Pinto (my most recent rescued black Labrador) and jumping on your lap for a snooze.',
-		img: '/images/cavapoo-puppy.jpg',
-		alt: 'Apricot cavapoo puppy lying with a rope toy',
-	},
-	{
-		when: '2023 →',
-		title: 'CWB Dog Training',
-		text: 'With retirement looming at the end of 2023 and wanting to do something for myself, I buried my head in books, webinars and courses, and it immediately ignited a passion for helping dogs and their owners. Relating all that knowledge back to the dogs I’d known, it all made sense. This is what I should do.',
-		img: '/images/chris.jpg',
-		alt: 'Chris, founder of CWB Dog Training',
-	},
-];
+import timeline from '../data/timeline.json';
+
+const entries = timeline.entries.filter((t) => t.title?.trim());
 ---
 
 <Layout
@@ -64,11 +31,18 @@ const timeline = [
 
 			<ol class="timeline">
 				{
-					timeline.map((t, i) => (
+					entries.map((t, i) => (
 						<li class="timeline__item reveal" class:list={{ 'is-flip': i % 2 === 1 }}>
-							<div class="timeline__img frame">
-								<img src={t.img} alt={t.alt} loading="lazy" />
-							</div>
+							{t.image ? (
+								<div class="timeline__img frame">
+									<img src={t.image} alt={t.imageAlt} loading="lazy" />
+								</div>
+							) : (
+								<div class="timeline__img timeline__img--empty topo" aria-hidden="true">
+									<Icon name="paw" />
+									<span>{t.when}</span>
+								</div>
+							)}
 							<div class="timeline__dot" aria-hidden="true" />
 							<div class="timeline__text">
 								<span class="tag tag--olive">{t.when}</span>
@@ -126,6 +100,29 @@ const timeline = [
 	.timeline__img {
 		aspect-ratio: 4 / 3;
 		max-height: 340px;
+	}
+	.timeline__img--empty {
+		border-radius: var(--radius-lg);
+		background: var(--navy);
+		color: var(--bone);
+		display: grid;
+		place-content: center;
+		justify-items: center;
+		gap: 0.6rem;
+		width: 100%;
+		box-shadow: var(--shadow);
+	}
+	.timeline__img--empty :global(svg) {
+		width: 56px;
+		height: 56px;
+		color: var(--tan);
+	}
+	.timeline__img--empty span {
+		font-family: var(--font-display);
+		font-weight: 800;
+		font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+		text-transform: uppercase;
+		letter-spacing: 0.03em;
 	}
 	.timeline__dot {
 		justify-self: center;

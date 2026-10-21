@@ -173,3 +173,73 @@ content:
         fields:
           - { name: question, label: Question, type: string, required: true }
           - { name: answer, label: Answer (leave a blank line between paragraphs), type: text, required: true }
+
+  - name: blog
+    label: Blog posts
+    type: collection
+    path: src/content/blog
+    format: yaml-frontmatter
+    filename: "{year}-{month}-{day}-{primary}.md"
+    view:
+      fields: [title, date, draft]
+      primary: title
+      sort: [date]
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: date
+        label: Date
+        type: date
+        required: true
+      - name: summary
+        label: Short summary (shown on the blog list and home page)
+        type: text
+      - name: image
+        label: Cover photo
+        type: image
+      - name: imageAlt
+        label: Cover photo description
+        type: string
+      - name: draft
+        label: Hide this post (draft)
+        type: boolean
+      - name: body
+        label: Post
+        type: rich-text
+
+  - name: timeline
+    label: About page timeline
+    type: file
+    path: src/data/timeline.json
+    format: json
+    fields:
+      - name: entries
+        label: Timeline (drag to reorder)
+        type: object
+        list: true
+        fields:
+          - { name: when, label: "When (e.g. 1980s)", type: string }
+          - { name: title, label: Title, type: string }
+          - { name: text, label: Story, type: text }
+          - { name: image, label: Photo (optional), type: image }
+          - { name: imageAlt, label: Photo description, type: string }
+
+  - name: partners
+    label: Partners
+    type: file
+    path: src/data/partners.json
+    format: json
+    fields:
+      - name: partners
+        label: Partners (drag to reorder)
+        type: object
+        list: true
+        fields:
+          - { name: name, label: Name, type: string, required: true }
+          - { name: logo, label: Logo, type: image }
+          - { name: description, label: Description, type: text }
+          - { name: perk, label: "Client offer (e.g. Client discount code available)", type: string }
+          - { name: link, label: Website link (optional), type: string }
+

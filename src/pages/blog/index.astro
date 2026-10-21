@@ -1,0 +1,47 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import PostCard from '../../components/PostCard.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { getPosts } from '../../lib/blog';
+
+const [latest, ...rest] = await getPosts();
+---
+
+<Layout title="Blog" description="Dog training tips, news and stories from CWB Dog Training in Wall Heath, Kingswinford.">
+	<PageHero eyebrow="Blog" title="Tips, news &amp; <em>stories</em>" intro="Training advice, course news and stories from the field." />
+
+	<section class="section">
+		<div class="container">
+			{
+				latest ? (
+					<div class="posts">
+						<PostCard post={latest} featured />
+						{rest.length > 0 && (
+							<div class="grid grid--3">
+								{rest.map((p) => (
+									<PostCard post={p} />
+								))}
+							</div>
+						)}
+					</div>
+				) : (
+					<p class="lede empty">The first post is on its way. Check back soon!</p>
+				)
+			}
+		</div>
+	</section>
+
+	<CtaBand />
+</Layout>
+
+<style>
+	.posts {
+		display: grid;
+		gap: clamp(20px, 3vw, 32px);
+	}
+	.empty {
+		text-align: center;
+		margin-inline: auto;
+	}
+</style>
