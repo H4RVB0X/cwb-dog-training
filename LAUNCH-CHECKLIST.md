@@ -92,7 +92,7 @@ The examples assume the organisation is called `cwbdogtraining` (available at th
 ## How it works afterwards
 
 - **Chris** edits in Pages CMS → the site updates in about 1 minute
-- **You** change the design or code in the same repo. Run `git pull` before starting, because Chris's edits go straight to `main`.
+- **You** ask Claude for design or code changes in the same repo. Claude fetches Chris's latest edits first, so nothing gets overwritten.
 - **GoDaddy** only renews the domain
 - **No secrets** are needed. The contact form key is designed to be public, and nothing private is in the code.
 
