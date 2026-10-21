@@ -4,6 +4,9 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  schedule:
+    # Rebuild daily so the Google rating and review count stay current
+    - cron: '0 5 * * *'
 
 permissions:
   contents: read
@@ -29,6 +32,8 @@ jobs:
           # Served from https://<user>.github.io/<repo>/ - remove both once on the custom domain
           BASE_PATH: /${{ github.event.repository.name }}
           NOINDEX: 'true'
+          # Optional: Google Places API key for the live rating (Settings > Secrets > Actions)
+          GOOGLE_PLACES_API_KEY: ${{ secrets.GOOGLE_PLACES_API_KEY }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

@@ -6,18 +6,20 @@ import ReviewCard from '../components/ReviewCard.astro';
 import CtaBand from '../components/CtaBand.astro';
 import Icon from '../components/Icon.astro';
 import settings from '../data/settings.json';
+import { getRating } from '../lib/rating';
 import gallery from '../data/gallery.json';
 
 const reviews = (await getCollection('reviews')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+const google = await getRating();
 ---
 
 <Layout
 	title="Reviews & Gallery"
-	description={`CWB Dog Training is rated ${settings.rating} from ${settings.reviewCount} Google reviews. Read what clients say and meet some of the dogs we’ve trained.`}
+	description={`CWB Dog Training is rated ${google.rating} from ${google.count} Google reviews. Read what clients say and meet some of the dogs we’ve trained.`}
 >
 	<PageHero
 		eyebrow="Reviews & gallery"
-		title={`${settings.rating} stars. <em>${settings.reviewCount} reviews.</em>`}
+		title={`${google.rating} stars. <em>${google.count} reviews.</em>`}
 		intro="Don’t just take my word for it. Here’s what owners say about training with CWB, and a few of the brilliant dogs I’ve had the pleasure of working with."
 	>
 		<div class="btn-row">
@@ -31,9 +33,9 @@ const reviews = (await getCollection('reviews')).sort((a, b) => b.data.date.getT
 			<div class="grid grid--3 reviews">
 				{reviews.map((r) => <ReviewCard review={r} />)}
 				<a class="review-cta reveal" href={settings.googleReviewsUrl} target="_blank" rel="noopener">
-					<span class="review-cta__score">{settings.rating}</span>
+					<span class="review-cta__score">{google.rating}</span>
 					<span class="stars">★★★★★</span>
-					<strong>Read all {settings.reviewCount} reviews</strong>
+					<strong>Read all {google.count} reviews</strong>
 					<span>on Google <Icon name="arrow" /></span>
 				</a>
 			</div>

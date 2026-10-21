@@ -75,7 +75,7 @@ content:
         type: text
 
   - name: reviews
-    label: Reviews
+    label: Reviews (copy and paste from Google)
     type: collection
     path: src/content/reviews
     format: yaml-frontmatter
@@ -125,8 +125,9 @@ content:
       - { name: tiktok, label: TikTok URL, type: string }
       - { name: bookwhenUrl, label: Bookwhen booking page URL, type: string }
       - { name: googleReviewsUrl, label: Google reviews URL, type: string }
-      - { name: rating, label: Google rating (e.g. 5.0), type: string }
-      - { name: reviewCount, label: Number of Google reviews, type: number }
+      - { name: googlePlaceId, label: Google Place ID (optional, for the automatic rating), type: string }
+      - { name: rating, label: "Google rating, backup only (e.g. 5.0). Updates automatically once Google is connected", type: string }
+      - { name: reviewCount, label: Number of Google reviews, backup only, type: number }
       - { name: web3formsKey, label: Web3Forms access key (contact form), type: string }
 
   - name: packages

@@ -9,6 +9,7 @@ import CtaBand from '../components/CtaBand.astro';
 import PostCard from '../components/PostCard.astro';
 import { getPosts } from '../lib/blog';
 import settings from '../data/settings.json';
+import { getRating } from '../lib/rating';
 import packages from '../data/packages.json';
 import partnerData from '../data/partners.json';
 
@@ -49,6 +50,7 @@ const services = [
 		from: `£${lowest('scent')}`,
 	},
 ];
+const google = await getRating();
 ---
 
 <Layout
@@ -70,10 +72,10 @@ const services = [
 					<a class="btn btn--ghost" href="/courses/">Courses &amp; prices</a>
 				</div>
 				<a class="rating" href={settings.googleReviewsUrl} target="_blank" rel="noopener">
-					<span class="rating__score">{settings.rating}</span>
+					<span class="rating__score">{google.rating}</span>
 					<span>
 						<span class="stars">★★★★★</span>
-						<small>{settings.reviewCount} Google reviews</small>
+						<small>{google.count} Google reviews</small>
 					</span>
 				</a>
 			</div>
@@ -202,7 +204,7 @@ const services = [
 			<div class="section-head section-head--split">
 				<div>
 					<span class="eyebrow">What clients say</span>
-					<h2>{settings.rating} stars from {settings.reviewCount} Google reviews</h2>
+					<h2>{google.rating} stars from {google.count} Google reviews</h2>
 				</div>
 				<div>
 					<a class="text-link" href={settings.googleReviewsUrl} target="_blank" rel="noopener">Read them all on Google <Icon name="arrow" /></a>

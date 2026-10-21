@@ -54,7 +54,12 @@ When moving to the real domain, delete those two `env` lines from the workflow.
    - Build command: `npm run build`
    - Output folder: `dist`
 3. **Domain**: in GoDaddy DNS, point `cwbdogtraining.co.uk` at the new host by following the host's "add custom domain" steps. Cancel the GoDaddy Website Builder plan only once the new site is live.
-4. **Contact form**: go to [web3forms.com](https://web3forms.com), enter `info.cwbdogtraining@gmail.com` to get a free access key, and paste it into `web3formsKey` in `src/data/settings.json` (or in Pages CMS under *Contact details & settings*). Until a key is set, the form opens the visitor's email app instead.
+4. **Google rating (optional)**: the overall star rating and review count can update automatically every day.
+   1. In [Google Cloud Console](https://console.cloud.google.com/), create a project, enable **Places API (New)** and create an API key. Restrict the key to *Places API (New)* only, and set a low budget alert.
+   2. In this GitHub repo: *Settings → Secrets and variables → Actions → New repository secret*, name `GOOGLE_PLACES_API_KEY`, paste the key.
+   3. Run the *Deploy* workflow (or push any change). The build log shows `[rating] Google: …` when it works, and prints the Place ID; paste that into *Google Place ID* in the site settings.
+   Without the key, the site uses the rating and review count typed into the settings. Individual reviews are still added by hand in Pages CMS.
+5. **Contact form**: go to [web3forms.com](https://web3forms.com), enter `info.cwbdogtraining@gmail.com` to get a free access key, and paste it into `web3formsKey` in `src/data/settings.json` (or in Pages CMS under *Contact details & settings*). Until a key is set, the form opens the visitor's email app instead.
 5. **Editing**: Chris signs in at [app.pagescms.org](https://app.pagescms.org) with a GitHub account and opens the repo. Every save rebuilds the site automatically in about a minute.
 
 ## Local development
