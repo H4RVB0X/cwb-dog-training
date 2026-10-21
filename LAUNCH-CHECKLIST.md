@@ -28,6 +28,13 @@ The examples assume the organisation is called `cwbdogtraining` (available at th
 - [ ] Go to <https://web3forms.com> → enter `info.cwbdogtraining@gmail.com` → the access key arrives in Chris's inbox
 - [ ] Paste it into **Contact details & settings → Web3Forms access key** in Pages CMS (step 6), or tell Claude to add it
 
+## 3b. Live Google reviews (10 min)
+
+- [ ] Sign up free at <https://justreview.co> (no card needed) and connect the **CWB Dog Training** Google listing
+- [ ] Set the widget to show **5-star reviews only** (anything above 4.5) and sort by **most recent**; choose a layout that shows the **overall rating** at the top
+- [ ] Copy the embed code and paste it into Pages CMS → **Contact details & settings → Live Google reviews: paste the widget embed code** (or tell Claude to add it)
+- [ ] Check the site: a cookie pop-up appears; **Accept** shows the live reviews, **Reject** keeps the hand-picked reviews
+
 ## 4. Point the domain at the new site
 
 **4a. In GitHub first**

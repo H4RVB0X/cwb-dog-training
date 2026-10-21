@@ -133,6 +133,8 @@ content:
       - { name: googleReviewsUrl, label: Google reviews URL, type: string }
       - { name: rating, label: "Google star rating (e.g. 5.0). Update when it changes on Google", type: string }
       - { name: reviewCount, label: Number of Google reviews, type: number }
+      - { name: reviewsWidgetProvider, label: "Live Google reviews: provider name (e.g. JustReview)", type: string }
+      - { name: reviewsWidgetCode, label: "Live Google reviews: paste the widget embed code here. Leave empty to show only the reviews added above", type: text }
       - { name: legalNotice, label: "Business details for the footer, if required (e.g. registered company name and number, VAT number)", type: string }
       - { name: web3formsKey, label: Web3Forms access key (contact form), type: string }
 

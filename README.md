@@ -30,6 +30,8 @@ A fast static site built with [Astro](https://astro.build). Course dates, prices
 | Blog posts | `src/content/blog/*.md` |
 | Images | `public/images/` |
 
+**Live Google reviews:** paste a review widget's embed code (e.g. JustReview) into `reviewsWidgetCode` in settings. A cookie consent pop-up then appears automatically, and the widget only loads after a visitor accepts; otherwise the hand-picked reviews show. Leave it empty for a cookie-free site.
+
 Course `status` controls the badge and button text:
 - `open`: "Booking now" / "Book a place"
 - `coming-soon`: "Register interest"

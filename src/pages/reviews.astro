@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/PageHero.astro';
 import ReviewCard from '../components/ReviewCard.astro';
+import GoogleReviews from '../components/GoogleReviews.astro';
 import CtaBand from '../components/CtaBand.astro';
 import Icon from '../components/Icon.astro';
 import settings from '../data/settings.json';
@@ -30,15 +31,17 @@ const google = await getRating();
 
 	<section class="section">
 		<div class="container">
-			<div class="grid grid--3 reviews">
-				{reviews.map((r) => <ReviewCard review={r} />)}
-				<a class="review-cta reveal" href={settings.googleReviewsUrl} target="_blank" rel="noopener">
-					<span class="review-cta__score">{google.rating}</span>
-					<span class="stars">★★★★★</span>
-					<strong>Read all {google.count} reviews</strong>
-					<span>on Google <Icon name="arrow" /></span>
-				</a>
-			</div>
+			<GoogleReviews>
+				<div class="grid grid--3 reviews">
+					{reviews.map((r) => <ReviewCard review={r} />)}
+					<a class="review-cta reveal" href={settings.googleReviewsUrl} target="_blank" rel="noopener">
+						<span class="review-cta__score">{google.rating}</span>
+						<span class="stars">★★★★★</span>
+						<strong>Read all {google.count} reviews</strong>
+						<span>on Google <Icon name="arrow" /></span>
+					</a>
+				</div>
+			</GoogleReviews>
 		</div>
 	</section>
 

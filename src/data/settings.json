@@ -16,6 +16,8 @@
   "googlePlaceId": "",
   "rating": "5.0",
   "reviewCount": 25,
+  "reviewsWidgetProvider": "JustReview",
+  "reviewsWidgetCode": "",
   "web3formsKey": "",
   "legalNotice": ""
 }

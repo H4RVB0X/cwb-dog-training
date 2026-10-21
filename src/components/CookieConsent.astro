@@ -1,0 +1,145 @@
+---
+import settings from '../data/settings.json';
+
+// Only shown when something on the site needs consent (currently: the live Google reviews widget).
+const provider = settings.reviewsWidgetProvider?.trim() || 'our reviews provider';
+---
+
+<div class="consent" data-consent-box hidden role="dialog" aria-live="polite" aria-label="Cookie choices">
+	<div class="consent__text">
+		<strong>Cookies</strong>
+		<p>
+			We’d like to show live Google reviews on this site using {provider}, which may set cookies. Nothing loads until you
+			choose. <a href="/privacy/#cookies">More info</a>
+		</p>
+	</div>
+	<div class="consent__actions">
+		<button type="button" class="btn btn--ghost consent__btn" data-consent-choice="denied">Reject</button>
+		<button type="button" class="btn consent__btn" data-consent-choice="granted">Accept</button>
+	</div>
+</div>
+
+<script>
+	const KEY = 'cwb-cookie-consent';
+	const box = document.querySelector<HTMLElement>('[data-consent-box]')!;
+
+	function read(): string | null {
+		try {
+			return localStorage.getItem(KEY);
+		} catch {
+			return null;
+		}
+	}
+	function save(value: string) {
+		try {
+			localStorage.setItem(KEY, value);
+		} catch {
+			/* storage blocked: the choice lasts for this page only */
+		}
+	}
+	function apply(value: string | null) {
+		document.documentElement.dataset.cookieConsent = value ?? 'unset';
+		window.dispatchEvent(new CustomEvent('cwb:consent', { detail: value }));
+	}
+
+	const current = read();
+	apply(current);
+	if (!current) box.hidden = false;
+
+	box.querySelectorAll<HTMLButtonElement>('[data-consent-choice]').forEach((b) =>
+		b.addEventListener('click', () => {
+			const value = b.dataset.consentChoice!;
+			save(value);
+			box.hidden = true;
+			apply(value);
+		}),
+	);
+
+	// "Cookie settings" links reopen the choice
+	document.querySelectorAll('[data-consent-open]').forEach((el) =>
+		el.addEventListener('click', (e) => {
+			e.preventDefault();
+			box.hidden = false;
+			box.querySelector<HTMLButtonElement>('[data-consent-choice="granted"]')?.focus();
+		}),
+	);
+</script>
+
+<style>
+	.consent {
+		position: fixed;
+		left: max(16px, env(safe-area-inset-left, 0px));
+		right: max(16px, env(safe-area-inset-right, 0px));
+		bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+		z-index: 60;
+		max-width: 720px;
+		margin: 0 auto;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 1rem 1.5rem;
+		padding: 1.1rem 1.3rem;
+		background: var(--navy);
+		color: var(--bone);
+		border-radius: var(--radius-lg);
+		box-shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.6);
+	}
+	.consent[hidden] {
+		display: none;
+	}
+	.consent__text {
+		flex: 1 1 320px;
+		min-width: 0;
+	}
+	.consent__text strong {
+		font-family: var(--font-display);
+		font-size: 1.2rem;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		color: var(--tan);
+	}
+	.consent__text p {
+		margin: 0.2rem 0 0;
+		font-size: 0.95rem;
+		color: rgba(239, 234, 223, 0.88);
+	}
+	.consent__text a {
+		color: var(--tan);
+		text-underline-offset: 3px;
+	}
+	.consent__actions {
+		display: flex;
+		gap: 0.6rem;
+		flex: 0 0 auto;
+	}
+	/* Accept and Reject are equally easy to choose */
+	.consent__btn {
+		min-width: 110px;
+		min-height: 46px;
+		font-size: 1.05rem;
+	}
+	.consent .btn--ghost {
+		color: var(--bone);
+		border-color: var(--bone);
+	}
+	.consent .btn--ghost:hover {
+		color: var(--navy);
+		background: var(--bone);
+		border-color: var(--bone);
+	}
+	.consent .btn:not(.btn--ghost) {
+		--bg: var(--bone);
+		--fg: var(--navy);
+	}
+	.consent .btn:not(.btn--ghost):hover {
+		--bg: #fff;
+	}
+	@media (max-width: 480px) {
+		.consent__actions {
+			width: 100%;
+		}
+		.consent__btn {
+			flex: 1;
+		}
+	}
+</style>

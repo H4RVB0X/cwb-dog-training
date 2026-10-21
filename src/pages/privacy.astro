@@ -75,6 +75,12 @@ const email = settings.email;
 						applies as well as ours.
 					</li>
 					<li><strong>WhatsApp</strong> (Meta) carries messages if you choose to contact us that way.</li>
+					{settings.reviewsWidgetCode?.trim() && (
+						<li>
+							<strong>{settings.reviewsWidgetProvider || 'Our reviews provider'}</strong> shows live Google reviews, only if
+							you accept cookies.
+						</li>
+					)}
 				</ul>
 				<p>
 					Some of these companies may store data outside the UK. They do so under safeguards recognised by UK data
@@ -103,10 +109,30 @@ const email = settings.email;
 				</p>
 
 				<h2 id="cookies">Cookies</h2>
+				{
+					settings.reviewsWidgetCode?.trim() ? (
+						<>
+							<p>
+								We only use cookies if you say yes. With your consent, we show live Google reviews using{' '}
+								{settings.reviewsWidgetProvider || 'a reviews provider'}, which may set cookies and receive technical
+								information such as your IP address. If you choose “Reject”, nothing is loaded and you’ll see a
+								selection of our reviews instead.
+							</p>
+							<p>
+								We remember your choice in your browser’s local storage, so you aren’t asked on every page. You can change
+								your mind at any time using <a href="#cookies" data-consent-open>Cookie settings</a>, which is also linked
+								at the bottom of every page.
+							</p>
+						</>
+					) : (
+						<p>
+							This website doesn’t use any cookies, so there’s nothing to accept or decline.
+						</p>
+					)
+				}
 				<p>
-					This website doesn’t use any cookies, so there’s nothing to accept or decline. If you follow a link to another
-					site, such as Bookwhen, Google, WhatsApp, Facebook, Instagram or TikTok, that site’s own cookie and privacy
-					policies apply.
+					If you follow a link to another site, such as Bookwhen, Google, WhatsApp, Facebook, Instagram or TikTok, that
+					site’s own cookie and privacy policies apply.
 				</p>
 
 				<h2 id="copyright">Copyright &amp; trademarks</h2>
