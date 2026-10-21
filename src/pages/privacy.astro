@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/PageHero.astro';
 import settings from '../data/settings.json';
+import { consentFeatures, consentSummary } from '../lib/consent';
 
 // Update this date whenever the wording below changes
 const updated = '21 October 2026';
@@ -75,12 +76,11 @@ const email = settings.email;
 						applies as well as ours.
 					</li>
 					<li><strong>WhatsApp</strong> (Meta) carries messages if you choose to contact us that way.</li>
-					{settings.reviewsWidgetCode?.trim() && (
+					{consentFeatures.map((f) => (
 						<li>
-							<strong>{settings.reviewsWidgetProvider || 'Our reviews provider'}</strong> shows live Google reviews, only if
-							you accept cookies.
+							<strong>{f.provider}</strong> shows {f.what}, only if you accept cookies.
 						</li>
-					)}
+					))}
 				</ul>
 				<p>
 					Some of these companies may store data outside the UK. They do so under safeguards recognised by UK data
@@ -110,13 +110,12 @@ const email = settings.email;
 
 				<h2 id="cookies">Cookies</h2>
 				{
-					settings.reviewsWidgetCode?.trim() ? (
+					consentFeatures.length ? (
 						<>
 							<p>
-								We only use cookies if you say yes. With your consent, we show live Google reviews using{' '}
-								{settings.reviewsWidgetProvider || 'a reviews provider'}, which may set cookies and receive technical
-								information such as your IP address. If you choose “Reject”, nothing is loaded and you’ll see a
-								selection of our reviews instead.
+								We only use cookies if you say yes. With your consent, we show {consentSummary}. These services may set
+								cookies and receive technical information such as your IP address. If you choose “Reject”, nothing from
+								them is loaded: you’ll see a selection of our reviews and a link to the map instead.
 							</p>
 							<p>
 								We remember your choice in your browser’s local storage, so you aren’t asked on every page. You can change
@@ -125,9 +124,7 @@ const email = settings.email;
 							</p>
 						</>
 					) : (
-						<p>
-							This website doesn’t use any cookies, so there’s nothing to accept or decline.
-						</p>
+						<p>This website doesn’t use any cookies, so there’s nothing to accept or decline.</p>
 					)
 				}
 				<p>

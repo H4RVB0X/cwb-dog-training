@@ -2,6 +2,7 @@
 import Icon from './Icon.astro';
 import settings from '../data/settings.json';
 import { getPosts } from '../lib/blog';
+import { needsConsent } from '../lib/consent';
 
 const hasPosts = (await getPosts()).length > 0;
 
@@ -44,7 +45,7 @@ const year = new Date().getFullYear();
 				<li><a href="/contact/">Contact</a></li>
 				<li><a href="/contact/#faq">FAQs</a></li>
 				<li><a href="/privacy/">Privacy &amp; legal</a></li>
-				{settings.reviewsWidgetCode?.trim() && <li><a href="/privacy/#cookies" data-consent-open>Cookie settings</a></li>}
+				{needsConsent && <li><a href="/privacy/#cookies" data-consent-open>Cookie settings</a></li>}
 			</ul>
 		</div>
 

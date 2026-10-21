@@ -9,7 +9,7 @@ const code = settings.reviewsWidgetCode?.trim() ?? '';
 
 {
 	code ? (
-		<div class="live-reviews" data-live-reviews>
+		<div class="live-reviews" data-consent-embed>
 			<div class="live-reviews__fallback" data-fallback>
 				<slot />
 				<p class="live-reviews__note">
@@ -27,34 +27,6 @@ const code = settings.reviewsWidgetCode?.trim() ?? '';
 	)
 }
 
-<script>
-	function mount(root: HTMLElement) {
-		if (root.dataset.mounted) return;
-		const tpl = root.querySelector<HTMLTemplateElement>('template[data-widget-code]');
-		const target = root.querySelector<HTMLElement>('[data-widget]');
-		if (!tpl || !target) return;
-		root.dataset.mounted = 'true';
-		const frag = tpl.content.cloneNode(true) as DocumentFragment;
-		// Scripts inside a <template> are inert; re-create them so they run
-		frag.querySelectorAll('script').forEach((old) => {
-			const s = document.createElement('script');
-			for (const a of Array.from(old.attributes)) s.setAttribute(a.name, a.value);
-			s.text = old.textContent ?? '';
-			old.replaceWith(s);
-		});
-		target.append(frag);
-		target.hidden = false;
-		root.querySelector<HTMLElement>('[data-fallback]')!.hidden = true;
-	}
-
-	function update() {
-		if (document.documentElement.dataset.cookieConsent !== 'granted') return;
-		document.querySelectorAll<HTMLElement>('[data-live-reviews]').forEach(mount);
-	}
-
-	window.addEventListener('cwb:consent', update);
-	update();
-</script>
 
 <style>
 	.live-reviews__note {

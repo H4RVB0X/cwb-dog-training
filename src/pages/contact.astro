@@ -4,6 +4,7 @@ import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/PageHero.astro';
 import Icon from '../components/Icon.astro';
 import Faq from '../components/Faq.astro';
+import GoogleMap from '../components/GoogleMap.astro';
 import settings from '../data/settings.json';
 
 const courses = (await getCollection('courses', (c) => !c.data.hidden)).sort((a, b) => a.data.order - b.data.order);
@@ -111,6 +112,8 @@ const tel = settings.phone.replace(/\s/g, '');
 			</form>
 		</div>
 	</section>
+
+	<GoogleMap />
 
 	<Faq />
 </Layout>

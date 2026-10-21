@@ -1,16 +1,14 @@
 ---
-import settings from '../data/settings.json';
+import { consentSummary } from '../lib/consent';
 
-// Only shown when something on the site needs consent (currently: the live Google reviews widget).
-const provider = settings.reviewsWidgetProvider?.trim() || 'our reviews provider';
+// Only rendered when something on the site needs consent (see src/lib/consent.ts).
 ---
 
 <div class="consent" data-consent-box hidden role="dialog" aria-live="polite" aria-label="Cookie choices">
 	<div class="consent__text">
 		<strong>Cookies</strong>
 		<p>
-			We’d like to show live Google reviews on this site using {provider}, which may set cookies. Nothing loads until you
-			choose. <a href="/privacy/#cookies">More info</a>
+			We’d like to show {consentSummary}, which may set cookies. Nothing loads until you choose. <a href="/privacy/#cookies">More info</a>
 		</p>
 	</div>
 	<div class="consent__actions">
@@ -54,6 +52,32 @@ const provider = settings.reviewsWidgetProvider?.trim() || 'our reviews provider
 			apply(value);
 		}),
 	);
+
+	// Load consent-only embeds (live reviews, map) once accepted. Their code sits in an inert <template>.
+	function mountEmbeds() {
+		if (document.documentElement.dataset.cookieConsent !== 'granted') return;
+		document.querySelectorAll<HTMLElement>('[data-consent-embed]').forEach((root) => {
+			if (root.dataset.mounted) return;
+			const tpl = root.querySelector<HTMLTemplateElement>('template[data-widget-code]');
+			const target = root.querySelector<HTMLElement>('[data-widget]');
+			if (!tpl || !target) return;
+			root.dataset.mounted = 'true';
+			const frag = tpl.content.cloneNode(true) as DocumentFragment;
+			// Scripts inside a <template> don't run; re-create them so they do
+			frag.querySelectorAll('script').forEach((old) => {
+				const s = document.createElement('script');
+				for (const a of Array.from(old.attributes)) s.setAttribute(a.name, a.value);
+				s.text = old.textContent ?? '';
+				old.replaceWith(s);
+			});
+			target.append(frag);
+			target.hidden = false;
+			const fallback = root.querySelector<HTMLElement>('[data-fallback]');
+			if (fallback) fallback.hidden = true;
+		});
+	}
+	window.addEventListener('cwb:consent', mountEmbeds);
+	mountEmbeds();
 
 	// "Cookie settings" links reopen the choice
 	document.querySelectorAll('[data-consent-open]').forEach((el) =>
