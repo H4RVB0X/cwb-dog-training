@@ -69,6 +69,7 @@ The examples assume the organisation is called `cwbdogtraining` (available at th
 - [ ] <https://cwbdogtraining.co.uk> and <https://www.cwbdogtraining.co.uk> both load the new site with the padlock
 - [ ] Click through every page on a phone, and press a Bookwhen "Book" button and the WhatsApp button
 - [ ] Send a test enquiry through the contact form and check it arrives
+- [ ] In Chris's BetterDog account, change his trainer map link to `https://cwbdogtraining.co.uk/betterdog/` (it currently points at the old GoDaddy site)
 
 ## 6. Set up Pages CMS and teach Chris (20 min)
 

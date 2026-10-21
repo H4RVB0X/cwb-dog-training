@@ -1,7 +1,7 @@
 ---
 title: Retrieval Skills for Pet Dogs
 category: workshop
-order: 6
+order: 7
 price: "£140"
 dates: "Group class dates coming soon"
 status: coming-soon

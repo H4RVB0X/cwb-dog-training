@@ -25,6 +25,7 @@ const external = !!d.bookingUrl;
 <article class="course card reveal" data-category={d.category}>
 	<div class="course__media" class:list={{ 'is-badge': d.badge }}>
 		<img src={d.image} alt={d.imageAlt} loading="lazy" />
+		{d.logo && <img class="course__logo" src={d.logo} alt={d.logoAlt} loading="lazy" />}
 		<span class:list={['tag', d.status === 'open' ? 'tag--signal' : 'tag--tan', 'course__status']}>{statusLabel}</span>
 	</div>
 	<div class="course__body">
@@ -111,6 +112,22 @@ const external = !!d.bookingUrl;
 	}
 	.course:hover .course__media.is-badge img {
 		transform: scale(1.06);
+	}
+	.course__media .course__logo {
+		position: absolute;
+		right: 12px;
+		bottom: 12px;
+		width: auto;
+		height: 34%;
+		max-width: 45%;
+		object-fit: contain;
+		background: #fff;
+		padding: 6px 8px;
+		border-radius: var(--radius);
+		box-shadow: 0 6px 16px -6px rgba(0, 0, 0, 0.45);
+	}
+	.course:hover .course__media .course__logo {
+		transform: none;
 	}
 	.course__status {
 		position: absolute;

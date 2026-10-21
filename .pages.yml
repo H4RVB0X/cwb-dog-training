@@ -58,6 +58,12 @@ content:
       - name: imageAlt
         label: Image description (for screen readers & Google)
         type: string
+      - name: logo
+        label: Small logo in the corner of the image (optional, e.g. BetterDog)
+        type: image
+      - name: logoAlt
+        label: Corner logo description
+        type: string
       - name: badge
         label: Image is a round badge/logo
         type: boolean

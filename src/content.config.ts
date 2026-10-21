@@ -17,6 +17,8 @@ const courses = defineCollection({
 		bookingUrl: z.union([z.string().url(), z.literal('')]).optional(), // empty = use the enquiry form
 		image: z.string(),
 		imageAlt: z.string().default(''),
+		logo: z.string().optional(), // small partner logo shown in the corner of the image
+		logoAlt: z.string().default(''),
 		badge: z.boolean().default(false),
 		featured: z.boolean().default(false),
 		hidden: z.boolean().default(false),

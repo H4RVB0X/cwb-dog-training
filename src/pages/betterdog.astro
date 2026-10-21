@@ -1,0 +1,245 @@
+---
+import { existsSync } from 'node:fs';
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import Credentials from '../components/Credentials.astro';
+import ReviewCard from '../components/ReviewCard.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Icon from '../components/Icon.astro';
+import settings from '../data/settings.json';
+import packages from '../data/packages.json';
+
+// Landing page for people who find Chris on the BetterDog trainer map.
+// Use https://cwbdogtraining.co.uk/betterdog/ as the link in the BetterDog map listing.
+
+const BETTERDOG_HOME = 'https://appliedcaninesciencebetterdog.com/homepage?location=cwb-dog-training-kingswinford-west-midlands';
+const PUPPY_SYSTEM = 'https://appliedcaninesciencebetterdog.com/thepuppydevelopmentsystemlanding1';
+const logo = '/images/logos/betterdog-approved-trainer.png';
+const hasLogo = existsSync(`${process.cwd()}/public${logo}`);
+
+const betterdogCourse = (await getCollection('courses')).find((c) => c.id === 'betterdog-puppy');
+const reviews = (await getCollection('reviews')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime()).slice(0, 3);
+---
+
+<Layout
+	title="BetterDog Support"
+	description="Approved BetterDog trainer in Wall Heath, Kingswinford. Professional, hands-on support alongside your BetterDog Puppy Development System."
+>
+	<PageHero
+		eyebrow="Approved BetterDog trainer"
+		title="Welcome, <em>BetterDog</em> owners"
+		intro="Found me on the BetterDog trainer map? I’m Chris, a participating BetterDog trainer based in Wall Heath, Kingswinford. If you’re working through a BetterDog course and would like professional support alongside it, you’re in the right place."
+		image="/images/chris.jpg"
+		imageAlt="Chris, founder of CWB Dog Training"
+	>
+		<div class="btn-row">
+			<a class="btn" href="/contact/?course=betterdog-puppy">Ask about BetterDog support <Icon name="arrow" /></a>
+			<a class="btn btn--ghost" href="#options">See options</a>
+		</div>
+	</PageHero>
+
+	{
+		hasLogo && (
+			<div class="container bd-badge-wrap">
+				<img class="bd-badge" src={logo} alt="BetterDog approved trainer" />
+			</div>
+		)
+	}
+
+	<section class="section">
+		<div class="container split">
+			<div class="reveal">
+				<span class="eyebrow">Online course + real-life support</span>
+				<h2>The course teaches you. I help you put it into practice.</h2>
+				<p class="lede">
+					The BetterDog Puppy Development System gives you the knowledge. Some things are easier with an experienced
+					trainer alongside you: watching your puppy, adjusting the plan, and helping when something isn’t working.
+				</p>
+			</div>
+			<ol class="steps reveal">
+				<li><div><strong>Get in touch</strong>Let me know you’re a BetterDog member and where you’re up to with your puppy.</div></li>
+				<li><div><strong>We have a chat</strong>We talk through what’s going well and what you’d like help with.</div></li>
+				<li><div><strong>Choose your support</strong>Pick the option that suits you, your puppy and your schedule.</div></li>
+			</ol>
+		</div>
+	</section>
+
+	<section class="section section--bone topo" id="options">
+		<div class="container">
+			<div class="section-head">
+				<span class="eyebrow">Support options</span>
+				<h2>How I can help</h2>
+			</div>
+			<div class="grid grid--3">
+				{
+					betterdogCourse && (
+						<article class="option option--featured reveal">
+							<span class="tag tag--signal">For BetterDog members</span>
+							<h3>{betterdogCourse.data.title}</h3>
+							<p>{betterdogCourse.body?.trim()}</p>
+							<div class="option__foot">
+								<span class="option__price">{betterdogCourse.data.price}</span>
+								<a class="text-link" href="/contact/?course=betterdog-puppy">Enquire <Icon name="arrow" /></a>
+							</div>
+						</article>
+					)
+				}
+				<article class="option reveal">
+					<span class="tag">1-1 training</span>
+					<h3>Private 1-1 sessions</h3>
+					<p>An initial assessment, a personalised training plan and 1-hour sessions at your pace, with phone support between sessions.</p>
+					<div class="option__foot">
+						<span class="option__price"><small>from</small> {packages.packages[0].price}</span>
+						<a class="text-link" href="/1-1-training/">Packages <Icon name="arrow" /></a>
+					</div>
+				</article>
+				<article class="option reveal">
+					<span class="tag">New puppy</span>
+					<h3>Pre-puppy home visit</h3>
+					<p>Puppy-proofing your home, the right equipment and enrichment, and how to help your new puppy settle in from day one.</p>
+					<div class="option__foot">
+						<span class="option__price option__price--text">Get in touch</span>
+						<a class="text-link" href="/contact/?course=home-visit">Request a visit <Icon name="arrow" /></a>
+					</div>
+				</article>
+			</div>
+		</div>
+	</section>
+
+	<section class="section">
+		<div class="container split split--center">
+			<div class="reveal">
+				<span class="eyebrow">Not started yet?</span>
+				<h2>The BetterDog Puppy Development System</h2>
+				<p class="lede">
+					BetterDog is the dog-owner education arm of the Institute of Applied Canine Science. Their Puppy Development
+					System covers everything from the first night through adolescence: biting, toilet training, settling, crate
+					training, recall, loose-lead walking, socialisation and more.
+				</p>
+				<div class="btn-row">
+					<a class="btn" href={PUPPY_SYSTEM} target="_blank" rel="noopener">View the Puppy Development System <Icon name="arrow" /></a>
+					<a class="btn btn--ghost dark-ghost" href={BETTERDOG_HOME} target="_blank" rel="noopener">Visit BetterDog</a>
+				</div>
+			</div>
+			<div class="frame bd-img reveal">
+				<img src="/images/gsd-puppy-frost.jpg" alt="German Shepherd puppy on frosty grass" loading="lazy" />
+			</div>
+		</div>
+	</section>
+
+	<Credentials />
+
+	<section class="section">
+		<div class="container">
+			<div class="section-head section-head--split">
+				<div>
+					<span class="eyebrow">What clients say</span>
+					<h2>Rated {settings.rating} on Google</h2>
+				</div>
+				<div><a class="text-link" href="/reviews/">More reviews <Icon name="arrow" /></a></div>
+			</div>
+			<div class="grid grid--3">
+				{reviews.map((r) => <ReviewCard review={r} />)}
+			</div>
+		</div>
+	</section>
+
+	<CtaBand title="Let’s get your puppy off to a great start" text="Tell me you’ve come from BetterDog and where you’re up to, and we’ll work out the right support together." />
+</Layout>
+
+<style>
+	.bd-badge-wrap {
+		display: flex;
+		justify-content: flex-end;
+		margin-top: -64px;
+		position: relative;
+		z-index: 2;
+	}
+	.bd-badge {
+		width: 150px;
+		height: auto;
+		background: #fff;
+		border-radius: var(--radius-lg);
+		padding: 10px;
+		box-shadow: var(--shadow);
+	}
+	.split {
+		display: grid;
+		gap: 3rem;
+	}
+	@media (min-width: 940px) {
+		.split {
+			grid-template-columns: 1.1fr 1fr;
+			gap: 5rem;
+		}
+		.split--center {
+			align-items: center;
+		}
+	}
+	.split h2 {
+		font-size: clamp(2rem, 3.6vw, 2.8rem);
+	}
+	.split .btn-row {
+		margin-top: 2rem;
+	}
+	.dark-ghost {
+		color: var(--navy);
+	}
+	.dark-ghost:hover {
+		color: var(--signal);
+		border-color: var(--signal);
+	}
+	.bd-img {
+		aspect-ratio: 4 / 3;
+	}
+	.option {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 0.6rem;
+		background: #fff;
+		border: 1px solid var(--line);
+		border-radius: var(--radius-lg);
+		padding: 1.6rem;
+		box-shadow: var(--shadow);
+	}
+	.option--featured {
+		border: 2px solid var(--signal);
+	}
+	.option h3 {
+		margin: 0.4rem 0 0;
+	}
+	.option p {
+		color: var(--muted);
+		margin: 0 0 0.6rem;
+	}
+	.option__foot {
+		margin-top: auto;
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		padding-top: 1rem;
+		border-top: 1px dashed var(--line);
+	}
+	.option__price {
+		font-family: var(--font-display);
+		font-weight: 800;
+		font-size: 2rem;
+		line-height: 1;
+		color: var(--navy);
+	}
+	.option__price small {
+		font-family: var(--font-mono);
+		font-weight: 500;
+		font-size: 0.7rem;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: var(--muted);
+	}
+	.option__price--text {
+		font-size: 1.3rem;
+	}
+</style>
