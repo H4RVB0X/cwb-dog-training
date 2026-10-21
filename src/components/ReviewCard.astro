@@ -8,6 +8,9 @@ interface Props {
 const { review } = Astro.props;
 const d = review.data;
 const date = d.date.toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });
+// Show first name and surname initial only, e.g. "Ruth H.", for reviewers' privacy
+const parts = d.name.trim().split(/\s+/);
+const displayName = parts.length > 1 ? `${parts[0]} ${parts[parts.length - 1][0]}.` : d.name;
 ---
 
 <figure class="review reveal">
@@ -19,7 +22,7 @@ const date = d.date.toLocaleDateString('en-GB', { month: 'long', year: 'numeric'
 	<figcaption>
 		<span class="avatar" aria-hidden="true">{d.name.replace(/[^A-Za-z ]/g, '').split(' ').filter(Boolean).map((p) => p[0]).slice(0, 2).join('')}</span>
 		<span>
-			<strong>{d.name}</strong>
+			<strong>{displayName}</strong>
 			<small>Google review · {date}</small>
 		</span>
 	</figcaption>

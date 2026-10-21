@@ -2,31 +2,194 @@
 import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/PageHero.astro';
 import settings from '../data/settings.json';
+
+// Update this date whenever the wording below changes
+const updated = '21 October 2026';
+const email = settings.email;
 ---
 
-<Layout title="Privacy" description={`Privacy information for ${settings.businessName}.`}>
-	<PageHero eyebrow="Privacy" title="Privacy policy" />
+<Layout
+	title="Privacy & Legal"
+	description={`How ${settings.businessName} handles your personal information, plus copyright and trademark notices.`}
+>
+	<PageHero eyebrow="Privacy & legal" title="Your privacy" intro={`Last updated ${updated}.`} />
+
 	<section class="section">
-		<div class="container privacy">
-			<p>
-				This website does not use tracking or advertising cookies. When you send an enquiry, the details you provide
-				(name, email, phone number and anything you tell me about your dog) are emailed to {settings.businessName} so I
-				can reply. They are never sold or shared for marketing.
-			</p>
-			<p>
-				To request a copy of the full privacy policy, or to ask for your details to be updated or deleted, please email
-				<a href={`mailto:${settings.email}`}>{settings.email}</a>.
-			</p>
+		<div class="container legal">
+			<nav class="toc" aria-label="On this page">
+				<a href="#who">Who we are</a>
+				<a href="#collect">What we collect</a>
+				<a href="#use">How we use it</a>
+				<a href="#share">Who we share it with</a>
+				<a href="#keep">How long we keep it</a>
+				<a href="#rights">Your rights</a>
+				<a href="#cookies">Cookies</a>
+				<a href="#copyright">Copyright &amp; trademarks</a>
+			</nav>
+
+			<div class="legal__body">
+				<h2 id="who">Who we are</h2>
+				<p>
+					This website is run by {settings.businessName}, based in {settings.location}, {settings.region}, UK. We are the
+					“controller” of any personal information you give us through this website, which means we decide how it’s used.
+				</p>
+				<p>
+					If you have any questions about your information, email <a href={`mailto:${email}`}>{email}</a> or call{' '}
+					{settings.phone}.
+				</p>
+
+				<h2 id="collect">What we collect</h2>
+				<p>We only collect what you choose to give us:</p>
+				<ul>
+					<li>
+						<strong>Enquiry form:</strong> your name, email address, phone number, your dog’s name, breed and age, the
+						course or service you’re interested in, and anything you write in your message.
+					</li>
+					<li><strong>Email, phone or WhatsApp:</strong> whatever you send when you contact us directly.</li>
+				</ul>
+				<p>
+					We don’t use analytics or tracking on this website, and we don’t collect information about you automatically.
+					Our web host keeps short-term technical logs (such as IP addresses) to keep the site secure and running; we
+					don’t use these to identify you.
+				</p>
+
+				<h2 id="use">How we use it</h2>
+				<ul>
+					<li>To reply to your enquiry and arrange training, courses or home visits.</li>
+					<li>To provide the training you’ve booked and support you between sessions.</li>
+				</ul>
+				<p>
+					Under UK data protection law, our lawful bases are taking steps at your request before entering into an
+					agreement with you, providing the service you’ve booked, and our legitimate interest in replying to messages
+					sent to us. We never sell your information or use it for marketing without asking you first.
+				</p>
+
+				<h2 id="share">Who we share it with</h2>
+				<p>We don’t share your information with anyone except the services that help us run the business:</p>
+				<ul>
+					<li><strong>Web3Forms</strong> delivers enquiry form messages to our inbox.</li>
+					<li><strong>Google (Gmail)</strong> stores our emails.</li>
+					<li><strong>GitHub</strong> hosts this website.</li>
+					<li>
+						<strong>Bookwhen</strong> handles course bookings. When you book through Bookwhen, their own privacy policy
+						applies as well as ours.
+					</li>
+					<li><strong>WhatsApp</strong> (Meta) carries messages if you choose to contact us that way.</li>
+				</ul>
+				<p>
+					Some of these companies may store data outside the UK. They do so under safeguards recognised by UK data
+					protection law. We may also share information if the law requires us to.
+				</p>
+
+				<h2 id="keep">How long we keep it</h2>
+				<p>
+					We keep enquiries for up to 12 months after our last contact, unless you become a client. For clients, we keep
+					training records for as long as we’re working together and for up to 2 years afterwards, so we can pick up
+					where we left off if you return. After that, we delete them.
+				</p>
+
+				<h2 id="rights">Your rights</h2>
+				<p>You have the right to:</p>
+				<ul>
+					<li>ask for a copy of the information we hold about you</li>
+					<li>ask us to correct anything that’s wrong</li>
+					<li>ask us to delete your information</li>
+					<li>object to, or ask us to limit, how we use it</li>
+				</ul>
+				<p>
+					To do any of these, email <a href={`mailto:${email}`}>{email}</a>. We’ll respond within one month. If you’re
+					unhappy with how we’ve handled your information, you can complain to the Information Commissioner’s Office
+					at <a href="https://ico.org.uk/make-a-complaint/" target="_blank" rel="noopener">ico.org.uk</a>.
+				</p>
+
+				<h2 id="cookies">Cookies</h2>
+				<p>
+					This website doesn’t use any cookies, so there’s nothing to accept or decline. If you follow a link to another
+					site, such as Bookwhen, Google, WhatsApp, Facebook, Instagram or TikTok, that site’s own cookie and privacy
+					policies apply.
+				</p>
+
+				<h2 id="copyright">Copyright &amp; trademarks</h2>
+				<p>
+					© {new Date().getFullYear()} {settings.businessName}. The text, photos and design of this website belong to{' '}
+					{settings.businessName} or are used with permission. Please don’t copy them without asking.
+				</p>
+				<p>
+					Accreditation, partner and brand logos (including ABTC, The Canine Behaviour &amp; Training Society, UK Sniffer
+					Dogs, Tracking Dogs UK, Perfect Fit and Tug-E-Nuff) are the trademarks of their respective owners and are shown
+					to indicate membership, accreditation or partnership. Reviews are quoted from Google, with a link to the
+					originals.
+				</p>
+				{settings.legalNotice && <p>{settings.legalNotice}</p>}
+			</div>
 		</div>
 	</section>
 </Layout>
 
 <style>
-	.privacy {
-		max-width: 760px;
-		font-size: 1.1rem;
+	.legal {
+		display: grid;
+		gap: 2.5rem;
+		align-items: start;
 	}
-	.privacy a {
+	@media (min-width: 940px) {
+		.legal {
+			grid-template-columns: 220px 1fr;
+			gap: 4rem;
+		}
+		.toc {
+			position: sticky;
+			top: 140px;
+		}
+	}
+	.toc {
+		display: grid;
+		gap: 0.15rem;
+		padding: 1rem;
+		border: 1px solid var(--line);
+		border-radius: var(--radius-lg);
+		background: #fff;
+	}
+	.toc a {
+		font-family: var(--font-display);
+		font-weight: 600;
+		font-size: 1.05rem;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+		text-decoration: none;
+		color: var(--navy);
+		padding: 0.35rem 0.5rem;
+		border-radius: var(--radius);
+	}
+	.toc a:hover {
+		background: var(--bone);
 		color: var(--signal);
+	}
+	.legal__body {
+		max-width: 68ch;
+		font-size: 1.08rem;
+		min-width: 0;
+	}
+	.legal__body h2 {
+		font-size: clamp(1.6rem, 3vw, 2rem);
+		margin: 2.4rem 0 0.7rem;
+	}
+	.legal__body h2:first-child {
+		margin-top: 0;
+	}
+	.legal__body ul {
+		padding-left: 1.2rem;
+		margin: 0 0 1em;
+		display: grid;
+		gap: 0.4rem;
+	}
+	.legal__body li::marker {
+		color: var(--signal);
+	}
+	.legal__body a {
+		color: var(--signal);
+		font-weight: 600;
+		text-underline-offset: 3px;
+		overflow-wrap: anywhere;
 	}
 </style>

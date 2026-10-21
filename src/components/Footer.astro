@@ -42,7 +42,7 @@ const year = new Date().getFullYear();
 				{hasPosts && <li><a href="/blog/">Blog</a></li>}
 				<li><a href="/contact/">Contact</a></li>
 				<li><a href="/contact/#faq">FAQs</a></li>
-				<li><a href="/privacy/">Privacy</a></li>
+				<li><a href="/privacy/">Privacy &amp; legal</a></li>
 			</ul>
 		</div>
 
@@ -57,7 +57,7 @@ const year = new Date().getFullYear();
 		</div>
 	</div>
 	<div class="container footer__base">
-		<span>© {year} {settings.businessName}. All rights reserved.</span>
+		<span>© {year} {settings.businessName}. All rights reserved.{settings.legalNotice && ` ${settings.legalNotice}`} <a href="/privacy/">Privacy &amp; legal</a></span>
 		<span>ABTC Registered Animal Training Instructor · UK Sniffer Dogs Instructor</span>
 	</div>
 </footer>
