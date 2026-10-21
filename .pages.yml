@@ -125,9 +125,8 @@ content:
       - { name: tiktok, label: TikTok URL, type: string }
       - { name: bookwhenUrl, label: Bookwhen booking page URL, type: string }
       - { name: googleReviewsUrl, label: Google reviews URL, type: string }
-      - { name: googlePlaceId, label: Google Place ID (optional, for the automatic rating), type: string }
-      - { name: rating, label: "Google rating, backup only (e.g. 5.0). Updates automatically once Google is connected", type: string }
-      - { name: reviewCount, label: Number of Google reviews, backup only, type: number }
+      - { name: rating, label: "Google star rating (e.g. 5.0). Update when it changes on Google", type: string }
+      - { name: reviewCount, label: Number of Google reviews, type: number }
       - { name: web3formsKey, label: Web3Forms access key (contact form), type: string }
 
   - name: packages

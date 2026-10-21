@@ -42,7 +42,7 @@ Set `hidden: true` to take a course off the site without deleting it, and `featu
 
 ## Preview vs live
 
-Every push to `main` (and a daily scheduled run) builds and deploys to GitHub Pages via `.github/workflows/deploy.yml`.
+Every push to `main` builds and deploys to GitHub Pages via `.github/workflows/deploy.yml`.
 
 - **Preview mode** (default): served from `https://<owner>.github.io/<repo>/`. `scripts/rebase.mjs` prefixes links with `BASE_PATH`, and `NOINDEX` keeps it out of Google.
 - **Live mode**: set the Actions **variable** `CUSTOM_DOMAIN` to `cwbdogtraining.co.uk` and the build targets the real domain. No code change is needed.

@@ -4,9 +4,6 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
-  schedule:
-    # Rebuild daily so the Google rating and review count stay current
-    - cron: '0 5 * * *'
 
 permissions:
   contents: read
@@ -34,7 +31,8 @@ jobs:
           # (Settings > Secrets and variables > Actions > Variables), the site builds for the real domain.
           BASE_PATH: ${{ !vars.CUSTOM_DOMAIN && format('/{0}', github.event.repository.name) || '' }}
           NOINDEX: ${{ !vars.CUSTOM_DOMAIN && 'true' || 'false' }}
-          # Optional: Google Places API key for the live rating (Settings > Secrets > Actions)
+          # Optional and currently unused: a Google Places API key would make the rating update itself.
+          # Without it the rating comes from the site settings. If ever added, also add a daily schedule above.
           GOOGLE_PLACES_API_KEY: ${{ secrets.GOOGLE_PLACES_API_KEY }}
       - uses: actions/upload-pages-artifact@v3
         with:
