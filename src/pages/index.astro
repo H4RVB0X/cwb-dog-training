@@ -90,7 +90,16 @@ const google = await getRating();
 					<img src="/images/chris.jpg" alt="Chris, founder of CWB Dog Training" />
 				</div>
 				<div class="hero__patch">
-					<img src="/images/logos/cwb-logo-full.png" alt="CWB Dog Training logo" />
+					<!-- Badge version of the CWB logo: lettering follows the circle, dog centred -->
+					<svg viewBox="0 0 200 200" role="img" aria-label="CWB Dog Training logo">
+						<defs>
+							<path id="badge-arc" d="M 46.26 153.74 A 76 76 0 1 1 153.74 153.74" />
+						</defs>
+						<text class="hero__patch-text">
+							<textPath href="#badge-arc" startOffset="50%" text-anchor="middle" textLength="300" lengthAdjust="spacing">CWB Dog Training</textPath>
+						</text>
+						<image href="/images/logos/cwb-dog.png" x="54" y="62" width="92" height="76" />
+					</svg>
 				</div>
 				<div class="hero__note">
 					<strong>Hi, I’m {settings.trainerName}.</strong>
@@ -373,8 +382,8 @@ const google = await getRating();
 		position: absolute;
 		top: -14px;
 		right: 8%;
-		width: 132px;
-		height: 132px;
+		width: 140px;
+		height: 140px;
 		border-radius: 50%;
 		overflow: hidden;
 		background: #fff;
@@ -382,11 +391,17 @@ const google = await getRating();
 		box-shadow: 0 14px 30px -10px rgba(0, 0, 0, 0.6);
 		display: grid;
 		place-items: center;
-		padding: 22px;
 	}
-	.hero__patch img {
+	.hero__patch svg {
 		width: 100%;
-		height: auto;
+		height: 100%;
+		display: block;
+	}
+	.hero__patch-text {
+		font-family: var(--font-display);
+		font-weight: 800;
+		font-size: 23px;
+		fill: var(--ink);
 	}
 	.hero__note {
 		position: absolute;
@@ -421,9 +436,8 @@ const google = await getRating();
 			min-height: 360px;
 		}
 		.hero__patch {
-			width: 96px;
-			height: 96px;
-			padding: 15px;
+			width: 104px;
+			height: 104px;
 		}
 		.hero__note {
 			max-width: 200px;
