@@ -8,7 +8,6 @@ import ReviewCard from '../components/ReviewCard.astro';
 import CtaBand from '../components/CtaBand.astro';
 import Icon from '../components/Icon.astro';
 import settings from '../data/settings.json';
-import packages from '../data/packages.json';
 
 // Landing page for people who find Chris on the BetterDog trainer map.
 // Use https://cwbdogtraining.co.uk/betterdog/ as the link in the BetterDog map listing.
@@ -18,7 +17,10 @@ const PUPPY_SYSTEM = 'https://appliedcaninesciencebetterdog.com/thepuppydevelopm
 const logo = '/images/logos/betterdog-approved-trainer.png';
 const hasLogo = existsSync(`${process.cwd()}/public${logo}`);
 
-const betterdogCourse = (await getCollection('courses')).find((c) => c.id === 'betterdog-puppy');
+const allCourses = await getCollection('courses');
+const betterdogOptions = ['betterdog-puppy', 'betterdog-online']
+	.map((id) => allCourses.find((c) => c.id === id && !c.data.hidden))
+	.filter((c) => c !== undefined);
 const reviews = (await getCollection('reviews')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime()).slice(0, 3);
 ---
 
@@ -37,6 +39,7 @@ const reviews = (await getCollection('reviews')).sort((a, b) => b.data.date.getT
 			<a class="btn" href="/contact/?course=betterdog-puppy">Ask about BetterDog support <Icon name="arrow" /></a>
 			<a class="btn btn--ghost" href="#options">See options</a>
 		</div>
+		<p class="bd-offer">Get the BetterDog Puppy Development System for <strong>£150</strong> (usually £180) when you book through me.</p>
 	</PageHero>
 
 	{
@@ -71,38 +74,22 @@ const reviews = (await getCollection('reviews')).sort((a, b) => b.data.date.getT
 				<span class="eyebrow">Support options</span>
 				<h2>How I can help</h2>
 			</div>
-			<div class="grid grid--3">
+			<div class="grid grid--2 options">
 				{
-					betterdogCourse && (
+					betterdogOptions.map((c) => (
 						<article class="option option--featured reveal">
 							<span class="tag tag--signal">For BetterDog members</span>
-							<h3>{betterdogCourse.data.title}</h3>
-							<p>{betterdogCourse.body?.trim()}</p>
+							<h3>{c.data.title}</h3>
+							<p>{c.body?.trim()}</p>
 							<div class="option__foot">
-								<span class="option__price">{betterdogCourse.data.price}</span>
-								<a class="text-link" href="/contact/?course=betterdog-puppy">Enquire <Icon name="arrow" /></a>
+								<span class="option__price" class:list={{ 'option__price--text': !/\d/.test(c.data.price) }}>
+									{/\d/.test(c.data.price) ? c.data.price : 'Get in touch'}
+								</span>
+								<a class="text-link" href={`/contact/?course=${c.id}`}>Enquire <Icon name="arrow" /></a>
 							</div>
 						</article>
-					)
+					))
 				}
-				<article class="option reveal">
-					<span class="tag">1-1 training</span>
-					<h3>Private 1-1 sessions</h3>
-					<p>An initial assessment, a personalised training plan and 1-hour sessions at your pace, with phone support between sessions.</p>
-					<div class="option__foot">
-						<span class="option__price"><small>from</small> {packages.packages[0].price}</span>
-						<a class="text-link" href="/1-1-training/">Packages <Icon name="arrow" /></a>
-					</div>
-				</article>
-				<article class="option reveal">
-					<span class="tag">New puppy</span>
-					<h3>Pre-puppy home visit</h3>
-					<p>Puppy-proofing your home, the right equipment and enrichment, and how to help your new puppy settle in from day one.</p>
-					<div class="option__foot">
-						<span class="option__price option__price--text">Get in touch</span>
-						<a class="text-link" href="/contact/?course=home-visit">Request a visit <Icon name="arrow" /></a>
-					</div>
-				</article>
 			</div>
 		</div>
 	</section>
@@ -149,6 +136,14 @@ const reviews = (await getCollection('reviews')).sort((a, b) => b.data.date.getT
 </Layout>
 
 <style>
+	.bd-offer {
+		margin: 1.5rem 0 0;
+		color: var(--tan);
+		font-weight: 500;
+	}
+	.options {
+		max-width: 900px;
+	}
 	.bd-badge-wrap {
 		display: flex;
 		justify-content: flex-end;

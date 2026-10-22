@@ -34,10 +34,13 @@ const entries = timeline.entries.filter((t) => t.title?.trim());
 					entries.map((t, i) => (
 						<li class="timeline__item reveal" class:list={{ 'is-flip': i % 2 === 1 }}>
 							{t.image ? (
-								<div class="timeline__img frame">
-									<img src={t.image} alt={t.imageAlt} loading="lazy" />
-									{t.image2 && <img class="timeline__inset" src={t.image2} alt={t.image2Alt} loading="lazy" />}
-								</div>
+								<figure class="timeline__fig">
+									<div class="timeline__img frame">
+										<img src={t.image} alt={t.imageAlt} loading="lazy" />
+										{t.image2 && <img class="timeline__inset" src={t.image2} alt={t.image2Alt} loading="lazy" />}
+									</div>
+									{t.imageCredit && <figcaption class="timeline__credit">{t.imageCredit}</figcaption>}
+								</figure>
 							) : (
 								<div class="timeline__img timeline__img--empty topo" aria-hidden="true">
 									<Icon name="paw" />
@@ -48,6 +51,7 @@ const entries = timeline.entries.filter((t) => t.title?.trim());
 							<div class="timeline__text">
 								<span class="tag tag--olive">{t.when}</span>
 								<h3>{t.title}</h3>
+								{t.note && <p class="timeline__note">{t.note}</p>}
 								<p>{t.text}</p>
 							</div>
 						</li>
@@ -117,6 +121,23 @@ const entries = timeline.entries.filter((t) => t.title?.trim());
 		border-radius: var(--radius);
 		box-shadow: 0 10px 24px -8px rgba(0, 0, 0, 0.5);
 	}
+	.timeline__fig {
+		margin: 0;
+		min-width: 0;
+	}
+	.timeline__credit {
+		margin-top: 0.5rem;
+		font-size: 0.72rem;
+		color: var(--muted);
+	}
+	.timeline__note {
+		font-family: var(--font-display);
+		font-weight: 600;
+		font-size: 1.2rem;
+		letter-spacing: 0.02em;
+		color: var(--signal) !important;
+		margin: -0.1rem 0 0.6rem !important;
+	}
 	.timeline__img--empty {
 		border-radius: var(--radius-lg);
 		background: var(--navy);
@@ -159,7 +180,8 @@ const entries = timeline.entries.filter((t) => t.title?.trim());
 		color: var(--muted);
 		margin: 0;
 	}
-	.is-flip .timeline__img {
+	.is-flip .timeline__img,
+	.is-flip .timeline__fig {
 		order: 3;
 	}
 	.is-flip .timeline__text {
@@ -189,11 +211,16 @@ const entries = timeline.entries.filter((t) => t.title?.trim());
 			margin-top: 6px;
 		}
 		.timeline__img,
-		.is-flip .timeline__img {
+		.is-flip .timeline__img,
+		.timeline__fig,
+		.is-flip .timeline__fig {
 			order: 0;
 			grid-column: 2;
 			grid-row: 2;
 			max-height: 260px;
+		}
+		.timeline__fig {
+			max-height: none;
 		}
 		.timeline__text,
 		.is-flip .timeline__text {

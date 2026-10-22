@@ -1,7 +1,7 @@
 ---
 title: Essential Canine Skills
 category: training
-order: 6
+order: 7
 price: "£200"
 dates: "New dates coming soon"
 status: coming-soon

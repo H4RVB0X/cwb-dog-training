@@ -233,11 +233,13 @@ content:
         fields:
           - { name: when, label: "When (e.g. 1980s)", type: string }
           - { name: title, label: Title, type: string }
+          - { name: note, label: "Note under the title, in brackets (optional)", type: string }
           - { name: text, label: Story, type: text }
           - { name: image, label: Photo (optional), type: image }
           - { name: imageAlt, label: Photo description, type: string }
           - { name: image2, label: Second small photo (optional), type: image }
           - { name: image2Alt, label: Second photo description, type: string }
+          - { name: imageCredit, label: "Photo credit, if the photo isn't yours (optional)", type: string }
 
   - name: partners
     label: Partners

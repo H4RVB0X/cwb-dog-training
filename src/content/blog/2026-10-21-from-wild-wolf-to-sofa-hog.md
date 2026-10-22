@@ -12,7 +12,7 @@ It is a fair question! After all, our dogs’ ancestors were wild predators, hun
 
 So, how did we get from wild wolves to the lovable, occasionally bonkers companions we share our homes with today? The answer lies in a fascinating process called domestication.
 
-Domestication is “…the process of hereditary reorganization of wild animals and plants into domestic and cultivated forms according to the interests of people.” (www.britannica.com, accessed 20/10/2016)
+Domestication is the gradual process, over many generations, of wild animals and plants changing into domestic forms that suit people’s needs.
 
 But the story of how it all began is even more interesting than the definition suggests!
 

@@ -1,7 +1,7 @@
 ---
 title: Tracking Workshop
 category: workshop
-order: 8
+order: 9
 price: "Enquire"
 dates: "Group classes run in conjunction with MooDog Training"
 status: enquire

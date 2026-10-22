@@ -4,10 +4,12 @@
       "when": "1980s",
       "title": "Panda",
       "text": "A small black Labrador ball of fluff, found in a cardboard box in winter by police officers in Brierley Hill and taken to the station, where my mother worked for the CPS at the time. A few days later Panda came home with us, and my journey with dogs began. Her love of water, and tales of her sitting on our laps on long road trips to Scotland, are still told with much affection. (It was the 1980s, so don’t be too alarmed by the lack of safety standards that are now commonplace!)",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/timeline-panda-car.jpg",
+      "imageAlt": "Classic blue and white Morris Minor police Panda car",
       "image2": "",
-      "image2Alt": ""
+      "image2Alt": "",
+      "note": "(taken to the police station in a Panda car!)",
+      "imageCredit": "Photo: “AMP345H Morris Police Panda Car” by Manhattan Research Inc, CC BY 2.0, via Wikimedia Commons"
     },
     {
       "when": "My first dog",
@@ -16,7 +18,9 @@
       "image": "",
       "imageAlt": "",
       "image2": "",
-      "image2Alt": ""
+      "image2Alt": "",
+      "note": "",
+      "imageCredit": ""
     },
     {
       "when": "Fostering",
@@ -25,16 +29,20 @@
       "image": "/images/timeline-police-puppy.jpg",
       "imageAlt": "German Shepherd running across a field",
       "image2": "",
-      "image2Alt": ""
+      "image2Alt": "",
+      "note": "",
+      "imageCredit": ""
     },
     {
       "when": "Recent years",
       "title": "Service dogs & Pinto",
       "text": "Three more dogs have graced our home in recent years, all belonging to service dog charities I also volunteer for. In a total change from Labs and Shepherds, a tiny male cavapoo arrived who loved nothing more than playing with Pinto (my most recent rescued black Labrador) and jumping on your lap for a snooze.",
-      "image": "/images/labrador-upside-down.jpg",
-      "imageAlt": "Pinto, Chris’s rescued black Labrador, lying upside down and grinning",
+      "image": "/images/timeline-pinto-service-dogs.jpg",
+      "imageAlt": "Pinto and a service dog sitting together on a bandstand step",
       "image2": "",
-      "image2Alt": ""
+      "image2Alt": "",
+      "note": "",
+      "imageCredit": ""
     },
     {
       "when": "2023 →",
@@ -43,7 +51,9 @@
       "image": "/images/chris.jpg",
       "imageAlt": "Chris, founder of CWB Dog Training",
       "image2": "",
-      "image2Alt": ""
+      "image2Alt": "",
+      "note": "(all with the help of another black Labrador, Jessie)",
+      "imageCredit": ""
     }
   ]
 }
