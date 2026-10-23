@@ -25,8 +25,8 @@ The examples assume the organisation is called `cwbdogtraining` (available at th
 
 ## 3. Contact form (5 min)
 
-- [ ] Go to <https://web3forms.com> → enter `info.cwbdogtraining@gmail.com` → the access key arrives in Chris's inbox
-- [ ] Paste it into **Contact details & settings → Web3Forms access key** in Pages CMS (step 6), or tell Claude to add it
+- [x] Go to <https://web3forms.com> → enter `info.cwbdogtraining@gmail.com` → the access key arrives in Chris's inbox
+- [x] Paste it into **Contact details & settings → Web3Forms access key** in Pages CMS (step 6), or tell Claude to add it
 
 ## 3b. Live Google reviews (10 min)
 
@@ -40,7 +40,7 @@ The examples assume the organisation is called `cwbdogtraining` (available at th
 **4a. In GitHub first**
 
 - [ ] *Organisation → Settings → Pages → Add a domain* → `cwbdogtraining.co.uk` → GitHub shows a **TXT record**. Keep this page open. (This verification stops anyone else claiming the domain on GitHub.)
-- [ ] *Repo → Settings → Secrets and variables → Actions → **Variables** → New repository variable*
+- [x] *Repo → Settings → Secrets and variables → Actions → **Variables** → New repository variable*
   - Name: `CUSTOM_DOMAIN`
   - Value: `cwbdogtraining.co.uk`
 
@@ -49,8 +49,8 @@ The examples assume the organisation is called `cwbdogtraining` (available at th
 **4b. In GoDaddy** (Chris logs in → *My Products → cwbdogtraining.co.uk → DNS*)
 
 - [ ] **Screenshot the current DNS records first**, so anything can be undone
-- [ ] Delete the existing **A** record(s) for `@` and the existing **CNAME** for `www` (they point at the old Website Builder site)
-- [ ] Add these records:
+- [x] Delete the existing **A** record(s) for `@` and the existing **CNAME** for `www` (they point at the old Website Builder site)
+- [x] Add these records:
 
 | Type | Name | Value | TTL |
 | --- | --- | --- | --- |
@@ -67,13 +67,13 @@ The examples assume the organisation is called `cwbdogtraining` (available at th
 **4c. Back in GitHub**
 
 - [ ] *Organisation → Settings → Pages* → **Verify** the domain (try again in a few minutes if it isn't ready)
-- [ ] *Repo → Settings → Pages → Custom domain* → `cwbdogtraining.co.uk` → Save
-- [ ] Wait for the DNS check to go green (usually 10–60 minutes), then tick **Enforce HTTPS**
-- [ ] *Repo → Actions → Deploy to GitHub Pages → Run workflow* to rebuild in live mode
+- [x] *Repo → Settings → Pages → Custom domain* → `cwbdogtraining.co.uk` → Save
+- [x] Wait for the DNS check to go green (usually 10–60 minutes), then tick **Enforce HTTPS**
+- [x] *Repo → Actions → Deploy to GitHub Pages → Run workflow* to rebuild in live mode
 
 ## 5. Check it's live
 
-- [ ] <https://cwbdogtraining.co.uk> and <https://www.cwbdogtraining.co.uk> both load the new site with the padlock
+- [x] <https://cwbdogtraining.co.uk> and <https://www.cwbdogtraining.co.uk> both load the new site with the padlock
 - [ ] Click through every page on a phone, and press a Bookwhen "Book" button and the WhatsApp button
 - [ ] Send a test enquiry through the contact form and check it arrives
 - [ ] In Chris's BetterDog account, change his trainer map link to `https://cwbdogtraining.co.uk/betterdog/` (it currently points at the old GoDaddy site)
