@@ -16,6 +16,7 @@
   "rating": "5.0",
   "reviewCount": 27,
   "reviewsWidgetProvider": "JustReview",
+  "reviewsWidgetCode": "<script>\n  document.addEventListener('DOMContentLoaded', function() {\n    JustReview.initBadge('VjFqUzc2dkxFS2M5c1BRQ1pLTnFzUT09', {\n      styles: {\n        left: '0px',\n        top: '0px',\n        borderRadius: '0px 0px 0px 0px',\n        backgroundColor: 'rgba(0, 0, 0, 1)',\n        color: 'rgba(255, 255, 255, 1)',\n        ratingBorderRadius: '0px'\n      },\n      showJustReviewLogo: true,\n      enableAggregateRatings: false,\n      disableOnMobile: false,\n      fadeOutWhenScrollingOnMobile: false,\n      services: ['google']\n    });\n  });\n</script>",
   "mapQuery": "Wall Heath, Kingswinford",
   "web3formsKey": "98b62325-497e-4901-bfc7-c3bec3ba7af8"
 }
