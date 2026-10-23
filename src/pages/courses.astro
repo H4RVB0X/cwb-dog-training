@@ -10,6 +10,7 @@ import packages from '../data/packages.json';
 const courses = (await getCollection('courses', (c) => !c.data.hidden)).sort((a, b) => a.data.order - b.data.order);
 const filters = [
 	{ key: 'all', label: 'All courses' },
+	{ key: 'puppy', label: 'Puppy courses' },
 	{ key: 'scent', label: 'Scent detection' },
 	{ key: 'training', label: 'Training' },
 	{ key: 'workshop', label: 'Workshops' },
@@ -75,15 +76,19 @@ const filters = [
 <script>
 	const buttons = document.querySelectorAll<HTMLButtonElement>('[data-filter]');
 	const cards = document.querySelectorAll<HTMLElement>('[data-course-grid] [data-category]');
-	buttons.forEach((btn) =>
-		btn.addEventListener('click', () => {
-			const f = btn.dataset.filter;
-			buttons.forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
-			cards.forEach((c) => {
-				c.hidden = f !== 'all' && c.dataset.category !== f;
-			});
-		}),
-	);
+	function show(btn: HTMLButtonElement) {
+		const f = btn.dataset.filter;
+		buttons.forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+		cards.forEach((c) => {
+			c.hidden = f === 'puppy' ? c.dataset.puppy === undefined : f !== 'all' && c.dataset.category !== f;
+		});
+	}
+	buttons.forEach((btn) => btn.addEventListener('click', () => show(btn)));
+
+	// Links like /courses/?filter=puppy open with that filter already chosen
+	const start = new URLSearchParams(location.search).get('filter');
+	const startBtn = Array.from(buttons).find((b) => b.dataset.filter === start);
+	if (startBtn) show(startBtn);
 </script>
 
 <style>

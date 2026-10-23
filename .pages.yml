@@ -50,7 +50,7 @@ content:
         label: Where (e.g. Wednesbury, outdoors)
         type: string
       - name: bookingUrl
-        label: Booking link (open the course on Bookwhen and copy the address from the top of the page). Leave empty to use the website enquiry form
+        label: Bookwhen booking link. Each new set of dates has its own link, so paste the new one here whenever the dates change (open the course on Bookwhen and copy the address from the top of the page). Leave empty to use the website enquiry form
         type: string
       - name: image
         label: Image

@@ -31,7 +31,7 @@ const reviews = (await getCollection('reviews')).sort((a, b) => b.data.date.getT
 	<PageHero
 		eyebrow="Approved BetterDog trainer"
 		title="Welcome, <em>BetterDog</em> owners"
-		intro="Found me on the BetterDog trainer map? I’m Chris, a participating BetterDog trainer based in Wall Heath, Kingswinford. If you’re working through a BetterDog course and would like professional support alongside it, you’re in the right place."
+		intro="Found me on the BetterDog trainer map? I’m Chris, a participating BetterDog trainer based in Wall Heath, Kingswinford. Whether you’re already working through a BetterDog course or just starting out with a new puppy, I can give you professional support alongside it. You don’t need to be a member already."
 		image="/images/chris.jpg"
 		imageAlt="Chris, founder of CWB Dog Training"
 	>
@@ -61,7 +61,7 @@ const reviews = (await getCollection('reviews')).sort((a, b) => b.data.date.getT
 				</p>
 			</div>
 			<ol class="steps reveal">
-				<li><div><strong>Get in touch</strong>Let me know you’re a BetterDog member and where you’re up to with your puppy.</div></li>
+				<li><div><strong>Get in touch</strong>Tell me about your puppy, and whether you’ve already started BetterDog.</div></li>
 				<li><div><strong>We have a chat</strong>We talk through what’s going well and what you’d like help with.</div></li>
 				<li><div><strong>Choose your support</strong>Pick the option that suits you, your puppy and your schedule.</div></li>
 			</ol>
@@ -78,7 +78,7 @@ const reviews = (await getCollection('reviews')).sort((a, b) => b.data.date.getT
 				{
 					betterdogOptions.map((c) => (
 						<article class="option option--featured reveal">
-							<span class="tag tag--signal">For BetterDog members</span>
+							<span class="tag tag--signal">Open to everyone</span>
 							<h3>{c.data.title}</h3>
 							<p>{c.body?.trim()}</p>
 							<div class="option__foot">
@@ -132,7 +132,7 @@ const reviews = (await getCollection('reviews')).sort((a, b) => b.data.date.getT
 		</div>
 	</section>
 
-	<CtaBand title="Let’s get your puppy off to a great start" text="Tell me you’ve come from BetterDog and where you’re up to, and we’ll work out the right support together." />
+	<CtaBand title="Let’s get your puppy off to a great start" text="Tell me about your puppy and where you’re up to, and we’ll work out the right support together." />
 </Layout>
 
 <style>

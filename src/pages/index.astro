@@ -19,8 +19,10 @@ const [latestPost] = await getPosts();
 const partners = partnerData.partners.filter((p) => p.name?.trim());
 const reviews = (await getCollection('reviews')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime()).slice(0, 3);
 const allCourses = await getCollection('courses', (c) => !c.data.hidden);
-const lowest = (cat: string) =>
-	Math.min(...allCourses.filter((c) => c.data.category === cat).map((c) => Number(c.data.price.replace(/[^\d.]/g, ''))).filter((n) => n > 0));
+const lowestOf = (list: typeof allCourses) =>
+	Math.min(...list.map((c) => Number(c.data.price.replace(/[^\d.]/g, ''))).filter((n) => n > 0));
+const lowest = (cat: string) => lowestOf(allCourses.filter((c) => c.data.category === cat));
+const puppyCourses = allCourses.filter((c) => /pupp/i.test(c.data.level ?? ''));
 
 const services = [
 	{
@@ -34,13 +36,13 @@ const services = [
 		from: packages.packages[0].price,
 	},
 	{
-		href: '/courses/',
+		href: '/courses/?filter=puppy',
 		img: '/images/gsd-puppy-frost.jpg',
 		alt: 'German Shepherd puppy on frosty grass',
 		kicker: '02',
 		title: 'Puppy & Skills Courses',
 		text: 'Give puppies a confident start and teach adult dogs the everyday skills that make life easier.',
-		from: `£${lowest('training')}`,
+		from: `£${lowestOf(puppyCourses)}`,
 	},
 	{
 		href: '/scentwork/',

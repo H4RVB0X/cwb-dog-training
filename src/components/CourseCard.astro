@@ -20,9 +20,10 @@ const categoryLabel = { training: 'Training course', scent: 'Scent detection', w
 const cta = d.status === 'open' ? 'Book a place' : d.status === 'coming-soon' ? 'Register interest' : 'Enquire';
 const href = d.bookingUrl || `/contact/?course=${course.id}`;
 const external = !!d.bookingUrl;
+const isPuppy = /pupp/i.test(d.level ?? '');
 ---
 
-<article class="course card reveal" data-category={d.category}>
+<article class="course card reveal" data-category={d.category} data-puppy={isPuppy ? '' : undefined}>
 	<div class="course__media" class:list={{ 'is-badge': d.badge }}>
 		<img src={d.image} alt={d.imageAlt} loading="lazy" />
 		{d.logo && <img class="course__logo" src={d.logo} alt={d.logoAlt} loading="lazy" />}
