@@ -10,16 +10,16 @@ The examples assume the organisation is called `cwbdogtraining` (available at th
 
 ## 1. Chris's GitHub account (5 min)
 
-- [ ] Chris signs up at <https://github.com/signup> using `info.cwbdogtraining@gmail.com`
+- [x] Chris signs up at <https://github.com/signup> using `info.cwbdogtraining@gmail.com`
 - [ ] Turn on two-factor authentication: *profile photo → Settings → Password and authentication*
 
 ## 2. Create the organisation and move the website into it (10 min)
 
-- [ ] You (H4RVB0X) go to <https://github.com/organizations/plan> → **Free** → name it `cwbdogtraining`
-- [ ] *Organisation → People → Invite member* → Chris's username → role **Owner**. Chris accepts the email.
-- [ ] Open <https://github.com/H4RVB0X/cwb-dog-training> → *Settings → General → Danger zone → Transfer* → to `cwbdogtraining`
-- [ ] In the moved repo: *Settings → Pages → Build and deployment → Source* = **GitHub Actions** (re-select it if it's blank)
-- [ ] Tell Claude: *"The repo has moved to cwbdogtraining"*. Claude points its copy at the new home, so future changes go to the right place.
+- [x] You (H4RVB0X) go to <https://github.com/organizations/plan> → **Free** → name it `cwbdogtraining`
+- [x] *Organisation → People → Invite member* → Chris's username → role **Owner**. Chris accepts the email.
+- [x] Open the old repo (was `H4RVB0X/cwb-dog-training`) → *Settings → General → Danger zone → Transfer* → to `cwbdogtraining`
+- [x] In the moved repo: *Settings → Pages → Build and deployment → Source* = **GitHub Actions** (re-select it if it's blank)
+- [x] Tell Claude: *"The repo has moved to cwbdogtraining"*. Done: new home is <https://github.com/cwbdogtraining/cwb-dog-training>, preview at <https://cwbdogtraining.github.io/cwb-dog-training/>
 
 > Chris is now the owner and you're an owner too. If you ever step away, he just removes you and the site keeps working.
 
